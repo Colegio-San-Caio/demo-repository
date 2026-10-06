@@ -1,43 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>978-3-00-068463-0 - Gist Pages</title>
+<title>TeX Gist - demo-repository</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <style>
-body{font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;margin:0;background:#f6f8fa}
-.top{background:#24292f;color:#fff;padding:16px 24px}
-.wrap{max-width:980px;margin:20px auto;padding:0 16px}
-.card{background:#fff;border:1px solid #d0d7de;border-radius:8px;overflow:hidden}
-.card-head{padding:12px 16px;background:#f6f8fa;border-bottom:1px solid #d0d7de;display:flex;justify-content:space-between;align-items:center}
-.btn{border:1px solid #d0d7de;background:#fff;padding:5px 12px;border-radius:6px;text-decoration:none;color:#24292f;font-size:12px;margin-left:6px}
-pre{padding:16px;overflow:auto;font-size:13px;line-height:1.6;margin:0}
-.pdf-view{width:100%;height:85vh;border:0}
+body{margin:0;background:#0d1117;color:#c9d1d9;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial}
+.header{background:#010409;border-bottom:1px solid #30363d;padding:14px 24px}
+.header a{color:#fff;text-decoration:none;font-weight:600}
+.wrap{max-width:950px;margin:0 auto;padding:24px 16px}
+.box{background:#0d1117;border:1px solid #30363d;border-radius:6px}
+.box-head{display:flex;justify-content:space-between;padding:10px 14px;background:#010409;border-bottom:1px solid #30363d;font-size:13px}
+.btn{border:1px solid #30363d;background:#21262d;color:#c9d1d9;padding:3px 10px;border-radius:6px;font-size:12px;text-decoration:none;margin-left:6px}
+pre{margin:0;padding:16px;overflow:auto;font-size:13px;white-space:pre-wrap}
+#rendered{padding:20px;border-top:1px solid #30363d;background:#0d1117}
 </style>
 </head>
 <body>
-<div class="top">978-3-00-068463-0 / v1.0 — TeX Gist @ Colegio-San-Caio</div>
+<div class="header"><a href="https://colegio-san-caio.github.io/demo-repository/">Colegio-San-Caio / demo-repository - TeX Gist</a></div>
 <div class="wrap">
-<div class="card">
-<div class="card-head">
-<b id="fname">main.tex / book.pdf</b>
-<span>
-<a class="btn" href="https://github.com/Colegio-San-Caio/978-3-00-068463-0/releases/tag/v1.0" target="_blank">Release v1.0</a>
-<a class="btn" id="raw" href="main.tex" target="_blank">Raw TeX</a>
-<a class="btn" id="pdf" href="book.pdf" target="_blank">PDF</a>
-</span>
-</div>
-<pre id="code">Loading...</pre>
-<iframe id="pdfview" class="pdf-view" style="display:none"></iframe>
+<div class="box">
+<div class="box-head"><span>main.tex</span><span><a class="btn" href="main.tex">Raw</a> <a class="btn" href="https://github.com/Colegio-San-Caio/978-3-00-068463-0/releases/tag/v1.0">v1.0 Release</a></span></div>
+<pre id="code">Loading main.tex...</pre>
+<div id="rendered"></div>
 </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <script>
-fetch('main.tex').then(r=>r.text()).then(t=>{document.getElementById('code').textContent=t; document.getElementById('fname').textContent='main.tex';}).catch(()=>{
- fetch('book.pdf',{method:'HEAD'}).then(r=>{
-   if(r.ok){document.getElementById('code').style.display='none'; document.getElementById('pdfview').style.display='block'; document.getElementById('pdfview').src='book.pdf'; document.getElementById('fname').textContent='book.pdf (v1.0)';}
-   else{document.getElementById('code').textContent='No main.tex or book.pdf found. Copy your files from 978-3-00-068463-0 repo.'}
- })
-});
+fetch('main.tex?v='+Date.now()).then(r=>r.text()).then(t=>{
+ document.getElementById('code').textContent=t;
+ document.getElementById('rendered').innerHTML=t.replace(/</g,'&lt;');
+ renderMathInElement(document.getElementById('rendered'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
+}).catch(()=>{document.getElementById('code').textContent='% No main.tex yet\n% Create main.tex with your TeX from 978-3-00-068463-0 repo';});
 </script>
 </body>
 </html>
