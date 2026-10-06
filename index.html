@@ -1,54 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>oeneyeOS</title>
-<meta property="og:type" content="website">
-<meta property="og:title" content="oeneyeOS - Floppy Max 2.88MB">
-<meta property="og:description" content="oeneyeOS disk images, EULA, and the book MOSFETQ by Kai Olaf Ketelhut.">
-<meta property="og:url" content="https://colegio-san-caio.github.io/demo-repository/">
-<meta property="og:image" content="https://colegio-san-caio.github.io/demo-repository/assets/og-preview.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Cover of MOSFETQ, Technologie als Gesellschaftstreiber">
-<meta name="twitter:card" content="summary_large_image">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tex Gist - demo-repository</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <style>
-body{font-family:Georgia,serif;max-width:720px;margin:0 auto;padding:16px;line-height:1.5;color:#111;background:#fff}
-@media(prefers-color-scheme:dark){body{color:#eee;background:#111}a{color:#8ab4f8}}
-h1{font-size:1.5rem}h2{font-size:1.2rem;margin-top:2rem;border-top:1px solid #8884;padding-top:1rem}
-code{display:block;font-size:.8rem;overflow-x:auto;padding:8px;background:#8882}
-img{max-width:260px;width:100%;height:auto;display:block;margin:12px 0}
-.small{font-size:.85rem;opacity:.8}
+body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;background:#f6f8fa;margin:0}
+.header{background:#24292f;color:#fff;padding:14px 24px;font-weight:600}
+.container{max-width:900px;margin:24px auto;padding:0 16px}
+.gist-box{background:#fff;border:1px solid #d0d7de;border-radius:6px;overflow:hidden}
+.gist-head{background:#f6f8fa;border-bottom:1px solid #d0d7de;padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+.file-name{font-weight:600;font-size:14px}
+.btn{font-size:12px;border:1px solid #d0d7de;border-radius:6px;padding:4px 10px;background:#f6f8fa;cursor:pointer;text-decoration:none;color:#24292f}
+.pre{padding:16px;overflow:auto;background:#fff;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;line-height:1.6}
+.rendered{padding:24px;background:#fff;border-top:1px solid #d0d7de}
+.rendered h2{font-size:16px;margin:24px 0 8px}
+a{color:#0969da}
 </style>
 </head>
 <body>
-<h1>oeneyeOS - Floppy Max 2.88MB + VHD</h1>
-<p>A: oeneyeOS.img | B: data.img (2.88M) | B: oeneyeB.vhd</p>
-<p><a href="oeneyeOS.img">Download A</a> | <a href="data.img">Download B</a></p>
-<code>qemu-system-i386 -fda oeneyeOS.img -fdb data.img</code>
-<p class="small">Back up important data before using the disk-image tools. A defect in disk-writing code can damage data.</p>
-
-<h2>License (EULA)</h2>
-<p>Free to use, modify and share. Don't present a modified version as the official release. The original oeneye code is MIT-licensed, the software is provided as is, and it is not security-certified.</p>
-<p><a href="assets/OENEYE_EULA.pdf">oeneye OS EULA, version 1.0 (PDF)</a><br>
-<span class="small">DOI: <a href="https://doi.org/10.5281/zenodo.22978006">10.5281/zenodo.22978006</a></span></p>
-
-<h2>Book</h2>
-<img src="assets/mosfetq-cover.jpeg" alt="Cover of MOSFETQ, Technologie als Gesellschaftstreiber, by Kai Olaf Ketelhut">
-<p><strong>MOSFETQ &ndash; Technologie als Gesellschaftstreiber</strong><br>
-Kai Olaf Ketelhut<br>
-Fieldberry Group, Berlin<br>
-ISBN 978-3-00-068463-0 | PDF | 21,00 &euro; (+ tax)</p>
-<p><a href="assets/mosfetq-record.pdf">Bibliographic record (PDF)</a> |
-<a href="https://bunq.me/fieldberry">Order / pay</a></p>
-<h2>Verify your download</h2>
-<p>SHA-256 checksums for the disk images. Put both images and the checksum file in one folder, then run the check.</p>
-<code>8a292e7d831e45f4bae09718a15a6b9cd101b13951bbd453f05ea3f177485807  oeneyeOS.img
-1b7b350b66f56a4646573de32f7fea22a050cdf99672d8751c49043abc82ebab  data.img</code>
-<code>sha256sum --check checksum.sha256</code>
-<p><a href="assets/checksum.sha256">checksum.sha256</a></p>
-<p class="small">A matching checksum shows the file is the one published here. It doesn't prove the contents are safe.</p>
-<!--REPOS-->
+<div class="header">Colegio-San-Caio / demo-repository — Tex Gist</div>
+<div class="container">
+<div class="gist-box">
+<div class="gist-head">
+<span class="file-name" id="filename">main.tex</span>
+<div><a class="btn" id="rawBtn" href="main.tex" target="_blank">Raw</a> <button class="btn" onclick="copyTex()">Copy</button></div>
+</div>
+<pre class="pre" id="code">Loading main.tex...</pre>
+<div class="rendered" id="rendered"></div>
+</div>
+<p style="font-size:13px;color:#57606a;margin-top:16px">To use your own TeX: push any <code>.tex</code> file as <code>main.tex</code> to this repo. This page auto-renders it with KaTeX like a gist.</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+async function loadTex(){
+  try{
+    const res = await fetch('main.tex?'+Date.now());
+    if(!res.ok) throw Error('no main.tex yet');
+    const tex = await res.text();
+    document.getElementById('code').textContent = tex;
+    document.getElementById('rendered').innerHTML = '<h2>Rendered preview</h2><div style="white-space:pre-wrap">'+tex.replace(/</g,'&lt;')+'</div>';
+    // Render $...$ math
+    renderMathInElement(document.getElementById('rendered'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]});
+    document.getElementById('filename').textContent='main.tex';
+    document.getElementById('rawBtn').href='main.tex';
+  }catch(e){
+    document.getElementById('code').textContent='% Put your TeX here -> create main.tex\n% Example:\n\\documentclass{article}\n\\begin{document}\nHello $E=mc^2$\n\\end{document}';
+    document.getElementById('rendered').innerHTML='<b>No main.tex found yet.</b><br>Create a file named main.tex in repo root.';
+  }
+}
+function copyTex(){navigator.clipboard.writeText(document.getElementById('code').textContent);alert('Copied!')}
+loadTex();
+</script>
 </body>
 </html>
