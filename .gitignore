@@ -1,0 +1,10 @@
+*.img
+*.bin
+termuxDB.bin
+libomqqiskit.so
+.env
+*.log
+GIT/
+oeneyeOScat.GIT/
+1422d87
+c56f491
