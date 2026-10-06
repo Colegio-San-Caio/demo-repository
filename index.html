@@ -1,5 +1,37 @@
-<!DOCTYPE html><title>oeneyeOS</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>oeneyeOS</title>
+<style>
+body{font-family:Georgia,serif;max-width:720px;margin:0 auto;padding:16px;line-height:1.5;color:#111;background:#fff}
+@media(prefers-color-scheme:dark){body{color:#eee;background:#111}a{color:#8ab4f8}}
+h1{font-size:1.5rem}h2{font-size:1.2rem;margin-top:2rem;border-top:1px solid #8884;padding-top:1rem}
+code{display:block;font-size:.8rem;overflow-x:auto;padding:8px;background:#8882}
+img{max-width:260px;width:100%;height:auto;display:block;margin:12px 0}
+.small{font-size:.85rem;opacity:.8}
+</style>
+</head>
+<body>
 <h1>oeneyeOS - Floppy Max 2.88MB + VHD</h1>
 <p>A: oeneyeOS.img | B: data.img (2.88M) | B: oeneyeB.vhd</p>
-<a href="oeneyeOS.img">Download A:</a> | <a href="data.img">Download B:</a>
-<pre>qemu-system-i386 -fda oeneyeOS.img -fdb data.img</pre>
+<p><a href="oeneyeOS.img">Download A</a> | <a href="data.img">Download B</a></p>
+<code>qemu-system-i386 -fda oeneyeOS.img -fdb data.img</code>
+<p class="small">Back up important data before using the disk-image tools. A defect in disk-writing code can damage data.</p>
+
+<h2>License (EULA)</h2>
+<p>Free to use, modify and share. Don't present a modified version as the official release. The original oeneye code is MIT-licensed, the software is provided as is, and it is not security-certified.</p>
+<p><a href="assets/OENEYE_EULA.pdf">oeneye OS EULA, version 1.0 (PDF)</a><br>
+<span class="small">DOI: <a href="https://doi.org/10.5281/zenodo.22978006">10.5281/zenodo.22978006</a></span></p>
+
+<h2>Book</h2>
+<img src="assets/mosfetq-cover.jpeg" alt="Cover of MOSFETQ, Technologie als Gesellschaftstreiber, by Kai Olaf Ketelhut">
+<p><strong>MOSFETQ &ndash; Technologie als Gesellschaftstreiber</strong><br>
+Kai Olaf Ketelhut<br>
+Fieldberry Group, Berlin<br>
+ISBN 978-3-00-068463-0 | PDF | 21,00 &euro; (+ tax)</p>
+<p><a href="assets/mosfetq-record.pdf">Bibliographic record (PDF)</a> |
+<a href="https://bunq.me/fieldberry">Order / pay</a></p>
+</body>
+</html>
