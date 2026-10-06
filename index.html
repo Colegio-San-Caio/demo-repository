@@ -1,58 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tex Gist - demo-repository</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<title>978-3-00-068463-0 - Gist Pages</title>
 <style>
-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;background:#f6f8fa;margin:0}
-.header{background:#24292f;color:#fff;padding:14px 24px;font-weight:600}
-.container{max-width:900px;margin:24px auto;padding:0 16px}
-.gist-box{background:#fff;border:1px solid #d0d7de;border-radius:6px;overflow:hidden}
-.gist-head{background:#f6f8fa;border-bottom:1px solid #d0d7de;padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
-.file-name{font-weight:600;font-size:14px}
-.btn{font-size:12px;border:1px solid #d0d7de;border-radius:6px;padding:4px 10px;background:#f6f8fa;cursor:pointer;text-decoration:none;color:#24292f}
-.pre{padding:16px;overflow:auto;background:#fff;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;line-height:1.6}
-.rendered{padding:24px;background:#fff;border-top:1px solid #d0d7de}
-.rendered h2{font-size:16px;margin:24px 0 8px}
-a{color:#0969da}
+body{font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;margin:0;background:#f6f8fa}
+.top{background:#24292f;color:#fff;padding:16px 24px}
+.wrap{max-width:980px;margin:20px auto;padding:0 16px}
+.card{background:#fff;border:1px solid #d0d7de;border-radius:8px;overflow:hidden}
+.card-head{padding:12px 16px;background:#f6f8fa;border-bottom:1px solid #d0d7de;display:flex;justify-content:space-between;align-items:center}
+.btn{border:1px solid #d0d7de;background:#fff;padding:5px 12px;border-radius:6px;text-decoration:none;color:#24292f;font-size:12px;margin-left:6px}
+pre{padding:16px;overflow:auto;font-size:13px;line-height:1.6;margin:0}
+.pdf-view{width:100%;height:85vh;border:0}
 </style>
 </head>
 <body>
-<div class="header">Colegio-San-Caio / demo-repository — Tex Gist</div>
-<div class="container">
-<div class="gist-box">
-<div class="gist-head">
-<span class="file-name" id="filename">main.tex</span>
-<div><a class="btn" id="rawBtn" href="main.tex" target="_blank">Raw</a> <button class="btn" onclick="copyTex()">Copy</button></div>
+<div class="top">978-3-00-068463-0 / v1.0 — TeX Gist @ Colegio-San-Caio</div>
+<div class="wrap">
+<div class="card">
+<div class="card-head">
+<b id="fname">main.tex / book.pdf</b>
+<span>
+<a class="btn" href="https://github.com/Colegio-San-Caio/978-3-00-068463-0/releases/tag/v1.0" target="_blank">Release v1.0</a>
+<a class="btn" id="raw" href="main.tex" target="_blank">Raw TeX</a>
+<a class="btn" id="pdf" href="book.pdf" target="_blank">PDF</a>
+</span>
 </div>
-<pre class="pre" id="code">Loading main.tex...</pre>
-<div class="rendered" id="rendered"></div>
+<pre id="code">Loading...</pre>
+<iframe id="pdfview" class="pdf-view" style="display:none"></iframe>
 </div>
-<p style="font-size:13px;color:#57606a;margin-top:16px">To use your own TeX: push any <code>.tex</code> file as <code>main.tex</code> to this repo. This page auto-renders it with KaTeX like a gist.</p>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <script>
-async function loadTex(){
-  try{
-    const res = await fetch('main.tex?'+Date.now());
-    if(!res.ok) throw Error('no main.tex yet');
-    const tex = await res.text();
-    document.getElementById('code').textContent = tex;
-    document.getElementById('rendered').innerHTML = '<h2>Rendered preview</h2><div style="white-space:pre-wrap">'+tex.replace(/</g,'&lt;')+'</div>';
-    // Render $...$ math
-    renderMathInElement(document.getElementById('rendered'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]});
-    document.getElementById('filename').textContent='main.tex';
-    document.getElementById('rawBtn').href='main.tex';
-  }catch(e){
-    document.getElementById('code').textContent='% Put your TeX here -> create main.tex\n% Example:\n\\documentclass{article}\n\\begin{document}\nHello $E=mc^2$\n\\end{document}';
-    document.getElementById('rendered').innerHTML='<b>No main.tex found yet.</b><br>Create a file named main.tex in repo root.';
-  }
-}
-function copyTex(){navigator.clipboard.writeText(document.getElementById('code').textContent);alert('Copied!')}
-loadTex();
+fetch('main.tex').then(r=>r.text()).then(t=>{document.getElementById('code').textContent=t; document.getElementById('fname').textContent='main.tex';}).catch(()=>{
+ fetch('book.pdf',{method:'HEAD'}).then(r=>{
+   if(r.ok){document.getElementById('code').style.display='none'; document.getElementById('pdfview').style.display='block'; document.getElementById('pdfview').src='book.pdf'; document.getElementById('fname').textContent='book.pdf (v1.0)';}
+   else{document.getElementById('code').textContent='No main.tex or book.pdf found. Copy your files from 978-3-00-068463-0 repo.'}
+ })
+});
 </script>
 </body>
 </html>
