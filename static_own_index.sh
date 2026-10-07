@@ -324,3 +324,15 @@ cat << 'IQXD_DETAIL' >> index.html
 <div class="card"><b>Full Stack Build Orchestration</b><br>Integrated execution loop combining `static_own_index.sh` and `./oeneyeGHview.imc`<br><code>Automation Pipeline</code><br><span>GitHub Pages Core</span></div>
 </div>
 IQXD_DETAIL
+
+# Append Self-Hosting Generator Pipeline to the HTML generator
+cat << 'SELF_HOST' >> index.html
+
+<h2>Self-Hosting Generator Pipeline (`static_own_index.sh`)</h2>
+<div class="grid">
+<div class="card"><b>Recursive Self-Compilation</b><br>Generates index markup directly through execution of `static_own_index.sh`<br><code>Self-Hosting Core</code><br><span class="ok">● Active Generator</span></div>
+<div class="card"><b>Template Injection Loop</b><br>Appends architecture grids, MIME tables, and metadata cards dynamically<br><code>Stream Processing</code><br><span>HTML Builder</span></div>
+<div class="card"><b>Automated Version Control Hook</b><br>Triggers Git staging, commit assertions, and GitHub Pages synchronization<br><code>Git Pipeline</code><br><span>Deployment Core</span></div>
+<div class="card"><b>Ecosystem Closure ({name})</b><br>Finalizes the recursive compilation loop across the entire repository structure<br><code>Closure Token</code><br><span>System Complete</span></div>
+</div>
+SELF_HOST
