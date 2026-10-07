@@ -384,3 +384,15 @@ cat << 'DOMAIN_DETAIL' >> index.html
 <div class="card"><b>DNS & Deployment Mapping</b><br>Integration of custom domains with GitHub Pages and custom routing rules<br><code>DNS Resolver</code><br><span>Publishing Pipeline</span></div>
 </div>
 DOMAIN_DETAIL
+
+# Append Hardware Disk Images & Regional TLD Registry Architecture to the HTML generator
+cat << 'MOSFET_TLD' >> index.html
+
+<h2>Hardware Disk Images & Regional TLD Registry (mosfetq-dos.img / .ru / .eu)</h2>
+<div class="grid">
+<div class="card"><b>MOSFET-DOS Disk Image (`mosfetq-dos.img`)</b><br>Low-level operating system and transistor-mapped binary disk image linked from <code>Colegio-San-Caio/qiskit</code><br><code>application/octet-stream</code><br><span class="ok">● External Disk</span></div>
+<div class="card"><b>Regional TLDs (.ru / .RU)</b><br>National domain registries and localized endpoint routing configurations<br><code>Network Namespace</code><br><span>Country Code TLD</span></div>
+<div class="card"><b>Organizational Domains (.org / .ORG)</b><br>Non-profit, foundation, and open-source registry structures<br><code>Entity Registry</code><br><span>Global Namespace</span></div>
+<div class="card"><b>European TLD (.EU)</b><br>Regional European Union domain routing and infrastructure mapping<br><code>Geographic TLD</code><br><span>European Gateway</span></div>
+</div>
+MOSFET_TLD
