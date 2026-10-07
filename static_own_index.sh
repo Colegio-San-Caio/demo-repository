@@ -372,3 +372,15 @@ cat << 'TEX_DETAIL' >> index.html
 <div class="card"><b>Zenodo & DNB Metadata Sync</b><br>DOI registration, URN cataloging, and German National Library archiving<br><code>Archive Pipeline</code><br><span>Metadata Registry</span></div>
 </div>
 TEX_DETAIL
+
+# Append Domain & Organization Registry Architecture to the HTML generator
+cat << 'DOMAIN_DETAIL' >> index.html
+
+<h2>Domain & Organization Registry (.COM / .NET / OrG)</h2>
+<div class="grid">
+<div class="card"><b>Commercial TLD (`.COM` / `.com`)</b><br>Global commercial registry endpoints and primary web hosting namespaces<br><code>Network Namespace</code><br><span class="ok">● Domain Active</span></div>
+<div class="card"><b>Network Infrastructure (`.NET`)</b><br>Network backbone routing, gateway protocols, and infrastructure services<br><code>Infrastructure Core</code><br><span>Network Target</span></div>
+<div class="card"><b>Organizational Namespace (`OrG`)</b><br>Foundation registries, institutional entities, and non-commercial structures<br><code>Entity Registry</code><br><span>Foundation Core</span></div>
+<div class="card"><b>DNS & Deployment Mapping</b><br>Integration of custom domains with GitHub Pages and custom routing rules<br><code>DNS Resolver</code><br><span>Publishing Pipeline</span></div>
+</div>
+DOMAIN_DETAIL
