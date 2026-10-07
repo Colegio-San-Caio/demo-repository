@@ -444,3 +444,15 @@ cat << 'OENEYE_IMG' >> index.html
 <div class="card"><b>Ecosystem Synchronization</b><br>Integrated with `./oeneyeGHview.imc` for continuous automated deployment<br><code>Publishing Loop</code><br><span>GitHub Pages Core</span></div>
 </div>
 OENEYE_IMG
+
+# Append AH/JC Real-Mode Emulator Architecture to the HTML generator
+cat << 'AH_EMU' >> index.html
+
+<h2>Real-Mode Assembly & AH Status Decoder (`emu_dos.py`)</h2>
+<div class="grid">
+<div class="card"><b>BIOS Interrupt Status (`AH`)</b><br>Decodes real-mode error codes (0x01, 0x04, 0x0B, 0xAA) from disk operations<br><code>Assembly Decoder</code><br><span class="ok">● Status Active</span></div>
+<div class="card"><b>Carry Flag Trap (`jc`)</b><br>Conditional jump and error handling validation for sector read/write loops<br><code>Flow Control</code><br><span>Interrupt Handler</span></div>
+<div class="card"><b>Pyodide WebAssembly Sandbox</b><br>Executes low-level disk inspection and file mounting inside browser environments<br><code>Python Engine</code><br><span>WASM Runtime</span></div>
+<div class="card"><b>Drive Mapping & Backup (`mosfetq-dos.img`)</b><br>Automated volume mapping (`A:`) and snapshot archives inside `emu_dos.py`<br><code>Storage Core</code><br><span>Virtual DOS</span></div>
+</div>
+AH_EMU
