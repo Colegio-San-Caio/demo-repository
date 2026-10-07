@@ -2,7 +2,7 @@
 <div style="font-family:monospace;background:#0d1117;color:#c9d1d9;border:1px solid #30363d;border-radius:8px;max-width:700px;margin:16px 0">
 <div style="background:#010409;padding:8px 12px;border-bottom:1px solid #30363d">~/wiki$ cat NAMESPACE.def --todo</div>
 <pre style="margin:0;padding:12px;white-space:pre-wrap;line-height:1.5">
-# Wikipedia entry - Colegio-San-Caio/978-3-00-068463-0
+# PLAN ONLY, not created yet: Wikipedia entry for Colegio-San-Caio/978-3-00-068463-0
 NAMESPACE=Book:978-3-00-068463-0
 TITLE="Colegio San Caio - Book Software Manual"
 LANG=de, en, pt
@@ -15,9 +15,6 @@ LANG=de, en, pt
 [ ] Add category: [[Category:Open educational resources]]
 [ ] Add wikidata: Q... (create if needed)
 
-$ wiki-create --namespace $NAMESPACE --from main.tex --cover cover.jpg
-> Parsed main.tex -> wiki markup OK
-> Uploading cover.jpg... OK
 </pre>
 </div>
 
@@ -42,7 +39,7 @@ $ curl -s https://colegio-san-caio.github.io/demo-repository/main.tex | head
 # google search operator for your TeX repo:
 site:colegio-san-caio.github.io/demo-repository filetype:tex OR filetype:pdf
 
-# unix one-liner to create wikipedia entry from TeX:
+# unix one-liner to convert TeX to MediaWiki markup (posting is manual):
 pandoc main.tex -t mediawiki -o wiki.txt && cat wiki.txt
 </pre>
 </div>
