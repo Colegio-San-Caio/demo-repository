@@ -408,3 +408,15 @@ cat << 'D5_DETAIL' >> index.html
 <div class="card"><b>Zenodo & LaTeX Monograph Integration</b><br>Archived theoretical preprints, DOI registries, and German National Library URN records<br><code>Research Pipeline</code><br><span>Publication Core</span></div>
 </div>
 D5_DETAIL
+
+# Append 3D/4D Camera & Ternary Circuit Architecture to the HTML generator
+cat << 'TRIT_CAMERA' >> index.html
+
+<h2>3D/4D Camera Projection & Ternary Circuit Logic (Trit / MOSFET)</h2>
+<div class="grid">
+<div class="card"><b>4D Cover Viewport & Camera Pipeline</b><br>Multi-dimensional perspective projection, matrix transformations, and rendering cover frames<br><code>application/x-camera-matrix</code><br><span class="ok">● Viewport Active</span></div>
+<div class="card"><b>Ternary Circuit Permit (`trit`)</b><br>Three-state logic gating (-1, 0, +1) providing advanced switching beyond binary gates<br><code>Ternary Logic Core</code><br><span>Multistate Switch</span></div>
+<div class="card"><b>MOSFET-Analogue Open Circuits</b><br>Transistor-level impedance control, channel insulation, and threshold voltage permits<br><code>Hardware Analog</code><br><span>Circuit Layer</span></div>
+<div class="card"><b>OeneyeOS Render Integration</b><br>Binds low-level hardware disk image states (`mosfetq-dos.img`) with real-time camera projections<br><code>System Pipeline</code><br><span>Execution Core</span></div>
+</div>
+TRIT_CAMERA
