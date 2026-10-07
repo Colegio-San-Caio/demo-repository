@@ -59,6 +59,22 @@ ISBN 978-3-00-068463-0 | PDF | 21,00 &euro; (+ tax)</p>
 <code>sha256sum --check checksum.sha256</code>
 <p><a href="assets/checksum.sha256">checksum.sha256</a></p>
 <p class="small">A matching checksum shows the file is the one published here. It doesn't prove the contents are safe.</p>
+<style>
+.pybox{border:1px solid #8886;border-radius:6px;overflow:hidden;margin:12px 0}
+.pyhead{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#8882;font-size:.85rem}
+.pyhead a,.pyhead button{margin-left:6px;font-size:.8rem}
+#pysrc{margin:0;padding:12px;overflow:auto;max-height:50vh;font-size:.75rem;white-space:pre}
+</style>
+<h2>Demo: python3 emu_dos.py</h2>
+<p class="small">Runs in your browser with Pyodide (Python compiled to WebAssembly). Nothing is sent to a server.</p>
+<div class="pybox">
+<div class="pyhead"><span>emu_dos.py</span><span><a href="emu_dos.py" target="_blank">Raw</a><button id="demorun" type="button">Run</button><button id="demostop" type="button" disabled>Stop</button></span></div>
+<pre id="pysrc">Loading emu_dos.py...</pre>
+</div>
+<textarea id="demoin" rows="3" placeholder="Input lines for the program, one per line (optional)"></textarea>
+<pre id="demoout" class="demoout">$ python3 emu_dos.py
+(press Run)</pre>
+<script src="demo.js"></script>
 <!--REPOS-->
 </body>
 </html>
