@@ -89,3 +89,83 @@ code{font-size:12px;background:#1e1e20;padding:2px 6px;border-radius:6px;word-br
 <div class="card"><b>Interrupt Vector Table (IVT)</b><br>BIOS and DOS hardware/software interrupt routing handlers<br><code>Vectors 0x00 - 0xFF</code><br><span>System Call Hooks</span></div>
 <div class="card"><b>Protected-Mode Descriptors</b><br>Global Descriptor Table (GDT) and Segment Selectors<br><code>32-bit Flat Memory Model</code><br><span>Advanced Execution</span></div>
 </div>
+
+<h2>Shell Scripts & Automation Pipelines (.SH)</h2>
+<div class="grid">
+<div class="card"><b>Static Index Generator (`static_own_index.sh`)</b><br>Dynamic asset fetching, live SHA256 hashing, and HTML compilation<br><code>Core Build Script</code><br><span class="ok">● Active Generator</span></div>
+<div class="card"><b>Deployment & Watch Loop (`oeneyeGHview.imc`)</b><br>Automated git commit, push, workflow dispatch, and polling loop<br><code>CI/CD Orchestration</code><br><span>Automated Pipeline</span></div>
+<div class="card"><b>Termux Environment Hooks</b><br>Android-native command execution, package management, and QEMU wrappers<br><code>Mobile Linux Runtime</code><br><span>Execution Shell</span></div>
+<div class="card"><b>Checksum Verification Suites</b><br>SHA256 integrity validation for release files, brand tokens, and external references<br><code>Asset Integrity</code><br><span>Security Layer</span></div>
+</div>
+
+<h2>Binary Disk Images & Raw Payloads (.bin)</h2>
+<div class="grid">
+<div class="card"><b>Floppy Disk Images (1.44MB / 720KB)</b><br>Raw sector-by-sector disk dumps containing boot sectors and file systems<br><code>Sector 0 to Max LBA</code><br><span class="ok">● Raw Disk Image</span></div>
+<div class="card"><b>16-bit Bootloaders</b><br>Stage 1 and Stage 2 real-mode boot code loaded at physical address 0x7C00<br><code>Origin 0x7C00</code><br><span>Primary Bootstrap</span></div>
+<div class="card"><b>Memory Dumps & Snapshots</b><br>Raw RAM state captures for QEMU and retro-computing emulation debugging<br><code>Full-Address Capture</code><br><span>Emulation State</span></div>
+<div class="card"><b>Custom Firmware & BIOS ROMs</b><br>Low-level initialization routines and hardware abstraction layers<br><code>ROM Binary Stacks</code><br><span>Hardware Interface</span></div>
+</div>
+
+<h2>Repository Dynamic File Registry (./{name}.{MIME})</h2>
+<div class="grid">
+<div class="card"><b>HTML Documents</b><br><code>text/html</code><br><a href="./index.html">index.html</a> | <a href="./oeneye.html">oeneye.html</a></div>
+<div class="card"><b>Scripts & Automation</b><br><code>text/plain / application/x-sh</code><br><a href="./static_own_index.sh">static_own_index.sh</a> | <a href="./oeneyeGHview.imc">oeneyeGHview.imc</a></div>
+<div class="card"><b>Vector & Raster Graphics</b><br><code>image/svg+xml | image/png</code><br><a href="./logo-copyright.svg">logo-copyright.svg</a> | <a href="./logo-copyright.png">logo-copyright.png</a></div>
+<div class="card"><b>Binary Payloads & Disks</b><br><code>application/octet-stream</code><br><span>Raw Sector Mapping Active</span></div>
+</div>
+
+<h2>Official Documentation & PDF Releases (application/pdf)</h2>
+<div class="grid">
+<div class="card"><b>OENEYE Text Brand Tokens</b><br>18.46 KiB — Core typographic tokens and identifiers<br><code>application/pdf</code><br><a href="https://github.com/Colegio-San-Caio/demo-repository/releases/download/v1.0.0/OENEYE_Text_Brand_Tokens.pdf">Download PDF</a></div>
+<div class="card"><b>Comprehensive Concept Specification</b><br>827.95 KiB — Full architectural framework document<br><code>application/pdf</code><br><a href="https://github.com/Colegio-San-Caio/demo-repository/releases/download/v1.0.0/OENEYE_Comprehensive_Concept_Specification.pdf">Download PDF</a></div>
+<div class="card"><b>Text Brand Tokens (Updated)</b><br>3.98 KiB — Revised typography specs and identity elements<br><code>application/pdf</code><br><a href="https://github.com/Colegio-San-Caio/demo-repository/releases/download/v1.0.0/OENEYE_Text_Brand_Tokens_Updated.pdf">Download PDF</a></div>
+<div class="card"><b>Automated PDF Generation</b><br>Python WeasyPrint / ReportLab rendering engines<br><code>Typesetting Pipeline</code><br><span>Active Compilation</span></div>
+</div>
+
+<h2>C Language Source & Kernel Modules (text/x-csrc / .c)</h2>
+<div class="grid">
+<div class="card"><b>oeneyeOS Kernel Core</b><br>Low-level system initialization, memory management, and process control<br><code>x86 Bare-Metal C</code><br><span class="ok">● Active Source</span></div>
+<div class="card"><b>Hardware Abstraction Layer (HAL)</b><br>Direct port I/O, interrupt service routines, and device drivers<br><code>Port-Level Access</code><br><span>Hardware Hooks</span></div>
+<div class="card"><b>Custom C Standard Libraries</b><br>Lightweight runtime utilities tailored for retro-computing environments<br><code>Standalone Runtime</code><br><span>System Library</span></div>
+<div class="card"><b>Compiler & Linker Integration</b><br>oeneyeCompiler object emission and symbol binding routines<br><code>Object Code Generator</code><br><span>Build Pipeline</span></div>
+</div>
+
+<h2>Pascal System Source & Retro Utilities (.pas / .PAS)</h2>
+<div class="grid">
+<div class="card"><b>Terminal Setup & Environment Scripts</b><br>Structured unit configuration for legacy system initialization<br><code>Modular Pascal Units</code><br><span class="ok">● Active Pascal Source</span></div>
+<div class="card"><b>Retro-Computing System Simulations</b><br>Low-level memory and hardware register state machines<br><code>Real-Mode Logic</code><br><span>Emulation Utility</span></div>
+<div class="card"><b>Interactive CLI Utility Modules</b><br>Menu-driven management tools and command-line interfaces<br><code>Text-Mode UI</code><br><span>Control Flow</span></div>
+<div class="card"><b>Compiler & Linker Interop</b><br>Cross-language bindings and symbol sharing with the oeneyeOS toolchain<br><code>Object Interface</code><br><span>Build Pipeline</span></div>
+</div>
+
+<h2>LaTeX Technical Manuscripts & Operator Physics (.TEX)</h2>
+<div class="grid">
+<div class="card"><b>Maxwell Inertia Conjunction (MIC)</b><br>Mathematical frameworks for density-mass equivalence and field coupling<br><code>Theoretical Physics</code><br><span class="ok">● Active Manuscript</span></div>
+<div class="card"><b>Structural Epsilon ($\epsilon$) Offsets</b><br>Non-linear perturbation modeling and tensor offset calculations<br><code>Operator Axioms</code><br><span>Mathematical Core</span></div>
+<div class="card"><b>$D^5$ Manifold Operators</b><br>Higher-dimensional topological space and inertia-coupled probability distributions<br><code>Advanced Topology</code><br><span>Geometric Framework</span></div>
+<div class="card"><b>Automated Typesetting Pipeline</b><br>LaTeX monograph compilation, Zenodo metadata sync, and DNB URN registration<br><code>Archival Publishing</code><br><span>Metadata Registry</span></div>
+</div>
+
+<h2>Published Monographs & PDF Registries (.pdf)</h2>
+<div class="grid">
+<div class="card"><b>Radius-0 & Structural Epsilon Monograph</b><br>Official academic preprint and patent pipeline specification<br><code>Zenodo DOI / DNB URN</code><br><span class="ok">● Verified Publication</span></div>
+<div class="card"><b>OENEYE + C4 System Specification</b><br>Complete architectural documentation and ecosystem layout<br><code>application/pdf</code><br><span>Archival Release</span></div>
+<div class="card"><b>Automated Zenodo / DNB Sync</b><br>Metadata deposit pipelines and persistent identifier generation<br><code>Metadata Registry</code><br><span>Sync Pipeline</span></div>
+<div class="card"><b>Retail Book Gateway (`bunq.me`)</b><br>Direct payment and physical monograph ordering integration<br><code>ISBN Monograph Order</code><br><span>Distribution Core</span></div>
+</div>
+
+<h2>Fortran Scientific Computing & LaTeX Source Modules (.f / .F / .tex)</h2>
+<div class="grid">
+<div class="card"><b>Fortran Numerical Subroutines (.f / .F)</b><br>High-performance array operations and mathematical modeling kernels<br><code>Scientific Computation</code><br><span class="ok">● Active Fortran Source</span></div>
+<div class="card"><b>Operator Physics Equation Solvers</b><br>Matrix-based density-mass equivalence and tensor transformation loops<br><code>Numerical Analysis</code><br><span>Computation Core</span></div>
+<div class="card"><b>Supplementary LaTeX Sources (.tex / .Tex)</b><br>Draft chapters, equation definitions, and modular markup blocks<br><code>Document Source</code><br><span>Typesetting Extension</span></div>
+<div class="card"><b>Build & Compilation Bindings</b><br>Cross-language object linking between Fortran runtimes and oeneyeOS<br><code>Object Linker Pipeline</code><br><span>Execution Target</span></div>
+</div>
+
+<h2>Archives, Disk Images & Universal MIME Routing (.zip / .IMG / .{MIME})</h2>
+<div class="grid">
+<div class="card"><b>Compressed Archives (.zip / .ZIP)</b><br>Full source trees, repository snapshots, and release bundles<br><code>application/zip</code><br><span class="ok">● Bundle Ready</span></div>
+<div class="card"><b>Floppy & Disk Image Bundles (.IMG)</b><br>Raw sector-mapped disk images for QEMU and bare-metal deployment<br><code>application/octet-stream</code><br><span>Disk Image Core</span></div>
+<div class="card"><b>Universal MIME Mapping (.{MIME}.{MIME})</b><br>Dynamic content-type header routing and dual-extension routing wrappers<br><code>Dynamic Routing Table</code><br><span>Header Resolution</span></div>
+<div class="card"><b>Ecosystem Base Identity ({name})</b><br>Core asset naming convention, release tags, and registry identifiers<br><code>Global Namespace</code><br><span>System Identifier</span></div>
+</div>
