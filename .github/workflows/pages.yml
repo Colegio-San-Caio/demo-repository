@@ -20,7 +20,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - run: mkdir _site && cp -r *.html assets $(ls *.img *.vhd *.tex *.pdf 2>/dev/null) _site/
+      - run: mkdir _site && cp -r *.html assets $(ls *.img *.vhd *.tex *.pdf emu_dos.py 2>/dev/null) _site/
       - name: Build book.pdf from main.tex
         continue-on-error: true
         run: |
