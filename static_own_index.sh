@@ -2,3 +2,65 @@
 HTML_SUM=$(curl -sL https://raw.githubusercontent.com/Colegio-San-Caio/demo-repository/main/oeneye.html | sha256sum | awk '{print $1}')
 PNG_SUM=$(curl -sL https://raw.githubusercontent.com/Colegio-San-Caio/demo-repository/main/logo-copyright.png | sha256sum | awk '{print $1}')
 SVG_SUM=$(curl -sL https://raw.githubusercontent.com/Colegio-San-Caio/demo-repository/main/logo-copyright.svg | sha256sum | awk '{print $1}')
+META_SUM=$(curl -sL "https://www.meta.ai/share/c/SpecItK2HS?utm_source=android_meta_ai_sl" | sha256sum | awk '{print $1}')
+
+cat << HTML > index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OENEYE + C4 — v1.0.0 Latest</title>
+<style>
+:root{--bg:#0a0a0b;--fg:#e8e8e8;--muted:#9a9a9a;--card:#151517;--border:#242428}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 ui-monospace,Menlo,monospace;padding:24px}
+a{color:var(--fg);text-decoration:underline;text-underline-offset:3px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:32px 0 12px;border-top:1px solid var(--border);padding-top:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin:12px 0}
+.badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:2px 10px;font-size:11px;color:var(--muted);margin-right:6px}
+code{font-size:12px;background:#1e1e20;padding:2px 6px;border-radius:6px;word-break:break-all}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.ok{color:#7CFF9E}
+</style>
+</head>
+<body>
+<h1>OENEYE + C4 Clock</h1>
+<div><span class="badge" style="color:#7CFF9E">● LIVE</span><span class="badge">v1.0.0 Latest</span></div>
+<p style="color:#9a9a9a">Colegio-San-Caio/demo-repository — frozen release with checksummed brand tokens, oeneye.html, logos, Meta AI reference, and C4 Clock main.html</p>
+
+<h2>Release</h2>
+<div class="card">
+<a href="https://github.com/Colegio-San-Caio/demo-repository/releases/tag/v1.0.0">Release v1.0.0</a><br>
+<code>gh release list → v1.0.0 - OENEYE + C4  Latest</code>
+</div>
+
+<h2>Verified Assets & External References (SHA256)</h2>
+<div class="grid">
+<div class="card"><b>Meta AI Share Reference</b><br>SpecItK2HS<br><code>\${META_SUM}</code><br><a href="https://www.meta.ai/share/c/SpecItK2HS?utm_source=android_meta_ai_sl">Open Link</a></div>
+<div class="card"><b>oeneye.html</b><br>Core Ecosystem Page<br><code>\${HTML_SUM}</code><br><a href="./oeneye.html">View Page</a></div>
+<div class="card"><b>OENEYE_Text_Brand_Tokens.pdf</b><br>18.46 KiB<br><code>d28b0522166ea2d892f0a932ee25f67ce334385ddd66d6f2f1f644618beec4a6</code><br><a href="https://github.com/Colegio-San-Caio/demo-repository/releases/download/v1.0.0/OENEYE_Text_Brand_Tokens.pdf">Download</a></div>
+<div class="card"><b>OENEYE_Comprehensive_Concept_Specification.pdf</b><br>827.95 KiB<br><code>1f6b9ea815a0c5534116e5d569f72e0535d2e86a61a6c4d85ef4404032aec597</code><br><a href="https://github.com/Colegio-San-Caio/demo-repository/releases/download/v1.0.0/OENEYE_Comprehensive_Concept_Specification.pdf">Download</a></div>
+<div class="card"><b>OENEYE_Text_Brand_Tokens_Updated.pdf</b><br>3.98 KiB<br><code>87996533f98962770de0da01df326ab15cb1f6b46998f3cdf1696aef71e2de6</code><br><a href="https://github.com/Colegio-San-Caio/demo-repository/releases/download/v1.0.0/OENEYE_Text_Brand_Tokens_Updated.pdf">Download</a></div>
+<div class="card"><b>logo-copyright.svg</b><br>Vector Asset<br><code>\${SVG_SUM}</code><br><a href="./logo-copyright.svg">View</a></div>
+<div class="card"><b>logo-copyright.png</b><br>Raster Asset<br><code>\${PNG_SUM}</code><br><a href="./logo-copyright.png">View</a></div>
+</div>
+
+<h2>C4 Clock — 8-BOX ∞-eyes</h2>
+<div class="card">
+<a href="./main.html">Open main.html (clock-container)</a><br><br>
+<iframe src="./main.html" style="width:100%;height:420px;border:1px solid #242428;border-radius:12px;background:#000"></iframe>
+</div>
+
+<h2>Repository Contents</h2>
+<div class="grid">
+<div class="card"><a href="./oeneye.html">oeneye.html</a></div>
+<div class="card"><a href="./main">./main</a> + <a href="./main.html">main.html</a></div>
+<div class="card"><a href="./logo-copyright.svg">logo-copyright.svg</a><br><a href="./logo-copyright.png">logo-copyright.png</a></div>
+<div class="card"><a href="./grok_1790157092732.jpg">grok_1790157092732.jpg</a><br><a href="./grok_1790454829310.png">grok_1790454829310.png</a></div>
+</div>
+
+<footer style="margin-top:40px;color:#9a9a9a;font-size:11px">v1.0.0 • Latest • OENEYE + C4 • Pages live via static_own_index.sh</footer>
+</body>
+</html>
+HTML
+echo "index.html generator successfully updated with Meta AI checksum!"
