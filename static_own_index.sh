@@ -336,3 +336,15 @@ cat << 'SELF_HOST' >> index.html
 <div class="card"><b>Ecosystem Closure ({name})</b><br>Finalizes the recursive compilation loop across the entire repository structure<br><code>Closure Token</code><br><span>System Complete</span></div>
 </div>
 SELF_HOST
+
+# Append Disk Images & Stage Binaries Architecture to the HTML generator
+cat << 'DISK_BIN' >> index.html
+
+<h2>Low-Level Disk Images & Stage Binaries (.img / .bin)</h2>
+<div class="grid">
+<div class="card"><b>Master Disk Image (`oeneye-00x00.img`)</b><br>External repository sector-mapped OS image linked from <code>Colegio-San-Caio/qiskit</code><br><code>application/octet-stream</code><br><span class="ok">● External Link</span></div>
+<div class="card"><b>Filesystem Data Image (`data.img`)</b><br>Raw sector-mapped file storage and partition image for emulator mounts<br><code>Storage Volume</code><br><span>Disk Core</span></div>
+<div class="card"><b>Secondary Bootloader (`stage2.bin`)</b><br>Low-level 16-bit x86 binary loader executed during system boot sequence<br><code>Binary Payload</code><br><span>Bootloader Target</span></div>
+<div class="card"><b>Emulation & Deployment Pipeline</b><br>Integrates binary binaries and disk volumes into QEMU and bare-metal targets<br><code>Virtualization Hook</code><br><span>Execution Layer</span></div>
+</div>
+DISK_BIN
