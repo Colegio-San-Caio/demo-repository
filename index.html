@@ -1,68 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TeX Gist - demo-repository</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>oeneyeOS</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="oeneyeOS - Floppy Max 2.88MB">
+<meta property="og:description" content="oeneyeOS disk images, EULA, and the book MOSFETQ by Kai Olaf Ketelhut.">
+<meta property="og:url" content="https://colegio-san-caio.github.io/demo-repository/">
+<meta property="og:image" content="https://colegio-san-caio.github.io/demo-repository/assets/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cover of MOSFETQ, Technologie als Gesellschaftstreiber">
+<meta name="twitter:card" content="summary_large_image">
 <style>
-body{margin:0;background:#0d1117;color:#c9d1d9;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial}
-.header{background:#010409;border-bottom:1px solid #30363d;padding:14px 24px;font-weight:600}
-.wrap{max-width:950px;margin:0 auto;padding:16px}
-.tabs{display:flex;gap:8px;margin-bottom:12px}
-.tab{padding:6px 14px;border:1px solid #30363d;border-radius:6px;background:#21262d;color:#c9d1d9;cursor:pointer;font-size:13px}
-.tab.active{background:#1f6feb;color:#fff;border-color:#1f6feb}
-.box{background:#0d1117;border:1px solid #30363d;border-radius:6px;overflow:hidden}
-.box-head{padding:10px 14px;background:#010409;border-bottom:1px solid #30363d;display:flex;justify-content:space-between;font-size:13px}
-.btn{border:1px solid #30363d;background:#21262d;color:#c9d1d9;padding:3px 10px;border-radius:6px;font-size:12px;text-decoration:none;margin-left:6px}
-pre{margin:0;padding:16px;overflow:auto;white-space:pre-wrap;font-size:13px}
-.render{padding:24px;background:#fff;color:#000;min-height:200px}
-.render h1,.render h2{color:#000}
-#htmlView{display:none}
+body{font-family:Georgia,serif;max-width:720px;margin:0 auto;padding:16px;line-height:1.5;color:#111;background:#fff}
+@media(prefers-color-scheme:dark){body{color:#eee;background:#111}a{color:#8ab4f8}}
+h1{font-size:1.5rem}h2{font-size:1.2rem;margin-top:2rem;border-top:1px solid #8884;padding-top:1rem}
+code{display:block;font-size:.8rem;overflow-x:auto;padding:8px;background:#8882}
+img{max-width:260px;width:100%;height:auto;display:block;margin:12px 0}
+.small{font-size:.85rem;opacity:.8}
 </style>
 </head>
 <body>
-<div class="header">Colegio-San-Caio / demo-repository — TeX Gist (v1.0 of 978-3-00-068463-0)</div>
-<div class="wrap">
-<div class="tabs">
-<button class="tab active" onclick="showTab('tex')">TeX Source</button>
-<button class="tab" onclick="showTab('html')">HTML View</button>
-<button class="tab" onclick="showTab('pdf')">PDF</button>
-</div>
-<div class="box">
-<div class="box-head"><span id="fname">main.tex</span><span><a class="btn" href="main.tex" target="_blank">Raw</a> <a class="btn" href="https://github.com/Colegio-San-Caio/978-3-00-068463-0/releases/tag/v1.0" target="_blank">Release</a></span></div>
-<pre id="texView">Loading main.tex...</pre>
-<div id="htmlView" class="render"></div>
-<iframe id="pdfView" style="width:100%;height:80vh;border:0;display:none"></iframe>
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-<script>
-let texContent='';
-function showTab(t){
- document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
- event.target.classList.add('active');
- document.getElementById('texView').style.display = t==='tex'?'block':'none';
- document.getElementById('htmlView').style.display = t==='html'?'block':'none';
- document.getElementById('pdfView').style.display = t==='pdf'?'block':'none';
- if(t==='html') renderHTML();
- if(t==='pdf') document.getElementById('pdfView').src='book.pdf';
-}
-function renderHTML(){
- const div=document.getElementById('htmlView');
- div.innerHTML = '<h1>Rendered from TeX</h1><div style="white-space:pre-wrap;line-height:1.7">'+texContent.replace(/</g,'&lt;')+'</div>';
- renderMathInElement(div,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
-}
-fetch('main.tex?v='+Date.now()).then(r=>r.text()).then(t=>{
- if(t.includes('Page not found') || t.includes('<!DOCTYPE html>')){
-   document.getElementById('texView').textContent='ERROR: main.tex not found on Pages. Push it:\n\ncp /tmp/book/*.tex main.tex\n git add main.tex\n git push';
-   return;
- }
- texContent=t;
- document.getElementById('texView').textContent=t;
- document.getElementById('htmlView').innerHTML='';
-}).catch(e=>{document.getElementById('texView').textContent='main.tex missing - add your ISBN TeX file';});
-</script>
+<h1>oeneyeOS - Floppy Max 2.88MB + VHD</h1>
+<p>A: oeneyeOS.img | B: data.img (2.88M) | B: oeneyeB.vhd</p>
+<p><a href="oeneyeOS.img">Download A</a> | <a href="data.img">Download B</a></p>
+<code>qemu-system-i386 -fda oeneyeOS.img -fdb data.img</code>
+<p class="small">Back up important data before using the disk-image tools. A defect in disk-writing code can damage data.</p>
+
+<h2>License (EULA)</h2>
+<p>Free to use, modify and share. Don't present a modified version as the official release. The original oeneye code is MIT-licensed, the software is provided as is, and it is not security-certified.</p>
+<p><a href="assets/OENEYE_EULA.pdf">oeneye OS EULA, version 1.0 (PDF)</a><br>
+<span class="small">DOI: <a href="https://doi.org/10.5281/zenodo.22978006">10.5281/zenodo.22978006</a></span></p>
+
+<h2>Book</h2>
+<img src="assets/mosfetq-cover.jpeg" alt="Cover of MOSFETQ, Technologie als Gesellschaftstreiber, by Kai Olaf Ketelhut">
+<p><strong>MOSFETQ &ndash; Technologie als Gesellschaftstreiber</strong><br>
+Kai Olaf Ketelhut<br>
+Fieldberry Group, Berlin<br>
+ISBN 978-3-00-068463-0 | PDF | 21,00 &euro; (+ tax)</p>
+<p><a href="tex.html">Book source (TeX)</a> | <a href="assets/mosfetq-record.pdf">Bibliographic record (PDF)</a> |
+<a href="https://bunq.me/fieldberry">Order / pay</a></p>
+<h2>Verify your download</h2>
+<p>SHA-256 checksums for the disk images. Put both images and the checksum file in one folder, then run the check.</p>
+<code>8a292e7d831e45f4bae09718a15a6b9cd101b13951bbd453f05ea3f177485807  oeneyeOS.img
+1b7b350b66f56a4646573de32f7fea22a050cdf99672d8751c49043abc82ebab  data.img</code>
+<code>sha256sum --check checksum.sha256</code>
+<p><a href="assets/checksum.sha256">checksum.sha256</a></p>
+<p class="small">A matching checksum shows the file is the one published here. It doesn't prove the contents are safe.</p>
+<!--REPOS-->
 </body>
 </html>
