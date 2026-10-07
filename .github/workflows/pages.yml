@@ -29,6 +29,14 @@ jobs:
           pdflatex -interaction=nonstopmode main.tex
           pdflatex -interaction=nonstopmode main.tex
           cp main.pdf _site/book.pdf
+      - name: Build book.pdf from main.tex
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq texlive-latex-recommended texlive-fonts-recommended
+          pdflatex -interaction=nonstopmode main.tex
+          pdflatex -interaction=nonstopmode main.tex
+          cp main.pdf _site/book.pdf
       - name: Build repo and release list
         env:
           GH_TOKEN: ${{ github.token }}
