@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+cat << 'HTML' > index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,3 +53,5 @@ code{font-size:12px;background:#1e1e20;padding:2px 6px;border-radius:6px;word-br
 <footer style="margin-top:40px;color:#9a9a9a;font-size:11px">v1.0.0 • Latest • OENEYE + C4 • Pages live via static_own_index.sh</footer>
 </body>
 </html>
+HTML
+echo "index.html successfully updated!"
