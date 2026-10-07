@@ -2,25 +2,28 @@ name: Deploy
 on:
   push:
     branches: [main]
+permissions:
+  contents: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build site
+      - name: Build _site
         run: |
-          mkdir -p _site/assets
-          ls -lh
-          echo "--- copying ---"
+          mkdir -p _site/assets _site/discussions
+          echo "=== ROOT FILES ==="; ls -lh *.html *.txt *.md 2>/dev/null | head -n 50
           cp -v *.html _site/ 2>/dev/null || true
-          cp -v *.txt *.tex *.pdf *.jpg *.png _site/ 2>/dev/null || true
-          cp -v *.txt *.tex *.pdf *.jpg *.png _site/assets/ 2>/dev/null || true
-          [ -d assets ] && cp -rv assets/* _site/assets/ 2>/dev/null || true
-          # also copy any other listed assets
-          for f in $(ls *.img *.vhd *.tex *.pdf emu_dos.py emu_worker.js demo.js 2>/dev/null); do cp -v "$f" _site/ 2>/dev/null || true; cp -v "$f" _site/assets/ 2>/dev/null || true; done
-          ls -lh _site/ | head -n 40
-          ls -lh _site/assets/ | head -n 40
-      - uses: peaceiris/actions-gh-pages@v4
+          cp -v *.txt *.md *.tex *.pdf *.jpg *.png _site/ 2>/dev/null || true
+          cp -rv discussions _site/ 2>/dev/null || true
+          cp -rv assets _site/ 2>/dev/null || true
+          mkdir -p _site/assets/discussions
+          cp -v *.html *.txt _site/assets/ 2>/dev/null || true
+          cp -rv discussions _site/assets/ 2>/dev/null || true
+          echo "=== _site ==="; ls -R _site | head -n 80
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: _site
+          force_orphan: true
