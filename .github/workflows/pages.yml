@@ -18,6 +18,7 @@ jobs:
           cp -v *.txt *.md *.tex *.pdf _site/ 2>/dev/null || true
           cp -rv discussions _site/ 2>/dev/null || true
           cp -rv assets _site/ 2>/dev/null || true
+          cp -v *.html logo-copyright.svg _site/ 2>/dev/null || true
           mkdir -p _site/assets/discussions
           cp -v *.html *.txt _site/assets/ 2>/dev/null || true
           cp -rv discussions _site/assets/ 2>/dev/null || true
