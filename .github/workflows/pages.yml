@@ -12,18 +12,20 @@ jobs:
       - name: Build _site
         run: |
           mkdir -p _site/assets _site/discussions
-          echo "=== ROOT FILES ==="; ls -lh *.html *.txt *.md 2>/dev/null | head -n 50
+          ls -lh *.html CNAME 2>/dev/null
+          cp -v CNAME _site/ 2>/dev/null || true
           cp -v *.html _site/ 2>/dev/null || true
-          cp -v *.txt *.md *.tex *.pdf *.jpg *.png _site/ 2>/dev/null || true
+          cp -v *.txt *.md *.tex *.pdf _site/ 2>/dev/null || true
           cp -rv discussions _site/ 2>/dev/null || true
           cp -rv assets _site/ 2>/dev/null || true
           mkdir -p _site/assets/discussions
           cp -v *.html *.txt _site/assets/ 2>/dev/null || true
           cp -rv discussions _site/assets/ 2>/dev/null || true
-          echo "=== _site ==="; ls -R _site | head -n 80
+          ls -lh _site/ && cat _site/CNAME
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: _site
+          cname: board.colegio-san-caio.com
           force_orphan: true
