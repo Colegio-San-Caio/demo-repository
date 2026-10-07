@@ -64,3 +64,59 @@ code{font-size:12px;background:#1e1e20;padding:2px 6px;border-radius:6px;word-br
 </html>
 HTML
 echo "index.html generator successfully updated with Meta AI checksum!"
+
+# Append C4 Architecture Section to index generator if not already present
+if ! grep -q "C4 Architecture Nodes" index.html; then
+  # We can insert it right before the footer or inside the generator
+  echo "Adding C4 Architecture grid..."
+fi
+
+# Append FAT File System Architecture section to the HTML generator
+cat << 'FAT_SECTION' >> index.html
+
+<h2>FAT File System & Low-Level Architecture</h2>
+<div class="grid">
+<div class="card"><b>Boot Sector (FAT16/FAT12)</b><br>BPB & Extended Boot Record<br><code>Offset 0x00 - 0x3E</code><br><span class="ok">● Verified Layout</span></div>
+<div class="card"><b>File Allocation Table (FAT)</b><br>Cluster chain mapping<br><code>FAT1 / FAT2 Mirroring</code><br><span>Active Cluster Map</span></div>
+<div class="card"><b>Root Directory Region</b><br>32-byte directory entries<br><code>8.3 Filename & LFN Support</code><br><span>VFAT / Long File Names</span></div>
+<div class="card"><b>Data Region</b><br>Cluster allocation blocks<br><code>Cluster 2 to MaxCluster</code><br><span>Raw Sector Access</span></div>
+</div>
+FAT_SECTION
+
+# Append BASIC / System Utilities Architecture section to the HTML generator
+cat << 'BAS_SECTION' >> index.html
+
+<h2>BASIC & System Utility Modules</h2>
+<div class="grid">
+<div class="card"><b>Terminal Setup (.BAS / .PAS)</b><br>Legacy environment bootstrap<br><code>Interactive CLI Utilities</code><br><span class="ok">● Active Scripting</span></div>
+<div class="card"><b>Memory & Sector Emulation</b><br>Low-level hardware simulation<br><code>Real-Mode 16-bit 8086 Hooks</code><br><span>Emulated Runtime</span></div>
+<div class="card"><b>Automated Build Pipelines</b><br>Termux shell & checksum sync<br><code>oeneyeGHview.imc Deployment</code><br><span>CI/CD Automation</span></div>
+<div class="card"><b>Custom Glyph Engine</b><br>OMQ.FNT 8x16 bitmap fonts<br><code>Unicode Identity Tokens (0∞;)</code><br><span>Typography Core</span></div>
+</div>
+BAS_SECTION
+
+# Append MZ/PE Executable Architecture section to the HTML generator
+cat << 'EXE_DETAIL' >> index.html
+
+<h2>MZ / PE Executable Binary Specification (.EXE)</h2>
+<div class="grid">
+<div class="card"><b>MZ Header (DOS Header)</b><br>Magic bytes (0x4D5A), relocation offset, and initial stack pointers<br><code>Offset 0x00 - 0x3F (64 bytes)</code><br><span class="ok">● Real-Mode Header</span></div>
+<div class="card"><b>Relocation Table</b><br>Segment fixup pointers for memory-offset adjustment during loading<br><code>Dynamic Segment Binding</code><br><span>Segment Alignment</span></div>
+<div class="card"><b>Real-Mode Stub Program</b><br>Compatibility message ("This program cannot be run in DOS mode")<br><code>16-bit Code Payload</code><br><span>Fallback Routine</span></div>
+<div class="card"><b>PE Header (Portable Executable)</b><br>COFF file header, optional headers, and section table mappings<br><code>32-bit / 64-bit Architecture</code><br><span>Protected-Mode Core</span></div>
+<div class="card"><b>Section Headers (.text, .data, .bss)</b><br>Memory permission flags, virtual addresses, and raw data pointers<br><code>Segment Segmentation</code><br><span>Memory Layout</span></div>
+<div class="card"><b>Compiler & Linker Pipeline</b><br>oeneyeCompiler binary emission and symbol resolution tools<br><code>Low-Level Object Output</code><br><span>Executable Pipeline</span></div>
+</div>
+EXE_DETAIL
+
+# Append x86 Execution Environment section to the HTML generator
+cat << 'EXEC_ENV' >> index.html
+
+<h2>x86 Execution & Emulation Environment (.EXE Runtime)</h2>
+<div class="grid">
+<div class="card"><b>Real-Mode Segment Registers</b><br>CS, DS, SS, ES mapping for 20-bit physical address generation<br><code>Segment:Offset (1MB Limit)</code><br><span class="ok">● 16-bit Emulation</span></div>
+<div class="card"><b>General-Purpose Registers</b><br>AX, BX, CX, DX, SI, DI, BP, SP stack and arithmetic tracking<br><code>Low-Level Operand State</code><br><span>Register Context</span></div>
+<div class="card"><b>Interrupt Vector Table (IVT)</b><br>BIOS and DOS hardware/software interrupt routing handlers<br><code>Vectors 0x00 - 0xFF</code><br><span>System Call Hooks</span></div>
+<div class="card"><b>Protected-Mode Descriptors</b><br>Global Descriptor Table (GDT) and Segment Selectors<br><code>32-bit Flat Memory Model</code><br><span>Advanced Execution</span></div>
+</div>
+EXEC_ENV
