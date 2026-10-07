@@ -1,32 +1,21 @@
-name: Deploy
+name: Deploy Pages
+
 on:
   push:
-    branches: [main]
-permissions:
-  contents: write
+    branches: ["main"]
+  workflow_dispatch:
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build _site
-        run: |
-          mkdir -p _site/assets _site/discussions
-          ls -lh *.html CNAME 2>/dev/null
-          cp -v CNAME _site/ 2>/dev/null || true
-          cp -v *.html _site/ 2>/dev/null || true
-          cp -v *.txt *.md *.tex *.pdf _site/ 2>/dev/null || true
-          cp -rv discussions _site/ 2>/dev/null || true
-          cp -rv assets _site/ 2>/dev/null || true
-          cp -v *.html logo-copyright.svg _site/ 2>/dev/null || true
-          mkdir -p _site/assets/discussions
-          cp -v *.html *.txt _site/assets/ 2>/dev/null || true
-          cp -rv discussions _site/assets/ 2>/dev/null || true
-          ls -lh _site/ && cat _site/CNAME
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _site
-          cname: board.colegio-san-caio.com
-          force_orphan: true
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
