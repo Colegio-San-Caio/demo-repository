@@ -396,3 +396,15 @@ cat << 'MOSFET_TLD' >> index.html
 <div class="card"><b>European TLD (.EU)</b><br>Regional European Union domain routing and infrastructure mapping<br><code>Geographic TLD</code><br><span>European Gateway</span></div>
 </div>
 MOSFET_TLD
+
+# Append D^5 Manifold Operators & Operator Physics Architecture to the HTML generator
+cat << 'D5_DETAIL' >> index.html
+
+<h2>D^5 Manifold Operators & Operator Physics ($D^5$)</h2>
+<div class="grid">
+<div class="card"><b>$D^5$ Manifold Operator Framework</b><br>Advanced theoretical physics operators and structural manifold transformations<br><code>application/x-operator-physics</code><br><span class="ok">● Operator Active</span></div>
+<div class="card"><b>Maxwell Inertia Conjunction (MIC)</b><br>Coupled inertia probability distributions and electromagnetic-gravitational mappings<br><code>Theoretical Model</code><br><span>Physics Core</span></div>
+<div class="card"><b>Structural Epsilon ($\epsilon$) Offsets</b><br>Density-mass equivalence and precision boundary corrections in operator spaces<br><code>Mathematical Offset</code><br><span>Field Dynamics</span></div>
+<div class="card"><b>Zenodo & LaTeX Monograph Integration</b><br>Archived theoretical preprints, DOI registries, and German National Library URN records<br><code>Research Pipeline</code><br><span>Publication Core</span></div>
+</div>
+D5_DETAIL
