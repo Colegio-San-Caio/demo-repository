@@ -420,3 +420,15 @@ cat << 'TRIT_CAMERA' >> index.html
 <div class="card"><b>OeneyeOS Render Integration</b><br>Binds low-level hardware disk image states (`mosfetq-dos.img`) with real-time camera projections<br><code>System Pipeline</code><br><span>Execution Core</span></div>
 </div>
 TRIT_CAMERA
+
+# Append Trit-$D^5$ Operator Architecture to the HTML generator
+cat << 'TRIT_D5' >> index.html
+
+<h2>Trit-$D^5$ Operator Matrix & Multistate Logic</h2>
+<div class="grid">
+<div class="card"><b>Ternary Trit-Permit Gate (`trit`)</b><br>Three-state logic gating (-1, 0, +1) mapped to MOSFET-analogue open circuits<br><code>Ternary Core</code><br><span class="ok">● State Active</span></div>
+<div class="card"><b>$D^5$ Operator Multiplier ($D^5*$)</b><br>Advanced manifold transformation matrix driven by ternary switching states<br><code>Operator Physics</code><br><span>Field Dynamics</span></div>
+<div class="card"><b>Maxwell Inertia Conjunction (MIC)</b><br>Coupled probability distributions controlled via multi-dimensional viewport switches<br><code>Theoretical Model</code><br><span>Physics Pipeline</span></div>
+<div class="card"><b>Execution & Disk Integration</b><br>Synchronized with the core binary and disk image target (`mosfetq-dos.img`)<br><code>System Target</code><br><span>Execution Loop</span></div>
+</div>
+TRIT_D5
