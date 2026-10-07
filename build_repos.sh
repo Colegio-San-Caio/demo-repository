@@ -3,7 +3,7 @@
 set -e
 OUT=${1:-repos.html}
 SOURCES="orgs/Colegio-San-Caio users/clevjhon"
-EXCLUDE=".github"   # repo names to hide, space-separated
+EXCLUDE=""   # repo names to hide, space-separated
 
 list() {
   local owner=$1 kind=$2
