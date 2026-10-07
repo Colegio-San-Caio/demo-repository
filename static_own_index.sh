@@ -360,3 +360,15 @@ cat << 'CPP_DETAIL' >> index.html
 <div class="card"><b>OeneyeOS SDK Integration</b><br>High-level system services and utility classes within the `oeneyeSDK` ecosystem<br><code>SDK Layer</code><br><span>System Architecture</span></div>
 </div>
 CPP_DETAIL
+
+# Append LaTeX Document Architecture to the HTML generator
+cat << 'TEX_DETAIL' >> index.html
+
+<h2>LaTeX Document Sources (.Tex / .tex / .TEX)</h2>
+<div class="grid">
+<div class="card"><b>LaTeX Monograph Sources (.Tex)</b><br>Mathematical typesetting, research papers, and technical documentation schemas<br><code>application/x-tex</code><br><span class="ok">● Typeset Active</span></div>
+<div class="card"><b>Automated PDF Generation</b><br>Document compilation via pdfTeX, WeasyPrint, and ReportLab pipelines<br><code>Rendering Engine</code><br><span>Publication Core</span></div>
+<div class="card"><b>Operator Physics Frameworks</b><br>Advanced mathematical models including Maxwell Inertia Conjunction (MIC)<br><code>Theoretical Physics</code><br><span>Research Core</span></div>
+<div class="card"><b>Zenodo & DNB Metadata Sync</b><br>DOI registration, URN cataloging, and German National Library archiving<br><code>Archive Pipeline</code><br><span>Metadata Registry</span></div>
+</div>
+TEX_DETAIL
