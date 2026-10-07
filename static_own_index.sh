@@ -432,3 +432,15 @@ cat << 'TRIT_D5' >> index.html
 <div class="card"><b>Execution & Disk Integration</b><br>Synchronized with the core binary and disk image target (`mosfetq-dos.img`)<br><code>System Target</code><br><span>Execution Loop</span></div>
 </div>
 TRIT_D5
+
+# Append oeneye-00x00.img & DD Architecture to the HTML generator
+cat << 'OENEYE_IMG' >> index.html
+
+<h2>oeneye-00x00.img & Sector DD Analysis</h2>
+<div class="grid">
+<div class="card"><b>Oeneye Binary Image (`oeneye-00x00.img`)</b><br>External kernel and disk architecture hosted at <code>Colegio-San-Caio/qiskit</code><br><code>application/octet-stream</code><br><span class="ok">● Binary Linked</span></div>
+<div class="card"><b>Precision Sector Carving (`dd`)</b><br>Block-level data extraction, MBR analysis, and raw sector mapping<br><code>Block Engine</code><br><span>Extraction Core</span></div>
+<div class="card"><b>Real-Mode AH Status Registers</b><br>Interrupt error trapping, carry flag (`jc`) validation, and disk status decoding<br><code>Assembly Logic</code><br><span>Interrupt Handler</span></div>
+<div class="card"><b>Ecosystem Synchronization</b><br>Integrated with `./oeneyeGHview.imc` for continuous automated deployment<br><code>Publishing Loop</code><br><span>GitHub Pages Core</span></div>
+</div>
+OENEYE_IMG
