@@ -348,3 +348,15 @@ cat << 'DISK_BIN' >> index.html
 <div class="card"><b>Emulation & Deployment Pipeline</b><br>Integrates binary binaries and disk volumes into QEMU and bare-metal targets<br><code>Virtualization Hook</code><br><span>Execution Layer</span></div>
 </div>
 DISK_BIN
+
+# Append C++ Source & Runtime Architecture to the HTML generator
+cat << 'CPP_DETAIL' >> index.html
+
+<h2>C++ Source & Object-Oriented Runtimes (.cpp)</h2>
+<div class="grid">
+<div class="card"><b>C++ Source Modules (.cpp)</b><br>Object-oriented system components, class definitions, and template libraries<br><code>text/x-c++src</code><br><span class="ok">● Source Active</span></div>
+<div class="card"><b>Standard Library & STL Integration</b><br>Memory management, vector containers, and template meta-programming<br><code>Runtime Core</code><br><span>System Library</span></div>
+<div class="card"><b>Cross-Language Linker Pipeline</b><br>Interoperability bindings linking C++ routines with C, Fortran, and x86 targets<br><code>Linker Target</code><br><span>Build Pipeline</span></div>
+<div class="card"><b>OeneyeOS SDK Integration</b><br>High-level system services and utility classes within the `oeneyeSDK` ecosystem<br><code>SDK Layer</code><br><span>System Architecture</span></div>
+</div>
+CPP_DETAIL
