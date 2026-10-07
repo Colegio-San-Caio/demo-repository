@@ -1,8 +1,7 @@
 \documentclass[11pt, a4paper]{article}
 \usepackage[a4paper, margin=2.5cm]{geometry}
-\usepackage{fontspec}
-\usepackage[english, bidi=basic, provide=*]{babel}
-\babelfont{rm}{Noto Sans}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{booktabs}
 \usepackage{xcolor}
@@ -12,7 +11,7 @@
 \definecolor{accentcolor}{RGB}{0, 120, 212}
 
 \title{\textbf{Colegio San Caio Book Software Manual}\\\large Language Selection, Release Configuration, and Deployment Guide}
-\author{Colegio San Caio Publishing & Development Team}
+\author{Colegio San Caio Publishing \& Development Team}
 \date{\today}
 
 \begin{document}
@@ -23,7 +22,7 @@
 This manual details the procedures for deploying, configuring, and executing the Colegio San Caio book software package. It provides precise instructions on selecting interface and publication languages via release assets, configuring local environments in Termux, and maintaining integrity through automated SHA-256 checksum verification.
 \end{abstract}
 
-\section{System Architecture & Prerequisites}
+\section{System Architecture \& Prerequisites}
 The Colegio San Caio book software framework is engineered to run seamlessly across local development nodes and automated CI/CD pipelines. 
 
 \begin{itemize}
@@ -54,7 +53,7 @@ The software supports multi-language execution. Language parameters are declared
 English (Default) & \texttt{en} & \texttt{--lang=en} \\
 Spanish & \texttt{es} & \texttt{--lang=es} \\
 Portuguese & \texttt{pt} & \texttt{--lang=pt} \\
-\bottom>
+\bottomrule
 \end{tabular}
 \caption{Supported Language Codes and Execution Flags}
 \label{tab:languages}
