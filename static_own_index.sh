@@ -264,3 +264,15 @@ cat << 'JPEG_DETAIL' >> index.html
 <div class="card"><b>Asset Checksum & SHA-256 Validation</b><br>Integrity verification for uploaded media files within the repository<br><code>Asset Security</code><br><span>Verification Hook</span></div>
 </div>
 JPEG_DETAIL
+
+# Append State Transition & Boundary Token Architecture to the HTML generator
+cat << 'BOUNDARIES' >> index.html
+
+<h2>State Transition & Boundary Tokens (_{name} / {name}_ / })</h2>
+<div class="grid">
+<div class="card"><b>Prefix State Token (_{name})</b><br>Initializes contextual scoping and parser state identifiers<br><code>State Prefix</code><br><span class="ok">● Active Binding</span></div>
+<div class="card"><b>Suffix State Token ({name}_)</b><br>Terminates scoped blocks and preserves trailing execution context<br><code>State Suffix</code><br><span>Context Closure</span></div>
+<div class="card"><b>Syntax Delimiter (})</b><br>Closes structural object declarations and generator templates<br><code>Delimiter Block</code><br><span>Syntax Anchor</span></div>
+<div class="card"><b>Dynamic Token Substitution</b><br>Parses wildcard sequences across template generation loops<br><code>Template Engine</code><br><span>Parser Pipeline</span></div>
+</div>
+BOUNDARIES
