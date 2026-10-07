@@ -276,3 +276,15 @@ cat << 'BOUNDARIES' >> index.html
 <div class="card"><b>Dynamic Token Substitution</b><br>Parses wildcard sequences across template generation loops<br><code>Template Engine</code><br><span>Parser Pipeline</span></div>
 </div>
 BOUNDARIES
+
+# Append Core Punctuation & Syntax Grammar Tokens architecture to the HTML generator
+cat << 'PUNCT_DETAIL' >> index.html
+
+<h2>Core Punctuation & Syntax Grammar Tokens (_ / ? / ! / .)</h2>
+<div class="grid">
+<div class="card"><b>Underscore Token (_)</b><br>Word boundary, snake_case identifier separator, and layout spacer<br><code>Identifier Delimiter</code><br><span class="ok">● Active Token</span></div>
+<div class="card"><b>Question Mark Operator (?)</b><br>Conditional routing, query parameter mapping, and uncertainty state hook<br><code>Conditional Logic</code><br><span>Query Parser</span></div>
+<div class="card"><b>Exclamation Point Prefix (!)</b><br>Assertion directive, status logging flag, and immediate execution hook<br><code>Execution Directive</code><br><span>Status Flag</span></div>
+<div class="card"><b>Period Path Anchor (.)</b><br>Namespace delimiter, relative path prefix, and file extension separator<br><code>Structural Anchor</code><br><span>Path Resolver</span></div>
+</div>
+PUNCT_DETAIL
