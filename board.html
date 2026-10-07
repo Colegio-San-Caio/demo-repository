@@ -1,0 +1,13 @@
+<!DOCTYPE html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Board as Gists</title>
+<style>body{font-family:monospace;background:#0d1117;color:#c9d1d9;max-width:800px;margin:0 auto;padding:12px} .box{border:1px solid #30363d;border-radius:8px;margin:12px 0;overflow:hidden} .head{background:#010409;padding:8px 12px;border-bottom:1px solid #30363d} .body{padding:12px;white-space:pre-wrap} a{color:#58a6ff}</style>
+<h2>Discussion Board - as Gists - 978-3-00-068463-0</h2>
+<div id="board">Loading gists...</div>
+<script>
+fetch('discussions/001-welcome.md').then(r=>r.text()).then(t=>{
+ document.getElementById('board').innerHTML='<div class=box><div class=head>001-welcome.md - gist</div><div class=body>'+t.replace(/</g,'&lt;')+'</div></div>';
+});
+</script>
+<div class="box"><div class="head">Comments (giscus)</div><div class="body">
+<script src="https://giscus.app/client.js" data-repo="Colegio-San-Caio/demo-repository" data-repo-id="R_kgDOP6b4vw" data-category="General" data-category-id="DIC_kwDOP6b4vw4CwXx" data-mapping="pathname" data-theme="dark" crossorigin="anonymous" async></script>
+</div></div>
