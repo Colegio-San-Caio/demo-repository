@@ -116,6 +116,8 @@ def run_master_autoexec():
         run_step([sys.executable, "generate_omq_brand_manifest.py"], "OMQ.FNT Fashion Lookbook Compilation")
     if os.path.exists("./oeneyepdf_brand"):
         run_step(["./oeneyepdf_brand"], "Native oeneyepdf.c C-Binary Core Compilation")
+    if os.path.exists("oeneye_sdk_footprint.py"):
+        run_step([sys.executable, "oeneye_sdk_footprint.py"], "oeneyeVirtualLab & oeneyeSDK Footprint Sync")
     if os.path.exists("fuzz_master.py"):
         run_step([sys.executable, "fuzz_master.py"], "Master .FUZZ Orchestration Engine")
     if os.path.exists("fetch_and_verify.sh"):
@@ -144,6 +146,8 @@ def run_master_autoexec():
         run_step([sys.executable, "generate_omq_brand_manifest.py"], "OMQ.FNT Fashion Lookbook Compilation")
     if os.path.exists("./oeneyepdf_brand"):
         run_step(["./oeneyepdf_brand"], "Native oeneyepdf.c C-Binary Core Compilation")
+    if os.path.exists("oeneye_sdk_footprint.py"):
+        run_step([sys.executable, "oeneye_sdk_footprint.py"], "oeneyeVirtualLab & oeneyeSDK Footprint Sync")
     if os.path.exists("fuzz_master.py"):
         run_step([sys.executable, "fuzz_master.py"], "Master .FUZZ Orchestration Engine")
     if os.path.exists("fetch_and_verify.sh"):
