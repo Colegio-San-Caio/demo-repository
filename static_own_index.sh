@@ -90,3 +90,5 @@ cat >index.html <<HTML
 <!doctype html><html><head><meta charset="utf-8"><title>OENEYEbluh INDEX $TS</title><style>body{background:#000;color:#0f0;font-family:monospace;padding:20px}a{color:#0ff} img{max-width:300px}</style></head><body><h1>OENEYEbluh — FULL + MINIMUM BOX</h1><p>$TS $CNT</p><img src="assets/oeneyebluh_cover.webp"><br><a href="candiOQM_xTitin.html?ts=$EPOCH">→ FULL ENGINE + BOOK PREVIEW + CHAT</a><pre>$(ls articles/|tail -n 20)</pre></body></html>
 HTML
 echo "FULL oeneye + book cover + minimum-box $TS"
+# add gallery to existing full page
+sed -i 's|<div id=engine>|<div style="display:flex;gap:10px;flex-wrap:wrap;padding:10px 20px"><img src="assets/mosfetq-cover.jpeg" style="height:180px;border:1px solid #0af"><img src="assets/og-preview.jpg" style="height:180px;border:1px solid #0af"><img src="assets/oeneyebluh_cover.webp" style="height:180px;border:1px solid #0af" onerror="this.style.display=\"none\""></div><div id=engine>|' candiOQM_xTitin.html
