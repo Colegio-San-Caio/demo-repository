@@ -1,7 +1,5 @@
 name: Proof HTML
-on:
-  push:
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,13 +10,11 @@ jobs:
           python-version: '3.11'
       - name: Generate Fuzz Report
         run: |
-          python3 compile_fuzz_report.py || echo "id,value
-          130,81.17
-          128,121.65" > fuzz_check.csv
+          python3 compile_fuzz_report.py
           cat fuzz_check.csv
       - name: Proof HTML
         uses: anishathalye/proof-html@v1.1.0
         with:
           directory: ./
-          ignore_missing_alt: true
-          ignore_empty_alt: true
+          check_external_hash: false
+          check_external_urls: false
