@@ -1,4 +1,3 @@
-# Topological Filtration and Coordinate Mapping via 𝔄-Void and xTitin
-**Julia_Menge_eigenOENEYE**
-∅ ⊂ ℱ0 ⊂ ℱ1 ⊂ ... ⊂ ℱ∞ - finite genetic base → infinite asymptotic 3D
-Abstract: discrete → continuous via xTitin placeholder Ŵ + A_𝔄
+# Topological Filtration - Julia_Menge_eigenOENEYE
+∅ ⊂ ℱ0 ⊂ ℱ1 ⊂ ℱ2 ⊂ ... ⊂ ℱ∞
+Finite genetic base → infinite asymptotic 3D via xTitin xTitin_(n+1)=Ŵ(xTitin_n)+A_𝔄
