@@ -1,26 +1,42 @@
 #!/usr/bin/env bash
 set -e
-# STATIC_OWN_INDEX — CANDI OQM — no append loop, always rewrite from scratch
-cat > index.html <<'HTML'
+DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+# xTitin naming convention: xTitin_{MODULE}_{TYPE}
+# e.g. xTitin_TRIT_gate, xTitin_CAM_proj, xTitin_RD_tile
+
+# LIGHT index.html - 850 bytes - for Pages root
+cat > index.html <<HTML
 <!doctype html><html><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta property="og:type" content="website" />
-<meta property="og:title" content="CANDI OQM - Colegio San Caio" />
+<meta property="og:title" content="CANDI OQM" />
 <meta property="og:url" content="https://colegio-san-caio.github.io/demo-repository/candiOQM.txt" />
-<link rel="up" href="https://colegio-san-caio.github.io/demo-repository/" />
-<title>CANDI OQM</title>
-</head><body>
+<title>CANDI OQM</title></head><body>
 <h1>CANDI OQM - Colegio San Caio</h1>
-<p><a href="candiOQM.txt">candiOQM.txt</a> | <a href="meta_share.html">meta_share</a></p>
-<h2>3D/4D Camera Projection & Ternary Circuit Logic (Trit / MOSFET)</h2>
-<pre>
-# road mapping macro
-RD_TILE_PX = 32
-RD_SNAP_PX(v) = floor(v / RD_TILE_PX) * RD_TILE_PX
-# 3D/4D projection: trit -1,0,1 -> gate bias
-</pre>
-<p>Generated: __DATE__</p>
+<p><a href="candiOQM.txt">txt</a> | <a href="candiOQM_xTitin.html">xTitin Full</a> | <a href="meta_share.html">meta</a></p>
+<p>$DATE - <span id="xTitin_STATUS">OK</span></p>
 </body></html>
 HTML
-sed -i "s/__DATE__/$(date -u +%Y-%m-%dT%H:%M:%SZ)/" index.html
-echo "index.html rebuilt $(wc -c < index.html) bytes"
+
+# FULL xTitin version - with 3D/4D + Trit
+cat > candiOQM_xTitin.html <<HTML
+<!doctype html><html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CANDI OQM xTitin</title></head><body>
+<h1>CANDI OQM xTitin Full</h1>
+<pre>
+// xTitin naming convention
+const xTitin_RD_TILE_PX = 32;
+const xTitin_RD_SNAP = (v) => Math.floor(v / xTitin_RD_TILE_PX) * xTitin_RD_TILE_PX;
+const xTitin_TRIT = [-1,0,1]; // ternary
+const xTitin_CAM_proj = (trit) => trit * 0.5 + 0.5; // gate bias
+const xTitin_MOSFET_gate = { low:-1, mid:0, high:1 };
+</pre>
+<p>Generated: $DATE</p>
+<p><a href="index.html">back to light</a></p>
+</body></html>
+HTML
+
+echo "index.html $(wc -c < index.html) bytes"
+echo "candiOQM_xTitin.html $(wc -c < candiOQM_xTitin.html) bytes"
