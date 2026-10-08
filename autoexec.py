@@ -104,6 +104,20 @@ def run_master_autoexec():
         run_step([sys.executable, "generate_checksums.py"], "Cryptographic SHA-256 Checksum Validation")
     if os.path.exists("quadruple_fahrenheit_model.py"):
         run_step([sys.executable, "quadruple_fahrenheit_model.py"], "Quadruple Root Fahrenheit Convergence Analysis")
+    if os.path.exists("fuzz_webhook.py"):
+        run_step([sys.executable, "fuzz_webhook.py"], "Random Webhook Mutation Fuzzing")
+    if os.path.exists("auto_fuzz_pipeline.py"):
+        run_step([sys.executable, "auto_fuzz_pipeline.py"], "Automated Random Webhook Fuzz Pipeline")
+    if os.path.exists("fuzz_proxy_invoice.py"):
+        run_step([sys.executable, "fuzz_proxy_invoice.py"], "fuzzProxy Random Invoice Injection")
+    if os.path.exists("fuzz_bluh_book.py"):
+        run_step([sys.executable, "fuzz_bluh_book.py"], "Custom BLUH_BLUH_BLUH Book Fuzz Injection")
+    if os.path.exists("fuzz_master.py"):
+        run_step([sys.executable, "fuzz_master.py"], "Master .FUZZ Orchestration Engine")
+    if os.path.exists("fetch_and_verify.sh"):
+        run_step(["./fetch_and_verify.sh"], "Network Fetch and Checksum Verification")
+    if os.path.exists("compile_fuzz_report.py"):
+        run_step([sys.executable, "compile_fuzz_report.py"], "Fuzz Verification Report Generation")
     if os.path.exists("d5_tensor_moments.py"):
         run_step([sys.executable, "d5_tensor_moments.py"], "D5 Tensor Moment Matrix Calibration")
     if os.path.exists("unity_attractor_model.py"):
@@ -114,6 +128,20 @@ def run_master_autoexec():
         run_step([sys.executable, "generate_checksums.py"], "Cryptographic SHA-256 Checksum Validation")
     if os.path.exists("quadruple_fahrenheit_model.py"):
         run_step([sys.executable, "quadruple_fahrenheit_model.py"], "Quadruple Root Fahrenheit Convergence Analysis")
+    if os.path.exists("fuzz_webhook.py"):
+        run_step([sys.executable, "fuzz_webhook.py"], "Random Webhook Mutation Fuzzing")
+    if os.path.exists("auto_fuzz_pipeline.py"):
+        run_step([sys.executable, "auto_fuzz_pipeline.py"], "Automated Random Webhook Fuzz Pipeline")
+    if os.path.exists("fuzz_proxy_invoice.py"):
+        run_step([sys.executable, "fuzz_proxy_invoice.py"], "fuzzProxy Random Invoice Injection")
+    if os.path.exists("fuzz_bluh_book.py"):
+        run_step([sys.executable, "fuzz_bluh_book.py"], "Custom BLUH_BLUH_BLUH Book Fuzz Injection")
+    if os.path.exists("fuzz_master.py"):
+        run_step([sys.executable, "fuzz_master.py"], "Master .FUZZ Orchestration Engine")
+    if os.path.exists("fetch_and_verify.sh"):
+        run_step(["./fetch_and_verify.sh"], "Network Fetch and Checksum Verification")
+    if os.path.exists("compile_fuzz_report.py"):
+        run_step([sys.executable, "compile_fuzz_report.py"], "Fuzz Verification Report Generation")
 
     # 5. Automatisches Git-Backup ausführen
     if os.path.exists("git_sync_ledger.py"):
