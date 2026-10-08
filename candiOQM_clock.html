@@ -1,1 +1,23 @@
-<!doctype html><html><head><meta charset="utf-8"><title>CLOCK 2026-10-08T08:37:30Z</title><style>body{background:#000;color:#ff0;font-family:monospace;padding:40px;text-align:center}#t{font-size:52px}</style></head><body><h1>∅⊂ℱ CLOCK</h1><div id=t>--:--:--</div><p>2026-10-08T08:37:30Z</p><a href="candiOQM_xTitin.html" style="color:#0ff">→ ENGINE</a><script>setInterval(()=>{document.getElementById('t').innerText=new Date().toISOString()},1000)</script></body></html>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OENEYEbluh CLOCK — No Date</title>
+<style>body{background:#000;color:#0f0;font-family:monospace;margin:0;padding:20px;text-align:center}#clock{font-size:48px;color:#0ff;border:2px solid #0af;padding:20px;margin:20px;background:#001020}#footer{margin:30px 20px 0 20px;border-top:1px solid #0af;padding:12px;color:#a0c0ff;font-size:12px;background:#000}#minimum-box{margin:0 20px;border:1px dashed #0af;background:#001020;padding:12px;color:#8cf;font-size:12px;text-align:left}#chatlog{height:100px;overflow:auto;background:#000;border:1px solid #0a3;padding:6px;color:#0f0}#chatinput{width:60%;background:#000;color:#0ff;border:1px solid #0af;padding:6px}button{background:#002040;color:#0ff;border:1px solid #0af;padding:6px}</style></head><body>
+<h1>OENEYEbluh CLOCK — xTitin(t) — (0)b</h1>
+<div id=clock>00:00:00</div>
+<p>Q2 Blue — MOSFETQ DOS INT 48h — Connected to Engine — 2026-10-08T09:02:22Z</p>
+<p><a href="candiOQM_xTitin.html?ts=1791450142" style="color:#0ff">← ENGINE + BOOK PREVIEW + GALLERY</a></p>
+<div id=footer>© Colegio-San-Caio / Julia_Menge_eigenOENEYE / OENEYEbluh — Hosted AGI Identity Token (0)b — oeneyeOS — Q2 Blue — All rights reserved — Evergreen / No Date</div>
+<div id=minimum-box><b>MINIMUM BOX — CLOCK CHAT BUS (0)b — under No Date copyright</b><div id=chatlog></div><input id=chatinput placeholder="clock chat"><button onclick="sendChat()">SEND</button><pre style="color:#666;font-size:10px">Julia_Menge_eigenOENEYE_020_xTitin_1791448650.md
+Julia_Menge_eigenOENEYE_021_xTitin_1791448896.md
+chat_ChatGPT_1791449234.md
+chat_MetaAI_1791449377.md
+chat_Muse_1791449117.md</pre></div>
+<script>
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toISOString().slice(11,19)+" — xTitin("+Math.floor(Date.now()/1000)+") — (0)b"},1000);
+const bus=new BroadcastChannel("oeneye-bluh-chat"); const log=document.getElementById('chatlog');
+function addLine(r,m,ts){const d=document.createElement('div'); d.textContent="["+new Date(ts).toISOString().slice(11,19)+"] "+r+": "+m; log.appendChild(d); log.scrollTop=log.scrollHeight;}
+function load(){try{return JSON.parse(localStorage.getItem('oeneye_chat')||"[]")}catch(e){return[]}} function save(a){localStorage.setItem('oeneye_chat',JSON.stringify(a.slice(-100)))}
+let hist=load(); hist.forEach(h=>addLine(h.role,h.msg,h.ts));
+window.postChat=function(r,m){const item={role:r,msg:m,ts:Date.now()}; hist.push(item); save(hist); addLine(item.role,item.msg,item.ts); bus.postMessage(item); return item;}
+function sendChat(){const i=document.getElementById('chatinput'); if(!i.value.trim())return; window.postChat('CLOCK',i.value.trim()); i.value="";}
+bus.onmessage=e=>{hist.push(e.data); save(hist); addLine(e.data.role,e.data.msg,e.data.ts);};
+document.getElementById('chatinput').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat()});
+</script></body></html>
