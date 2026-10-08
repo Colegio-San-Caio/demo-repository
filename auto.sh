@@ -18,3 +18,4 @@ gh workflow run pages.yml
 sleep 5
 gh run list --workflow="pages.yml" -L 3
 gh run view $(gh run list --workflow="pages.yml" -L 1 --json databaseId -q '.[0].databaseId') 2>&1 | tail -n 30
+./static_own_index.sh
