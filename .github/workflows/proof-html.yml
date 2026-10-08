@@ -12,12 +12,12 @@ jobs:
         run: |
           python3 compile_fuzz_report.py
           cat fuzz_check.csv
-      - name: Remove heavy output from proof check
+      - name: Remove heavy output
         run: rm -rf MOSFETQexchange/output
       - name: Proof HTML
         uses: anishathalye/proof-html@v1.1.0
         with:
-          directory:./
+          directory: ./
           check_favicon: false
           check_opengraph: false
           disable_external: true
