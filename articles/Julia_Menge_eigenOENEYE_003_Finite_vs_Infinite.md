@@ -1,2 +1,4 @@
 # Finite vs Infinite Limits
-Finite: discrete AA backbone, Ig domains countable. Infinite: n→∞ manifold.
+Finite Domain: discrete AA backbone, countable Ig domains
+Infinite Limit: n→∞ manifold, continuous asymptotic boundary
+CAM projection + RD_SNAP integration
