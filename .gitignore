@@ -1,10 +1,11 @@
-oeneye_manifest.json
-oeneyeos_backup_*.tar.gz
+*.imc
+*.img
 backup_*/
 gand/
 modules/
-*.imc
 mosfetq*
 oeneye*
+oeneye_manifest.json
+oeneyeos_backup_*.tar.gz
 termux.db
 termux_db.sh
