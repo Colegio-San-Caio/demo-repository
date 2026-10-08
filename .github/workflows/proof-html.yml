@@ -8,16 +8,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Generate Fuzz Report
-        run: |
-          python3 compile_fuzz_report.py
-          cat fuzz_check.csv
-      - name: Remove heavy output
-        run: rm -rf MOSFETQexchange/output
-      - name: Proof HTML
-        uses: anishathalye/proof-html@v1.1.0
+      - run: python3 compile_fuzz_report.py && cat fuzz_check.csv
+      - run: rm -rf MOSFETQexchange/output
+      - uses: anishathalye/proof-html@v1.1.0
         with:
-          directory:./
+          directory: ./
           check_favicon: false
           check_opengraph: false
           check_img_http: false
