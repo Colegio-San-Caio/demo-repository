@@ -1,21 +1,18 @@
-*.img
-backup_*/
-gand/
-modules/
-mosfetq*
-oeneye*
-oeneye_manifest.json
-oeneyeos_backup_*.tar.gz
-termux.db
-termux_db.sh
-# !allow list - MUST be at bottom
-!oeneyeGHview.imc
-!candi_loop.imc
-!fruit.sh
-!static_own_index.sh
+# Ignore local compiled binary databases and snapshots
+*.db
+MOSFETQexchange/output/telemetry.db
+MOSFETQexchange/output/backups/
 
+# Ignore compiled PDF assets and reports
+MOSFETQexchange/output/*.pdf
+MOSFETQexchange/output/*.csv
 
-!oeneyeVNC.py
-!oeneyepdf.c
-!xtex.sh
-!MOSFETQexchange/spool/vnc/**
+# Ignore compiled release archives
+MOSFETQexchange/output/*.tar.gz
+
+# Ignore interactive deployment testing folders
+MOSFETQ_Onboarding_Deploy/
+
+# Ignore Python runtime compilation caches
+__pycache__/
+.pytest_cache/
