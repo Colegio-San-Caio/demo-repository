@@ -112,6 +112,8 @@ def run_master_autoexec():
         run_step([sys.executable, "fuzz_proxy_invoice.py"], "fuzzProxy Random Invoice Injection")
     if os.path.exists("fuzz_bluh_book.py"):
         run_step([sys.executable, "fuzz_bluh_book.py"], "Custom BLUH_BLUH_BLUH Book Fuzz Injection")
+    if os.path.exists("generate_omq_brand_manifest.py"):
+        run_step([sys.executable, "generate_omq_brand_manifest.py"], "OMQ.FNT Fashion Lookbook Compilation")
     if os.path.exists("fuzz_master.py"):
         run_step([sys.executable, "fuzz_master.py"], "Master .FUZZ Orchestration Engine")
     if os.path.exists("fetch_and_verify.sh"):
@@ -136,6 +138,8 @@ def run_master_autoexec():
         run_step([sys.executable, "fuzz_proxy_invoice.py"], "fuzzProxy Random Invoice Injection")
     if os.path.exists("fuzz_bluh_book.py"):
         run_step([sys.executable, "fuzz_bluh_book.py"], "Custom BLUH_BLUH_BLUH Book Fuzz Injection")
+    if os.path.exists("generate_omq_brand_manifest.py"):
+        run_step([sys.executable, "generate_omq_brand_manifest.py"], "OMQ.FNT Fashion Lookbook Compilation")
     if os.path.exists("fuzz_master.py"):
         run_step([sys.executable, "fuzz_master.py"], "Master .FUZZ Orchestration Engine")
     if os.path.exists("fetch_and_verify.sh"):
