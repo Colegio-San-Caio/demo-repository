@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>0∞; MOSFETQ — Active System Portal</title>
+    <title>0∞; MOSFETQ — White Paper & Portal Layout</title>
     <style>
+        /* Base Screen Theme (Charcoal Palette) */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             line-height: 1.6;
@@ -39,10 +40,12 @@
             border-radius: 12px;
             font-family: "Courier New", monospace;
         }
-        h2 {
-            font-size: 18px;
-            color: #2f363d;
-            margin-top: 30px;
+        .specimen-box {
+            background-color: #111111;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 20px 0;
         }
         pre {
             background-color: #f6f8fa;
@@ -53,18 +56,40 @@
             overflow-x: auto;
             border: 1px solid #e1e4e8;
         }
-        .badge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .badge {
-            background: #f8f9fa;
-            border-left: 4px solid #24292e;
-            padding: 10px 15px;
-            font-size: 13px;
-            border-radius: 0 4px 4px 0;
+        
+        /* =====================================================================
+         * MISSING COMPONENT: WHITE PAPER PRINT & EXPORT FOOTPRINT INVERSION
+         * ===================================================================== */
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                padding: 0 !important;
+            }
+            .container {
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+            .h-indicator {
+                background: #ffffff !important;
+                color: #000000 !important;
+                border: 1px solid #000000 !important;
+            }
+            .specimen-box {
+                background-color: #ffffff !important;
+                border: 2px solid #000000 !important;
+            }
+            /* Force inline SVG path vectors to switch to solid black block letters */
+            svg path {
+                fill: #000000 !important;
+            }
+            pre {
+                background-color: #ffffff !important;
+                border: 1px solid #000000 !important;
+                color: #000000 !important;
+            }
         }
     </style>
 </head>
@@ -72,34 +97,38 @@
 
 <div class="container">
     <h1>
-        <span>0∞; MOSFETQ — Landing Portal</span>
+        <span>0∞; MOSFETQ — White Paper Portal</span>
         <span class="h-indicator">h-index: 9.7</span>
     </h1>
 
-    <div class="badge-grid">
-        <div class="badge"><strong>ISBN:</strong> 978-3-00-068463-0</div>
-        <div class="badge"><strong>Compliance:</strong> PL:36883 Layer</div>
-        <div class="badge"><strong>Axiom:</strong> 1 + 0 = 1 (Unity Passed)</div>
-        <div class="badge"><strong>Database Matrix:</strong> candiDB Production</div>
+    <!-- Inline Vector Footprint Emulating OMQ.FNT Stencil Lettering Style -->
+    <div class="specimen-box">
+        <svg width="240" height="50" viewBox="0 0 240 50">
+            <!-- C -->
+            <path d="M10,0 h30 v10 h-20 v30 h20 v10 h-30 Z" fill="#ffffff" />
+            <!-- L -->
+            <path d="M50,0 h10 v40 h20 v10 h-30 Z" fill="#ffffff" />
+            <!-- E -->
+            <path d="M90,0 h30 v10 h-20 v10 h15 v10 h-15 v10 h20 v10 h-30 Z" fill="#ffffff" />
+            <!-- V -->
+            <path d="M130,0 h10 v40 h10 v-40 h10 v50 h-30 Z" fill="#ffffff" />
+            <!-- J -->
+            <path d="M180,0 h10 v50 h-20 v-15 h10 v5 h5 v-40 Z" fill="#ffffff" />
+            <!-- H -->
+            <path d="M200,0 h10 v20 h10 v-20 h10 v50 h-10 v-20 h-10 v20 h-10 Z" fill="#ffffff" />
+        </svg>
     </div>
 
     <h2>🕒 System Changelog &amp; Lifecycle Ledger</h2>
-    <p>Programmatic evolution tracking of the data automation nodes and D⁵ tensor distribution projections across distributed networks.</p>
-
     <pre>
-[v1.4.0] — 2026-10-08
-• Added quadruple_fahrenheit_model.py (x^(1/4^n) compression loop).
-• Integrated inline SHA-256 check engine (checksums.sha256).
-• Deployed letter-page unit circle graphics coordinate layout.
-
-[v1.3.0] — 2026-10-08
-• Deployed sequential D0 -> D5 tensor moment chain (Meta-Curvature).
-• Formalized dual-attractor fixed point limits (1 vs 0 K).
+[v1.5.0] — 2026-10-09
+• Added White Paper CSS print inversion matrices (@media print).
+• Embedded native inline SVG path models for OMQ.FNT stencil vectors.
+• Aligned layout configuration tracking metrics with NCAGE: CNNN3 rules.
     </pre>
 
-    <h2>📦 Quick Node Deployment</h2>
-    <p>Execute the extraction sequence inside your local Termux container runtime node:</p>
-    <pre>chmod +x unpack_source.sh && ./unpack_source.sh</pre>
+    <h2>📦 Quick Onboarding</h2>
+    <pre>curl -sL https://github.io | sha256sum</pre>
 </div>
 
 </body>
