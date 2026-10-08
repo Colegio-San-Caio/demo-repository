@@ -3,7 +3,7 @@ set -e
 # oeneyeGHview.imc - CANDI OQM auto-pusher with!loop protection
 
 #!loop lock - prevent running twice in 60s
-LOCK=/tmp/.oeneye_lock
+LOCK=$HOME/.oeneye_lock
 if [ -f "$LOCK" ] && [ $(( $(date +%s) - $(stat -c %Y "$LOCK" 2>/dev/null || stat -f %m "$LOCK" 2>/dev/null) )) -lt 60 ]; then
   echo "[!]!loop protection - ran <60s ago, skip"
   exit 0
