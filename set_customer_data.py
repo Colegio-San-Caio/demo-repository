@@ -1,57 +1,49 @@
 #!/usr/bin/env python3
 # ==============================================================================
 # Script Name: set_customer_data.py
-# Description: Interactive provisioning utility allowing readers to register
-#              their own ISBN and bunq settlement references into the DB.
+# Description: Interactive provisioning utility aligned with production
+#              invoice tables, logging customized user metadata to candiDB.
 # ==============================================================================
 
 import os
-import shutil
+from datetime import datetime
 import bunq_db
 
-TEMPLATE_PATH = "template.pdf"
-OUTPUT_DIR = "MOSFETQexchange/output"
-
 def run_customer_provisioning():
-    # Ensure database tables exist
+    # Ensure database schemas are fully initialized
     bunq_db.init_db()
     
     print("=" * 60)
     print("  OENEYE-NN INTERACTIVE BOOK & PAYMENT LINK PROVISIONER")
     print("=" * 60)
     
-    # 1. Capture user telemetry configurations
-    user_isbn = input("[?] Enter your publication ISBN (e.g., 9783000684630): ").strip()
+    # 1. Capture production user telemetry configuration variables
+    user_isbn = input("[?] Enter your publication ISBN (e.g., 978-3-00-068463-0): ").strip()
     user_pay_link = input("[?] Enter your payment link (e.g., https://bunq.me): ").strip()
     
     if not user_isbn or not user_pay_link:
         print("[-] Execution halted: Input fields cannot be left blank.")
         return
 
-    # 2. Save variables straight to your SQL configuration tables
-    bunq_db.save_config("isbn", user_isbn)
-    bunq_db.save_config("settlement_reference", user_pay_link)
-    bunq_db.log_event("CUSTOMER_PROVISION", f"Registered ISBN: {user_isbn} | Link: {user_pay_link}")
+    # 2. Map directly into the official production invoices ledger schema
+    current_date = datetime.utcnow().strftime("%Y-%m-%d")
     
-    print("[+] Configuration parameters successfully synced to relational tables.")
-
-    # 3. Handle fulfillment document generation
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    custom_pdf_name = f"fulfillment_ISBN_{user_isbn}.pdf"
-    output_pdf_path = os.path.join(OUTPUT_DIR, custom_pdf_name)
-
-    # Check if a base template PDF exists in the working directory
-    if os.path.exists(TEMPLATE_PATH):
-        shutil.copy(TEMPLATE_PATH, output_pdf_path)
-        print(f"[+] Custom tracking document generated: {output_pdf_path}")
-    else:
-        # Fallback: Create a structural tracking asset file if template.pdf is not present yet
-        with open(output_pdf_path, "w") as dummy_pdf:
-            dummy_pdf.write(f"%PDF-1.4 Mock Framework - ISBN: {user_isbn} | Target: {user_pay_link}\n")
-        print(f"[*] Base template.pdf not found. Generated empty asset wireframe at: {output_pdf_path}")
-
+    bunq_db.insert_invoice(
+        date=current_date,
+        isbn=user_isbn,
+        item_description="Custom User-Provisioned Reference Monograph Asset",
+        status="INTERACTIVE_SET",
+        gateway=user_pay_link,
+        net=21.00,
+        vat=1.47,
+        gross=22.47,
+        channel="RETAIL_PROVISIONED",
+        entity="SIETEHR FOUNDATION",
+        n_cage="CNNN3"
+    )
+    
+    print("[+] Configuration parameters successfully synced to invoices matrix.")
     print("=" * 60)
-    print("[+] Pipeline initialization sequence complete!")
 
 if __name__ == "__main__":
     run_customer_provisioning()

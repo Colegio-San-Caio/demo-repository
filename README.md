@@ -41,3 +41,38 @@ Das theoretische Framework schlägt eine Brücke zwischen technologischen Waffen
 
 ---
 *Generated automatically inside the Termux Mobile Terminal Workspace Node.*
+
+---
+
+## 🕒 System Changelog & Lifecycle Milestone Ledger
+
+This ledger records the programmatic evolution of the **MOSFETQ** ecosystem, tracking version transitions from local prototype loops to production open banking architectures and \(D^5\) tensor moment calibrations.
+
+### [v1.4.0] — 2026-10-08 (Current Sprint)
+#### 🚀 Added
+- **`quadruple_fahrenheit_model.py`**: Integrated a high-order Quadruple-Root compression loop (\(x^{1/4^n}\)) verifying variance compression toward unity (\(1\)) using room-temperature Fahrenheit transformations (\(68^\circ\text{F} \rightarrow 293.15\text{ K}\)).
+- **`generate_checksums.py`**: Automated an inline SHA-256 cryptographic check engine that writes a permanent verification ledger (`checksums.sha256`) for all core assets.
+- **`generate_unit_circle_pdf.py`**: Implemented an inch-based graphics coordinate projection to render the Unit Circle boundary directly onto an explicit page layout using ReportLab canvas primitives.
+
+#### 🔧 Changed
+- **`autoexec.py` (Master Loop)**: Enhanced the centralized orchestration engine to chain all 12 script pipelines sequentially—handling schema verification, `gh run view` parsing blocks, and automatic Git pushes in a single process.
+- **Tuple Unpacking Patch**: Corrected an implicit iterator loop fault inside the terminal diagnostic query block, forcing clean row structure parsing (`row_id, sys_id, proto, raw_payload = r`).
+
+### [v1.3.0] — 2026-10-08
+#### 🚀 Added
+- **`d5_tensor_moments.py`**: Deployed a distribution tensor model to map the sequential moment chain from \(D^0\) to \(D^5\) (Identity, Position, Spread, Flow, Curvature, Meta-Curvature) across cross-sectional area forces (\(mm^4\)).
+- **`unity_attractor_model.py`**: Formalized the dual-attractor mechanism verifying convergence constraints toward the multiplicative identity (\(1\)) vs. the absolute thermodynamic zero limit (\(0\text{ K}\)).
+- **`somatic_quantum_model.py`**: Mapped the geometric transition on a 5-dimensional manifold (\(D^5\)) via Quaternion transformations (\(q = a + bi + cj + dk\)), resolving spectral stability parameters.
+
+### [v1.2.0] — 2026-10-08
+#### 🔧 Changed
+- **Production Schema Migration (`candiDB`)**: Restructured the relational core from temporary keys to formal production-aligned databases (`invoices` and `telemetry_records`).
+- **`switch_to_sandbox.py`**: Implemented environment-switching mechanisms to securely redirect API connection paths to the live public test sandbox endpoint (`https://bunq.com`).
+
+### [v1.1.0] — 2026-10-08
+#### 🚀 Added
+- **Asynchronous Webhook Sink**: Configured an event-driven local web server (`mock_webhook_receiver.py`) on port `8080` to parse incoming bank transaction mutation streams and store logs to SQLite records.
+
+### [v1.0.0] — 2026-10-08
+#### 🚀 Added
+- **Initial Baseline Core**: Generated foundational OpenSSL private/public key pairs and verified unauthenticated public sandbox user person allocations.
