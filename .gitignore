@@ -2,7 +2,6 @@ oeneye_manifest.json
 oeneyeos_backup_*.tar.gz
 backup_*/
 gand/
-gand.sh
 meta_share.html
 modules/
 *.img
