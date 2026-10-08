@@ -4,19 +4,18 @@
 
 /* ==============================================================================
  * Script Name: oeneyepdf_brand.c
- * Description: Low-level C graphics generation pipeline emulating the 771-byte
- *              oeneyepdf.c writer to output the blocky vector OMQ.FNT font.
+ * Description: Clean low-level C graphics generation pipeline emulating the
+ *              771-byte oeneyepdf.c writer to output the blocky vector OMQ.FNT.
  * ============================================================================== */
 
 void draw_omq_box(FILE *f, float x, float y, float w, float h) {
-    // Injecting raw PDF graphic rectangle operations (re = rect, f = fill)
     fprintf(f, "%.2f %.2f %.2f %.2f re f\n", x, y, w, h);
 }
 
 void render_omq_character(FILE *f, char c, float x_offset, float y_base, float scale) {
     float w = 24.0f * scale;
     float h = 46.0f * scale;
-    float th = 8.0f * scale; // Segment thickness
+    float th = 8.0f * scale; // Segment-Dicke
 
     if (c == 'C' || c == 'c') {
         draw_omq_box(f, x_offset, y_base, w, th);
@@ -62,20 +61,20 @@ int main() {
         return 1;
     }
 
-    // Write foundational minimalist PDF raw structural headers context
+    // PDF-Struktur-Header schreiben
     fprintf(f, "%%PDF-1.4\n");
     fprintf(f, "1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj\n");
     fprintf(f, "2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj\n");
     fprintf(f, "3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R >> endobj\n");
     
-    // Begin high-contrast vector drawing page data stream object layout
+    // Stream-Inhalt starten
     fprintf(f, "4 0 obj << /Length 5 0 obj >> stream\n");
     
-    // Draw the dark commercial merchandise display box layout
-    fprintf(f, "0.067 0.078 0.082 rg\n"); // Setup charcoal vector color spectrum
+    // Dunkle Box zeichnen
+    fprintf(f, "0.067 0.078 0.082 rg\n");
     fprintf(f, "54.00 530.00 504.00 110.00 re f\n");
     
-    // Redefine drawing matrix color parameters to pure white for text glyph blocks
+    // Weiße Schriftfarbe für OMQ-Glyphen einstellen
     fprintf(f, "1.00 1.00 1.00 rg\n");
     
     const char *brand_name = "CLEVJHON";
@@ -83,16 +82,15 @@ int main() {
     float y_base = 562.0f;
     float text_scale = 1.25f;
     
-    for (int i = 0; i < strlen(brand_name); i++) {
+    for (size_t i = 0; i < strlen(brand_name); i++) {
         render_omq_character(f, brand_name[i], start_x + (i * 54.0f), y_base, text_scale);
     }
     
     fprintf(f, "\nendstream\nendobj\n");
-    fprintf(f, "5 0 obj %d endobj\n", 4000); // Standard layout size alignment tracker
-    fprintf(f, "xref\n0 6\n0000000000 65535 f\n", 0);
-    fprintf(f, "trailer << /Size 6 /Root 1 0 R >>\nstartxref\n%d\n%%EOF\n", 4500);
+    fprintf(f, "5 0 obj 4000 endobj\n"); 
+    fprintf(f, "xref\n0 6\n0000000000 65535 f\n");
+    fprintf(f, "trailer << /Size 6 /Root 1 0 R >>\nstartxref\n4500\n%%EOF\n");
     
     fclose(f);
-    printf("[+] Static C-Writer successfully compiled asset footprint to: %s\n", out_path);
     return 0;
 }
