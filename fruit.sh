@@ -12,3 +12,4 @@ else
   echo "[*] skip push (use./fruit.sh --push to push)"
 fi
 echo "[*] done"
+./autoexec_append.sh
