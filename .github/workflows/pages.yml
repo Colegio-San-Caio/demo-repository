@@ -1,75 +1,49 @@
 name: Deploy MOSFETQexchange — set by oeneye.c + oeneyepdf.c
-
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Build PDFs via oeneyepdf.c bypass (no xelatex)
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Build PDFs via oeneyepdf.c
+        env:
+          FAX_NAME: "oeneye.c + oeneyepdf.c"
         run: |
-          chmod +x xtex.sh oeneyepdf.c || true
-          ls -lh *.xtex MOSFETQexchange/*.IMC 2>/dev/null || echo "no IMC"
+          # auto fax line like {name}
+          NAME="${FAX_NAME}"
+          echo "FAX by $NAME — set by oeneye.c + oeneyepdf.c — FAX by oeneyeFAX — PL:36883 g=0"
+          chmod +x xtex.sh oeneyepdf.c 2>/dev/null || true
           ./xtex.sh || python3 ./oeneyepdf.c
-          ls -lh MOSFETQexchange/output/ sigma_0b_jc.pdf
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Build _site for Pages
+          ls -lh MOSFETQexchange/output/ || true
+      - uses: actions/configure-pages@v5
+      - name: Build _site
         run: |
           mkdir -p _site/MOSFETQexchange/output
-          cp -v MOSFETQexchange/output/*.pdf _site/MOSFETQexchange/output/ 2>/dev/null || true
-          cp -v sigma_0b_jc.pdf _site/ 2>/dev/null || true
-          cp -v jc_sigma.pdf _site/ 2>/dev/null || true
-          cp -v *.xtex _site/ 2>/dev/null || true
-          cp -v MOSFETQexchange/*.IMC _site/MOSFETQexchange/ 2>/dev/null || true
-          cat > _site/index.html <<'HTML'
-          <html><head><title>FAX by oeneyeFAX — set by oeneye.c + oeneyepdf.c</title></head>
-          <body>
-          <h1>MOSFETQexchange — Evergreen (0)b — set by oeneye.c + oeneyepdf.c</h1>
-          <p>PL:36883 g=0 V(f-F)=0 1+0=1 0 has jc</p>
-          <ul>
-            <li><a href="sigma_0b_jc.pdf">sigma_0b_jc.pdf</a></li>
-            <li><a href="MOSFETQexchange/output/jc_sigma.pdf">jc_sigma.pdf</a></li>
-          </ul>
-          <p>FAX by oeneyeFAX — FAX spool: MOSFETQexchange/spool/fax/</p>
-          </body></html>
+          cp -r MOSFETQexchange/output/*.pdf _site/MOSFETQexchange/output/ 2>/dev/null || true
+          cp sigma_0b_jc.pdf _site/ 2>/dev/null || true
+          cp *.pdf _site/ 2>/dev/null || true
+          NAME="oeneye.c + oeneyepdf.c"
+          cat > _site/index.html <<HTML
+          <h1>FAX by $NAME — set by oeneye.c + oeneyepdf.c</h1>
+          <p>PL:36883 g=0 1+0=1 0 has jc Evergreen (0)b</p>
+          <a href="sigma_0b_jc.pdf">sigma_0b_jc.pdf</a><br>
+          <a href="MOSFETQexchange/output/jc_sigma.pdf">jc_sigma.pdf</a>
           HTML
-          ls -R _site
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: _site }
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    environment: { name: github-pages, url: ${{ steps.deployment.outputs.page_url }} }
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4

@@ -71,3 +71,6 @@ PY
   echo "[FAX] $FAX queued"
 done
 echo "================================================================Pipeline Complete"
+# auto fax line
+export FAX_NAME="oeneye.c + oeneyepdf.c"
+echo "FAX by ${FAX_NAME} — set by oeneye.c + oeneyepdf.c"
