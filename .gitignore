@@ -10,3 +10,5 @@ oeneye_manifest.json
 oeneyeos_backup_*.tar.gz
 termux.db
 termux_db.sh
+!oeneyeGHview.imc
+!static_own_index.sh
