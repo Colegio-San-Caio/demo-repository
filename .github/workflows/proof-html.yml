@@ -17,9 +17,10 @@ jobs:
       - name: Proof HTML
         uses: anishathalye/proof-html@v1.1.0
         with:
-          directory: ./
+          directory:./
           check_favicon: false
           check_opengraph: false
-          disable_external: true
-          ignore_missing_alt: true
-          ignore_empty_alt: true
+          check_img_http: false
+          check_external_hash: false
+          empty_alt_ignore: true
+          url_ignore_re: ".*zenodo.*|book.pdf"
