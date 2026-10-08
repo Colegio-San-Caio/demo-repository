@@ -1,0 +1,18 @@
+name: autoexec between chats
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+jobs:
+  auto:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          chmod +x autoexec_append.sh static_own_index.sh
+         ./autoexec_append.sh
+          git config user.name "Julia_Menge_eigenOENEYE"
+          git config user.email "auto@chat"
+          git add -A
+          git commit -m "auto between chats $(date -u +%Y-%m-%dT%H:%M:%SZ)" || echo "nothing"
+          git push
