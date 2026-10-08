@@ -2,22 +2,21 @@
 # ==============================================================================
 # Script Name: sync_and_register.py
 # Description: Dynamically imports generated Bunq Sandbox parameters to execute
-#              authenticated webhook deployment routines via REST payloads.
+#              authenticated webhook deployment routines via native urllib.
 # ==============================================================================
 
 import os
 import json
-import requests
+import urllib.request
+import urllib.error
 
 CONFIG_PATH = "MOSFETQexchange/output/bunq_sandbox_config.json"
-WEBHOOK_TARGET = "https://github.io"
+WEBHOOK_TARGET = "https://colegio-san-caio.github.io/demo-repository/index.html"
 
-# Placeholders matching the standard sandbox simulation framework
 USER_ID = "0"
-SESSION_TOKEN = "SANDBOX_SESSION_MOCK_TOKEN"
+OENEYE_TOKEN = "OENEYE_MOCK_TOKEN_36883"
 
 def execute_sync_pipeline():
-    # 1. Validation check
     if not os.path.exists(CONFIG_PATH):
         print(f"[-] Execution failure: Config file {CONFIG_PATH} not found.")
         return
@@ -25,15 +24,13 @@ def execute_sync_pipeline():
     with open(CONFIG_PATH, "r") as f:
         config = json.load(f)
 
-    # 2. Extract values dynamically
     base_endpoint = config["api_endpoint"]
     target_route = f"{base_endpoint}user/{USER_ID}/notification-filter-url"
 
     print(f"[*] Initializing sync for Author: {config['author']} (ORCID: {config['orcid']})")
     print(f"[*] Target Station Coordinates: {config['station_coordinates']}")
-    print(f"[*] Connecting telemetry pipeline to: {target_route}")
+    print(f"[*] Connecting telemetry pipeline via Oeneye token to: {target_route}")
 
-    # 3. Formulate the bunq registration body
     payload = {
         "notification_filters": [
             {
@@ -43,17 +40,21 @@ def execute_sync_pipeline():
         ]
     }
 
+    data = json.dumps(payload).encode("utf-8")
     headers = {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache",
-        "X-Bunq-Client-Authentication": SESSION_TOKEN
+        "X-Bunq-Client-Authentication": OENEYE_TOKEN
     }
 
-    # 4. Attempt transport call
+    req = urllib.request.Request(target_route, data=data, headers=headers, method="POST")
+
     try:
-        response = requests.post(target_route, json=payload, headers=headers, timeout=10)
-        print(f"[+] HTTP Status Code: {response.status_code}")
-        print(f"[+] Route Map: {WEBHOOK_TARGET} <- Linked under Constraint [{config['axiom_constraint']}]")
+        with urllib.request.urlopen(req, timeout=10) as response:
+            print(f"[+] HTTP Status Code: {response.status}")
+            print(f"[+] Route Map: {WEBHOOK_TARGET} <- Linked under Constraint [{config['axiom_constraint']}]")
+    except urllib.error.HTTPError as e:
+        print(f"[-] HTTP Transport failure: {e.code} - {e.reason}")
     except Exception as e:
         print(f"[-] Transport layer failure: {e}")
 
