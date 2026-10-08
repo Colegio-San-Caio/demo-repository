@@ -15,6 +15,7 @@ DB_SOURCE = "MOSFETQexchange/output/telemetry.db"
 DB_BACKUP_DIR = "MOSFETQexchange/output/backups"
 
 def execute_secure_ledger_push():
+    # 1. Initialize schema framework
     bunq_db.init_db()
     if not os.path.exists(DB_SOURCE):
         print(f"[-] Execution fault: Operational database source {DB_SOURCE} not found.")
@@ -31,7 +32,20 @@ def execute_secure_ledger_push():
         shutil.copy2(DB_SOURCE, backup_path)
         shutil.copy2(DB_SOURCE, os.path.join(DB_BACKUP_DIR, "telemetry_evergreen.db"))
         print(f"[+] Isolated binary snapshot saved at: {backup_path}")
-        bunq_db.log_event("LEDGER_BACKUP", f"Created safe commit snapshot {backup_filename}")
+        
+        # Log backup event straight to production table structures instead of old mock method
+        bunq_db.insert_invoice(
+            date=datetime.utcnow().strftime("%Y-%m-%d"),
+            isbn="SYSTEM_BACKUP",
+            description=f"Snapshot compiled: {backup_filename}",
+            status="AUTOMATED_SYNC",
+            gateway="Git Subprocess Loop",
+            net=0.00,
+            vat=0.00,
+            gross=0.00,
+            channel="SYSTEM_LEADER",
+            entity="Git Automation Node"
+        )
         
     except Exception as e:
         print(f"[-] Failure isolating SQLite data state: {e}")
