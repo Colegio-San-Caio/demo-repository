@@ -1,15 +1,9 @@
 #!/usr/bin/env bash
 set -e
-# CANDI OQM fruit.sh style -!loop safe
-echo "[CANDI OQM] fruit.sh start"
-
 ./static_own_index.sh
-
-# run oeneyeGHview only if you pass --push
-if [[ "$1" == "--push" ]]; then
- ./oeneyeGHview.imc
-else
-  echo "[*] skip push (use./fruit.sh --push to push)"
-fi
-echo "[*] done"
-./autoexec_append.sh
+# append-only
+if [ -f autoexec_append.sh ]; then ./autoexec_append.sh; fi
+git add -A
+git commit -m "global restore $TS - no deletions - Julia_Menge_eigenOENEYE $(date -u +%Y-%m-%dT%H:%M:%SZ)" || echo "nothing to commit"
+git push
+gh workflow run pages.yml || gh run view --web || true
