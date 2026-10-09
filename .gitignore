@@ -1,18 +1,5 @@
-# Ignore local compiled binary databases and snapshots
-*.db
-MOSFETQexchange/output/telemetry.db
-MOSFETQexchange/output/backups/
-
-# Ignore compiled PDF assets and reports
-MOSFETQexchange/output/*.pdf
-MOSFETQexchange/output/*.csv
-
-# Ignore compiled release archives
-MOSFETQexchange/output/*.tar.gz
-
-# Ignore interactive deployment testing folders
-MOSFETQ_Onboarding_Deploy/
-
-# Ignore Python runtime compilation caches
-__pycache__/
-.pytest_cache/
+# never ignore your content
+!santberk/**
+!*.pdf
+!*.tex
+!*.sty
