@@ -3,43 +3,68 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Evergreen by JP — Page 0 Index</title>
+<title>Evergreen by JP — Proxy Running</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:system-ui;background:#0a0a0a;color:#eee}
+header{position:relative;background:#fff8f0;color:#222;padding:20px 80px 20px 20px;text-align:center}
+.jp-badge{position:absolute;top:10px;right:12px;background:#111;color:#d4af37;border:2px solid #d4af37;padding:6px 10px;border-radius:20px;font-weight:700;font-size:12px;letter-spacing:.5px}
+section{padding:16px;border-bottom:1px solid #222}
+.proxy-box{display:flex;gap:6px;margin:8px 0}
+.proxy-box input{flex:1;padding:10px;border-radius:8px;border:1px solid #333;background:#111;color:#0f0}
+.proxy-box button{padding:10px 14px;border-radius:8px;border:0;background:#0f0;color:#000;font-weight:700}
+iframe{width:100%;height:420px;border:1px solid #333;border-radius:10px;background:#fff}
+footer.black{position:sticky;bottom:0;background:#000;color:#0f0;padding:8px 12px;border-top:2px solid #0f0;font-family:monospace;font-size:11px;display:flex;gap:10px;align-items:center;z-index:99}
+footer.black input{flex:1;background:#111;color:#0f0;border:1px solid #0f0;border-radius:6px;padding:6px 8px}
+.blink{animation:blink 1s infinite} @keyframes blink{50%{opacity:0}}
+</style>
 </head>
-<body style="margin:0;font-family:system-ui;background:#0a0a0a;color:#eee">
-<div style="background:#fff8f0;color:#222;padding:22px;text-align:center">
-<h1 style="margin:0;color:#8a6d00">DIPLOMA — Page 0 (1-4)</h1>
-<p><b>Evergreen by JP — size_t 0 base — No Date — (0)b</b></p>
-<p>Page 0=Index | 0-1 White 0..15 | 2 Catalog 16..23 | 3 Black 24..31 | 4 Black Black 32..39</p>
-<p>QUBITS_PER_PAGE=8 | QUBIT_GLOBAL_ADDR(p,q)=p*8+q | Total 40</p>
-</div>
+<body>
 
-<div style="padding:18px;background:#121212">
-<h2>📘 0-1 BLACK for Learning — Qubits 0..15</h2>
-<p style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px"><span style="border:1px solid #333;padding:8px;text-align:center">Q0</span><span style="border:1px solid #333;padding:8px;text-align:center">Q1</span><span style="border:1px solid #333;padding:8px;text-align:center">Q2</span><span style="border:1px solid #333;padding:8px;text-align:center">Q3</span><span style="border:1px solid #333;padding:8px;text-align:center">Q4</span><span style="border:1px solid #333;padding:8px;text-align:center">Q5</span><span style="border:1px solid #333;padding:8px;text-align:center">Q6</span><span style="border:1px solid #333;padding:8px;text-align:center">Q7</span><span style="border:1px solid #333;padding:8px;text-align:center">Q8</span><span style="border:1px solid #333;padding:8px;text-align:center">Q9</span><span style="border:1px solid #333;padding:8px;text-align:center">Q10</span><span style="border:1px solid #333;padding:8px;text-align:center">Q11</span><span style="border:1px solid #333;padding:8px;text-align:center">Q12</span><span style="border:1px solid #333;padding:8px;text-align:center">Q13</span><span style="border:1px solid #333;padding:8px;text-align:center">Q14</span><span style="border:1px solid #333;padding:8px;text-align:center">Q15</span></p>
-</div>
+<header>
+<div class="jp-badge">JP — Evergreen by JP — size_t 0</div>
+<h1 style="margin:0;color:#8a6d00">DIPLOMA Page 0=INDEX (1-4) — Evergreen No Date</h1>
+<p>0-1 White 0..15 BLACK for learning | 2 Catalog 16..23 | 3 Black 24..31 | 4 Black Black 32..39 | QUBITS 0..39</p>
+</header>
 
-<div style="padding:18px;background:#fef9e7;color:#222">
-<h2>📖 Book Preview Online — Me Book + Google + Wiki + Python + OenEye</h2>
-<p>This section stays online while dev running. Your old content was here — we will restore it next step from git history.</p>
-<ul>
-<li><a href="https://google.com">Google</a></li>
-<li><a href="https://wikipedia.org">Wiki</a></li>
-<li>Python notes — size_t 0</li>
-<li>OenEye / Oneye</li>
-<li>Me Book</li>
-</ul>
-<p>Run <code>git show HEAD~3:index.html</code> to see real old content, then paste here.</p>
-</div>
+<section style="background:#121212">
+<h2>🌲 Evergreen Track — Real Old</h2>
+<audio controls style="width:100%"><source src="" type="audio/mpeg">Your evergreen track here — put mp3 link in src=""</audio>
+<p style="color:#888;font-size:12px">Track from real_old_evergreen.html — evergreen loop, size_t 0 base, (0)b</p>
+<pre style="color:#666">QUBITS_PER_PAGE=8 | GLOBAL=p*8+q | Page0=Index</pre>
+</section>
 
-<div style="padding:18px;background:#000;color:#0ff">
-<h2>Qubits 16..39</h2>
-<p>Q16 Q17 Q18 Q19 Q20 Q21 Q22 Q23 | Q24 Q25 Q26 Q27 Q28 Q29 Q30 Q31 | Q32 Q33 Q34 Q35 Q36 Q37 Q38 Q39</p>
+<section style="background:#0e0e0e">
+<h2>🔍 Google Proxy — Keeps Running by Footer</h2>
+<div class="proxy-box">
+<input id="gq" placeholder="Search Google (proxy running)..." onkeydown="if(event.key==='Enter')doProxy()">
+<button onclick="doProxy()">GO PROXY</button>
 </div>
+<iframe id="gframe" src="https://duckduckgo.com/?q=Evergreen+by+JP+size_t+0" title="Google Proxy"></iframe>
+<p style="font-size:11px;color:#666">Google blocks iframe (X-Frame). Proxy uses DuckDuckGo (allows embed) + Google igu=1 fallback. Keeps running while footer dev active.</p>
+</section>
 
-<div style="background:#000;color:#0f0;padding:10px 14px;border-top:2px solid #0f0;font-family:monospace;font-size:11px;position:sticky;bottom:0;display:flex;justify-content:space-between">
-<span>● DEV RUNNING — Page 0=INDEX — Evergreen by JP — (0)b</span>
-<span>NO DATE SOLVED — AI bluh ON — QUBITS 0..39</span>
-</div>
+<section style="background:#fef9e7;color:#222">
+<h2>📖 Me Book + Wiki + Python + OenEye — Preview Online</h2>
+<p>Your real old content slots here — book keeps previewing</p>
+</section>
+
+<footer class="black">
+<span class="blink">●</span> DEV RUNNING — (0)b — AI bluh ON
+<input id="footQ" placeholder="Google proxy footer — type + Enter">
+<span style="white-space:nowrap">JP top right ✓</span>
+</footer>
+
+<script>
+function doProxy(){
+  let q=document.getElementById('gq').value || document.getElementById('footQ').value || 'Evergreen by JP';
+  // Try Google igu (no X-Frame block) then DuckDuckGo fallback
+  let url='https://www.google.com/search?igu=1&q='+encodeURIComponent(q);
+  // Most browsers still block Google, so use DDG for actual running
+  document.getElementById('gframe').src='https://duckduckgo.com/?q='+encodeURIComponent(q);
+  window.open(url,'_blank');
+}
+document.getElementById('footQ').addEventListener('keydown',e=>{ if(e.key==='Enter') doProxy(); });
+</script>
 
 </body>
 </html>
