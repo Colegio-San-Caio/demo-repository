@@ -3,18 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Evergreen by JP — SantBerk + AP + Google</title>
+<title>Evergreen by JP — SantBerk Pulse</title>
 <style>
 *{box-sizing:border-box} body{margin:0;font-family:system-ui;background:#0a0a0a;color:#eee}
 header{position:relative;background:#fff8f0;color:#222;padding:20px 90px 20px 20px;text-align:center}
-.jp{position:absolute;top:10px;right:12px;background:#111;color:#d4af37;border:2px solid #d4af37;padding:6px 12px;border-radius:20px;font-weight:800;font-size:11px}
+.jp{position:absolute;top:10px;right:12px;background:#111;color:#d4af37;border:2px solid #d4af37;padding:6px 12px;border-radius:20px;font-weight:800;font-size:11px;box-shadow:0 0 10px rgba(212,175,55,.4)}
 .sec{padding:14px;border-bottom:1px solid #222}
 .row{display:flex;gap:6px;flex-wrap:wrap} .row input{flex:1;min-width:180px;padding:10px;border-radius:8px;border:1px solid #333;background:#111;color:#0f0}
 .btn{padding:10px 12px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
 iframe{width:100%;height:420px;border:1px solid #333;border-radius:10px;background:#fff}
-footer{position:sticky;bottom:0;background:#000;color:#0f0;padding:8px 10px;border-top:2px solid #0f0;font-family:monospace;font-size:11px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-footer a{color:#0ff;text-decoration:none;border:1px solid #0ff;padding:4px 8px;border-radius:6px}
-.ts{background:#111;color:#fff;border:1px solid #d4af37;padding:4px 8px;border-radius:6px}
+@keyframes goldPulse{0%{box-shadow:0 0 0 0 rgba(212,175,55,.7);transform:scale(1)} 50%{box-shadow:0 0 0 12px rgba(212,175,55,0);transform:scale(1.05)} 100%{box-shadow:0 0 0 0 rgba(212,175,55,0);transform:scale(1)}}
+@keyframes goldGlow{0%,100%{background:#d4af37} 50%{background:#ffdf6e}}
+.join-pulse{animation:goldPulse 2s infinite, goldGlow 2s infinite; color:#000 !important; font-weight:900 !important; border:2px solid #fff !important}
+.join-done{background:#222 !important;color:#888 !important;border:1px solid #444 !important;animation:none !important}
+footer{position:sticky;bottom:0;background:#000;color:#0f0;padding:8px 10px;border-top:2px solid #0f0;font-family:monospace;font-size:11px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;z-index:99}
+footer a{color:#0ff;text-decoration:none;border:1px solid #0ff;padding:5px 10px;border-radius:6px}
 </style>
 </head>
 <body>
@@ -22,59 +25,45 @@ footer a{color:#0ff;text-decoration:none;border:1px solid #0ff;padding:4px 8px;b
 <header>
 <div class="jp">JP — Evergreen by JP — (0)b</div>
 <h1 style="margin:0;color:#8a6d00">Page 0=INDEX — Evergreen No Date — size_t 0</h1>
-<p>QUBITS 0..39 | Evergreen track real old | Google + AP + TruthSocial Proxy</p>
 </header>
 
-<div class="sec" style="background:#121212">
-<h2>🌲 Evergreen Track — Real Old</h2>
-<audio controls style="width:100%"><source src="" type="audio/mpeg"></audio>
-</div>
+<div class="sec" style="background:#121212"><h2>🌲 Evergreen Track — Real Old</h2><audio controls style="width:100%"><source src="" type="audio/mpeg"></audio></div>
 
 <div class="sec" style="background:#0e0e0e">
-<h2>🔍 Proxy — Google + AP + SantBerk</h2>
 <div class="row">
-<input id="q" placeholder="Search...">
-<button class="btn" onclick="gProxy()" style="background:#0f0">Google Proxy</button>
-<button class="btn" onclick="apProxy()" style="background:#d4af37">AP Proxy</button>
-<button class="btn" onclick="tsProxy()" style="background:#fff;color:#000">SantBerk Proxy</button>
+<input id="q" placeholder="Search proxy...">
+<button class="btn" onclick="gProxy()" style="background:#0f0">Google</button>
+<button class="btn" onclick="apProxy()" style="background:#d4af37">AP</button>
+<button class="btn" onclick="tsProxy()" style="background:#fff;color:#000">SantBerk</button>
 </div>
-<iframe id="frame" src="https://truthsocial.com/group/santberk" title="SantBerk Proxy"></iframe>
-<div id="feed" style="margin-top:8px;color:#888;font-size:12px">TruthSocial blocks iframe (X-Frame) — proxy will open in new tab + keep footer running. AP feed loads via RSS proxy.</div>
+<iframe id="frame" src="https://truthsocial.com/group/santberk" title="SantBerk"></iframe>
 </div>
 
 <footer>
-<span>● DEV RUNNING (0)b</span>
-<input id="foot" placeholder="Proxy footer — type + Enter">
-<a href="https://truthsocial.com/group/santberk" target="_blank">JOIN SANTBERK GROUP</a>
-<a href="https://truthsocial.com/group/santberk/posts/117410942877598320" target="_blank" class="ts">VIEW POST 117410942877598320</a>
-<a href="https://apnews.com" target="_blank">AP</a>
-<span style="margin-left:auto">JP top right ✓ — Evergreen by JP</span>
+<span>● DEV RUNNING</span>
+<input id="foot" placeholder="footer proxy — type santberk + Enter">
+<a id="joinBtn" href="https://truthsocial.com/group/santberk" target="_blank" class="join-pulse" onclick="markJoined()">★ JOIN SANTBERK GROUP</a>
+<a href="https://truthsocial.com/group/santberk/posts/117410942877598320" target="_blank">VIEW POST 117410942877598320</a>
+<span style="margin-left:auto">JP top right ✓</span>
 </footer>
 
 <script>
-function gProxy(){
- let q=document.getElementById('q').value||document.getElementById('foot').value||'Evergreen by JP';
- document.getElementById('frame').src='https://duckduckgo.com/?q='+encodeURIComponent(q);
- window.open('https://www.google.com/search?igu=1&q='+encodeURIComponent(q),'_blank');
+// Check if joined before
+if(localStorage.getItem('santberk_joined')==='1'){
+ document.getElementById('joinBtn').classList.remove('join-pulse');
+ document.getElementById('joinBtn').classList.add('join-done');
+ document.getElementById('joinBtn').innerText='✓ SANTBERK JOINED';
 }
-function apProxy(){
- let q=document.getElementById('q').value||document.getElementById('foot').value||'';
- document.getElementById('frame').src='https://apnews.com/search?q='+encodeURIComponent(q);
+function markJoined(){
+ localStorage.setItem('santberk_joined','1');
+ document.getElementById('joinBtn').classList.remove('join-pulse');
+ document.getElementById('joinBtn').classList.add('join-done');
+ document.getElementById('joinBtn').innerText='✓ SANTBERK JOINED';
 }
-function tsProxy(){
- // TruthSocial group — opens real group, tries iframe
- document.getElementById('frame').src='https://truthsocial.com/group/santberk';
- window.open('https://truthsocial.com/group/santberk','_blank');
- window.open('https://truthsocial.com/group/santberk/posts/117410942877598320','_blank');
-}
-document.getElementById('foot').addEventListener('keydown',e=>{
- if(e.key==='Enter'){
-  let v=e.target.value.toLowerCase();
-  if(v.includes('sant')||v.includes('berk')||v.includes('truth')) tsProxy();
-  else if(v.includes('ap')) apProxy();
-  else gProxy();
- }
-});
+function gProxy(){ let q=document.getElementById('q').value||document.getElementById('foot').value||'Evergreen by JP'; document.getElementById('frame').src='https://duckduckgo.com/?q='+encodeURIComponent(q); window.open('https://www.google.com/search?igu=1&q='+encodeURIComponent(q),'_blank'); }
+function apProxy(){ let q=document.getElementById('q').value||document.getElementById('foot').value||''; document.getElementById('frame').src='https://apnews.com/search?q='+encodeURIComponent(q); }
+function tsProxy(){ document.getElementById('frame').src='https://truthsocial.com/group/santberk'; window.open('https://truthsocial.com/group/santberk','_blank'); }
+document.getElementById('foot').addEventListener('keydown',e=>{ if(e.key==='Enter'){ let v=e.target.value.toLowerCase(); if(v.includes('sant')||v.includes('truth')) tsProxy(); else if(v.includes('ap')) apProxy(); else gProxy(); }});
 </script>
 
 </body>
