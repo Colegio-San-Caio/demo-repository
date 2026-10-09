@@ -1,42 +1,54 @@
-# paste footer before </body><!doctype html>
-<html> <head> <meta charset="utf-8"> <meta 
-name="viewport" 
-content="width=device-width,initial-scale=1"> <title>Page 
-0 Index - Evergreen by JP - DEV RUNNING</title> <style> 
-*{box-sizing:border-box} 
-body{margin:0;font-family:system-ui;background:#0a0a0a;color:#e0e0e0} 
-header{background:#fff8f0;color:#222;padding:24px;text-align:center} 
-section{padding:24px;margin:0;border-bottom:1px solid 
-#222} .white-learn{background:#121212;color:#e0e0e0} /* 
-0-1 BLACK for learning */ .white-learn 
-.card{background:#1e1e1e;border-color:#333;color:#7ef} 
-.black-learn{background:#000;color:#0ff;font-family:monospace} 
-.book-preview{background:#fef9e7;color:#222;border:3px 
-dashed #d4af37} 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:10px} 
-.card{border:1px solid 
-#333;padding:14px;border-radius:10px;text-align:center;background:#1a1a1a} 
-.diploma-table{margin:12px 
-auto;border-collapse:collapse;color:#222} .diploma-table 
-td,.diploma-table th{border:1px solid #ccc;padding:6px 
-10px;background:#fff} 
-footer.black-dev{position:sticky;bottom:0;background:#000;color:#0f0;padding:10px 
-16px;display:flex;justify-content:space-between;align-items:center;border-top:2px 
-solid 
-#0f0;font-family:monospace;font-size:12px;z-index:99} 
-.blink{animation:blink 1s infinite} @keyframes 
-blink{50%{opacity:0}} </style> </head> <body> git add 
-index.html <header id="page0-index"> <h1 
-style="color:#8a6d00;margin:0">Page 0 = INDEX - Diploma 
-(1-4)</h1> <p><b>size_t 0 base — Evergreen by JP — 
-Evergreen No Date</b></p> <table class="diploma-table"> 
-<tr><th>Page</th><th>Qubits</th><th>Mode</th></tr> 
-<tr><td>0 = Index</td><td>Diploma</td><td>White 
-Paper</td></tr> <tr><td>0-1</td><td>0..15</td><td>BLACK 
-for learning</td></tr> <tr><td>2 
-Catalog</td><td>16..23</td><td>Catalog</td></tr> 
-<tr><td>3 Black</td><td>24..31</td><td>Black</td></tr> 
-<tr><td>4 Black Black</td><td>32..39</td><td>Black 
-Black</td></tr> </table> git commit -m "credit: by Big 
-Crowd - Google Bug Hunter"
-git push
+<!-- HEADER v6.1 FINAL - JP -->
+<header style="font-family:OMQ,monospace;background:#000;color:#0f0;padding:10px;border-bottom:2px solid #0f0">
+<div style="display:flex;justify-content:space-between">
+<span>oeneyeOS (8) OMQ v6 FINAL | JP Host: jp.fieldberry.oeneye.os</span>
+<span id="clock-h">--:--:-- JST</span>
+</div>
+<div style="font-size:12px;color:#8f8">IMG: 1eac37f688a | FNT: 4a36bcbd 1840B | ZIP: 9ddf75f0 13K | {name}=Kai</div>
+</header>
+<script>
+setInterval(()=>{document.getElementById('clock-h').textContent=new Date().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',hour12:false})+' JST'},1000);
+</script>
+<!-- para0 v6.1 FINAL 9ddf75f0 -->
+<p id="para0" style="font-family:OMQ,monospace;background:#000;color:#0f0;padding:8px">
+[thanks]{name} — Clock: <span id="clock">-- JST</span> | JP: <span id="jpip">jp</span>
+<br>IMG 1eac37f688a FNT 4a36bcbd 1840B
+</p>
+<script>
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'})+' JST'},1000);
+let h=document.getElementById('para0').innerHTML;
+h=h.replaceAll('{name}','Kai').replaceAll('[thanks]','Thank you ').replaceAll('[name]','').replaceAll('[/name]','');
+document.getElementById('para0').innerHTML=h;
+</script>
+<!-- FOOTER v6.1 FINAL - JP + Tenure -->
+<footer style="font-family:monospace;background:#000;color:#0f0;padding:10px;border-top:2px solid #0f0;margin-top:20px;font-size:12px">
+<div>[thanks]{name} — Tenure Supplement 2026-05-13 | JP: jp.fieldberry.oeneye.os (<span id="jpip-f">resolving...</span>) | Clock: <span id="clock-f">-- JST</span></div>
+<div>Artifact: ZENODO_oeneyeOS_8_NAME_v6_FINAL.zip SHA256: 9ddf75f08784f938d15fc0635055d06d4cdcebcbd463b119db1613eb85daa995 | Build: Termux 21:56-22:32 | DBA: 8f6672a -> b7169305 MATCH</div>
+<div>Boot OK: [omqINIT] FNT loaded: {name} [/name] [name] [thanks]{name} | OMQ:[name][/name]{name}[thanks]{name} v6 1840 | Author: Kai</div>
+</footer>
+<script>
+setInterval(()=>{document.getElementById('clock-f').textContent=new Date().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'})+' JST'},1000);
+fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>{document.getElementById('jpip-f').textContent=d.ip}).catch(()=>{document.getElementById('jpip-f').textContent=location.hostname});
+let fh=document.querySelector('footer').innerHTML; fh=fh.replaceAll('{name}','Kai').replaceAll('[thanks]','Thank you ').replaceAll('[name]','').replaceAll('[/name]',''); document.querySelector('footer').innerHTML=fh;
+</script>
+<!-- NEXT LEARNING: Hello World OMQ v6.1 -->
+<div id="hello" style="font-family:OMQ,monospace;background:#001;color:#0f0;padding:15px;margin-top:20px;border:2px dashed #0f0;text-align:center">
+<h2>[thanks]{name} — Hello World</h2>
+<p id="hw">Loading...</p>
+<button onclick="sayHello()" style="background:#0f0;color:#000;padding:8px 16px;font-family:monospace">Say Hello</button>
+</div>
+<script>
+function sayHello(){
+  const name = "Kai";
+  const jp = document.getElementById('jpip-f')?.textContent || "jp.fieldberry.oeneye.os";
+  const jst = new Date().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'});
+  document.getElementById('hw').innerHTML =
+    `Hello World!<br>Thank you ${name}<br>JP: ${jp}<br>JST: ${jst}<br>OMQ: [name]${name}[/name] BOOT OK`;
+}
+// auto run + teach tags
+sayHello();
+let hw = document.getElementById('hello').innerHTML;
+hw = hw.replaceAll('{name}','Kai').replaceAll('[thanks]','Thank you ').replaceAll('[name]','').replaceAll('[/name]','');
+document.getElementById('hello').innerHTML = hw;
+console.log("Next learning: Hello World connected to index.html v6.1 FINAL 9ddf75f0");
+</script>
