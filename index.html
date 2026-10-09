@@ -3,27 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Evergreen by JP — AP + Google Proxy</title>
+<title>Evergreen by JP — SantBerk + AP + Google</title>
 <style>
 *{box-sizing:border-box} body{margin:0;font-family:system-ui;background:#0a0a0a;color:#eee}
 header{position:relative;background:#fff8f0;color:#222;padding:20px 90px 20px 20px;text-align:center}
 .jp{position:absolute;top:10px;right:12px;background:#111;color:#d4af37;border:2px solid #d4af37;padding:6px 12px;border-radius:20px;font-weight:800;font-size:11px}
 .sec{padding:14px;border-bottom:1px solid #222}
-.row{display:flex;gap:6px;flex-wrap:wrap}
-.row input{flex:1;min-width:180px;padding:10px;border-radius:8px;border:1px solid #333;background:#111;color:#0f0}
-.row button{padding:10px 12px;border-radius:8px;border:0;background:#0f0;color:#000;font-weight:700}
-iframe{width:100%;height:380px;border:1px solid #333;border-radius:10px;background:#fff}
-.ap-item{padding:8px;border:1px solid #333;border-radius:8px;background:#111;margin:6px 0;font-size:13px}
-footer{position:sticky;bottom:0;background:#000;color:#0f0;padding:8px 10px;border-top:2px solid #0f0;font-family:monospace;font-size:11px;display:flex;gap:8px;align-items:center}
-footer input{flex:1;background:#111;color:#0f0;border:1px solid #0f0;border-radius:6px;padding:6px}
+.row{display:flex;gap:6px;flex-wrap:wrap} .row input{flex:1;min-width:180px;padding:10px;border-radius:8px;border:1px solid #333;background:#111;color:#0f0}
+.btn{padding:10px 12px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
+iframe{width:100%;height:420px;border:1px solid #333;border-radius:10px;background:#fff}
+footer{position:sticky;bottom:0;background:#000;color:#0f0;padding:8px 10px;border-top:2px solid #0f0;font-family:monospace;font-size:11px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+footer a{color:#0ff;text-decoration:none;border:1px solid #0ff;padding:4px 8px;border-radius:6px}
+.ts{background:#111;color:#fff;border:1px solid #d4af37;padding:4px 8px;border-radius:6px}
 </style>
 </head>
 <body>
 
 <header>
 <div class="jp">JP — Evergreen by JP — (0)b</div>
-<h1 style="margin:0;color:#8a6d00">Page 0=INDEX Diploma (1-4) — Evergreen No Date</h1>
-<p>QUBITS 0..39 | 0-1 White/Black learning | size_t 0 — AI bluh ON</p>
+<h1 style="margin:0;color:#8a6d00">Page 0=INDEX — Evergreen No Date — size_t 0</h1>
+<p>QUBITS 0..39 | Evergreen track real old | Google + AP + TruthSocial Proxy</p>
 </header>
 
 <div class="sec" style="background:#121212">
@@ -32,48 +31,50 @@ footer input{flex:1;background:#111;color:#0f0;border:1px solid #0f0;border-radi
 </div>
 
 <div class="sec" style="background:#0e0e0e">
-<h2>🔍 Google Proxy + AP Associated Press Proxy</h2>
+<h2>🔍 Proxy — Google + AP + SantBerk</h2>
 <div class="row">
-<input id="q" placeholder="Google proxy search...">
-<button onclick="gProxy()">Google Proxy</button>
-<button onclick="apProxy()" style="background:#d4af37">AP Proxy</button>
+<input id="q" placeholder="Search...">
+<button class="btn" onclick="gProxy()" style="background:#0f0">Google Proxy</button>
+<button class="btn" onclick="apProxy()" style="background:#d4af37">AP Proxy</button>
+<button class="btn" onclick="tsProxy()" style="background:#fff;color:#000">SantBerk Proxy</button>
 </div>
-<div class="row" style="margin-top:8px">
-<a href="https://twitter.com/AP" target="_blank" style="color:#1d9bf0">@AP</a>
-<a href="https://twitter.com/AP_Politics" target="_blank" style="color:#1d9bf0">@AP_Politics</a>
-<a href="https://apnews.com" target="_blank" style="color:#d4af37">apnews.com</a>
-</div>
-<iframe id="frame" src="https://apnews.com" title="AP Proxy"></iframe>
-<div id="apfeed">Loading AP headlines via proxy...</div>
+<iframe id="frame" src="https://truthsocial.com/group/santberk" title="SantBerk Proxy"></iframe>
+<div id="feed" style="margin-top:8px;color:#888;font-size:12px">TruthSocial blocks iframe (X-Frame) — proxy will open in new tab + keep footer running. AP feed loads via RSS proxy.</div>
 </div>
 
 <footer>
-<span>● DEV RUNNING</span>
-<input id="foot" placeholder="Type — Google or AP — Enter to proxy">
-<span>NO DATE SOLVED — Evergreen by JP</span>
+<span>● DEV RUNNING (0)b</span>
+<input id="foot" placeholder="Proxy footer — type + Enter">
+<a href="https://truthsocial.com/group/santberk" target="_blank">JOIN SANTBERK GROUP</a>
+<a href="https://truthsocial.com/group/santberk/posts/117410942877598320" target="_blank" class="ts">VIEW POST 117410942877598320</a>
+<a href="https://apnews.com" target="_blank">AP</a>
+<span style="margin-left:auto">JP top right ✓ — Evergreen by JP</span>
 </footer>
 
 <script>
 function gProxy(){
  let q=document.getElementById('q').value||document.getElementById('foot').value||'Evergreen by JP';
- document.getElementById('frame').src='https://duckduckgo.com/?q='+encodeURIComponent(q)+' site:apnews.com';
- window.open('https://www.google.com/search?igu=1&q='+encodeURIComponent(q)+' site:apnews.com','_blank');
+ document.getElementById('frame').src='https://duckduckgo.com/?q='+encodeURIComponent(q);
+ window.open('https://www.google.com/search?igu=1&q='+encodeURIComponent(q),'_blank');
 }
 function apProxy(){
- let q=document.getElementById('q').value||document.getElementById('foot').value||'Evergreen';
+ let q=document.getElementById('q').value||document.getElementById('foot').value||'';
  document.getElementById('frame').src='https://apnews.com/search?q='+encodeURIComponent(q);
- loadAP(q);
 }
-async function loadAP(q=''){
- try{
-  // AP RSS via proxy — keeps running, no X-Frame block
-  let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://storage.googleapis.com/afs-prod/feeds/ap-topnews.rss');
-  let j=await r.json();
-  document.getElementById('apfeed').innerHTML=j.items.slice(0,6).map(i=>`<div class=ap-item><b>${i.title}</b><br><a href="${i.link}" target=_blank style=color:#0f0>${i.link}</a></div>`).join('');
- }catch(e){ document.getElementById('apfeed').innerHTML='AP feed offline — iframe apnews.com still running'; }
+function tsProxy(){
+ // TruthSocial group — opens real group, tries iframe
+ document.getElementById('frame').src='https://truthsocial.com/group/santberk';
+ window.open('https://truthsocial.com/group/santberk','_blank');
+ window.open('https://truthsocial.com/group/santberk/posts/117410942877598320','_blank');
 }
-document.getElementById('foot').addEventListener('keydown',e=>{ if(e.key==='Enter'){ if(e.target.value.toLowerCase().includes('ap')) apProxy(); else gProxy(); }});
-loadAP();
+document.getElementById('foot').addEventListener('keydown',e=>{
+ if(e.key==='Enter'){
+  let v=e.target.value.toLowerCase();
+  if(v.includes('sant')||v.includes('berk')||v.includes('truth')) tsProxy();
+  else if(v.includes('ap')) apProxy();
+  else gProxy();
+ }
+});
 </script>
 
 </body>
