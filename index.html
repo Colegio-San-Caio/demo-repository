@@ -3,20 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Evergreen by JP — SantBerk Pulse</title>
+<title>Evergreen by JP — Book Proxy Pay</title>
 <style>
 *{box-sizing:border-box} body{margin:0;font-family:system-ui;background:#0a0a0a;color:#eee}
 header{position:relative;background:#fff8f0;color:#222;padding:20px 90px 20px 20px;text-align:center}
-.jp{position:absolute;top:10px;right:12px;background:#111;color:#d4af37;border:2px solid #d4af37;padding:6px 12px;border-radius:20px;font-weight:800;font-size:11px;box-shadow:0 0 10px rgba(212,175,55,.4)}
+.jp{position:absolute;top:10px;right:12px;background:#111;color:#d4af37;border:2px solid #d4af37;padding:6px 12px;border-radius:20px;font-weight:800;font-size:11px}
 .sec{padding:14px;border-bottom:1px solid #222}
 .row{display:flex;gap:6px;flex-wrap:wrap} .row input{flex:1;min-width:180px;padding:10px;border-radius:8px;border:1px solid #333;background:#111;color:#0f0}
 .btn{padding:10px 12px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
-iframe{width:100%;height:420px;border:1px solid #333;border-radius:10px;background:#fff}
-@keyframes goldPulse{0%{box-shadow:0 0 0 0 rgba(212,175,55,.7);transform:scale(1)} 50%{box-shadow:0 0 0 12px rgba(212,175,55,0);transform:scale(1.05)} 100%{box-shadow:0 0 0 0 rgba(212,175,55,0);transform:scale(1)}}
-@keyframes goldGlow{0%,100%{background:#d4af37} 50%{background:#ffdf6e}}
-.join-pulse{animation:goldPulse 2s infinite, goldGlow 2s infinite; color:#000 !important; font-weight:900 !important; border:2px solid #fff !important}
-.join-done{background:#222 !important;color:#888 !important;border:1px solid #444 !important;animation:none !important}
-footer{position:sticky;bottom:0;background:#000;color:#0f0;padding:8px 10px;border-top:2px solid #0f0;font-family:monospace;font-size:11px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;z-index:99}
+iframe{width:100%;height:460px;border:1px solid #333;border-radius:10px;background:#fff}
+@keyframes goldPulse{0%{box-shadow:0 0 0 0 rgba(212,175,55,.7)} 70%{box-shadow:0 0 0 12px rgba(212,175,55,0)} 100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}}
+.pay-gold{animation:goldPulse 2s infinite;background:#d4af37;color:#000 !important;font-weight:900;border:2px solid #fff}
+.book-card{background:linear-gradient(135deg,#1a1a0a,#2a2211);border:2px solid #d4af37;border-radius:12px;padding:14px;margin:10px 0}
+footer{position:sticky;bottom:0;background:#000;color:#0f0;padding:8px 10px;border-top:2px solid #0f0;font-family:monospace;font-size:11px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 footer a{color:#0ff;text-decoration:none;border:1px solid #0ff;padding:5px 10px;border-radius:6px}
 </style>
 </head>
@@ -24,46 +23,51 @@ footer a{color:#0ff;text-decoration:none;border:1px solid #0ff;padding:5px 10px;
 
 <header>
 <div class="jp">JP — Evergreen by JP — (0)b</div>
-<h1 style="margin:0;color:#8a6d00">Page 0=INDEX — Evergreen No Date — size_t 0</h1>
+<h1 style="margin:0;color:#8a6d00">Page 0=INDEX — Evergreen No Date</h1>
 </header>
 
-<div class="sec" style="background:#121212"><h2>🌲 Evergreen Track — Real Old</h2><audio controls style="width:100%"><source src="" type="audio/mpeg"></audio></div>
+<div class="sec" style="background:#121212">
+<h2>📖 My Book — Proxy + Pay Link</h2>
+<div class="book-card">
+<h3 style="margin:0 0 6px;color:#d4af37">Evergreen by JP — Book Preview Online</h3>
+<p style="margin:4px 0;font-size:13px;color:#ccc">Size_t 0 base | Page 0=Index | QUBITS 0..39 | Me Book + Wiki + Python + OenEye</p>
+<div class="row">
+<a id="payBtn" href="REPLACE_WITH_YOUR_PAY_LINK" target="_blank" class="btn pay-gold">💰 BUY / PAY BOOK — REPLACE LINK</a>
+<a href="https://truthsocial.com/group/santberk" target="_blank" class="btn" style="background:#fff;color:#000">JOIN SANTBERK</a>
+<button class="btn" style="background:#0f0" onclick="document.getElementById('bookFrame').src=document.getElementById('bookFrame').src">↻ Reload Book Proxy</button>
+</div>
+</div>
+<iframe id="bookFrame" src="https://colegio-san-caio.github.io/demo-repository/" title="Book Proxy"></iframe>
+<p style="font-size:11px;color:#666">This iframe IS your book proxy — it loads your Pages book. Replace src with Google Drive / Gumroad / Stripe preview if needed.</p>
+</div>
 
 <div class="sec" style="background:#0e0e0e">
+<h2>🔍 Other Proxies</h2>
 <div class="row">
-<input id="q" placeholder="Search proxy...">
+<input id="q" placeholder="Google / AP / SantBerk search...">
 <button class="btn" onclick="gProxy()" style="background:#0f0">Google</button>
 <button class="btn" onclick="apProxy()" style="background:#d4af37">AP</button>
 <button class="btn" onclick="tsProxy()" style="background:#fff;color:#000">SantBerk</button>
 </div>
-<iframe id="frame" src="https://truthsocial.com/group/santberk" title="SantBerk"></iframe>
+<iframe id="frame" src="https://truthsocial.com/group/santberk/posts/117410942877598320" title="Proxy"></iframe>
 </div>
 
 <footer>
-<span>● DEV RUNNING</span>
-<input id="foot" placeholder="footer proxy — type santberk + Enter">
-<a id="joinBtn" href="https://truthsocial.com/group/santberk" target="_blank" class="join-pulse" onclick="markJoined()">★ JOIN SANTBERK GROUP</a>
-<a href="https://truthsocial.com/group/santberk/posts/117410942877598320" target="_blank">VIEW POST 117410942877598320</a>
-<span style="margin-left:auto">JP top right ✓</span>
+<span>● DEV RUNNING (0)b</span>
+<input id="foot" placeholder="footer proxy">
+<a id="joinBtn" href="https://truthsocial.com/group/santberk" target="_blank" style="animation:goldPulse 2s infinite;background:#d4af37;color:#000;font-weight:900">★ JOIN SANTBERK</a>
+<a id="footPay" href="REPLACE_WITH_YOUR_PAY_LINK" target="_blank" class="pay-gold">💰 PAY BOOK</a>
+<span style="margin-left:auto">JP top right ✓ — No Date Solved</span>
 </footer>
 
 <script>
-// Check if joined before
-if(localStorage.getItem('santberk_joined')==='1'){
- document.getElementById('joinBtn').classList.remove('join-pulse');
- document.getElementById('joinBtn').classList.add('join-done');
- document.getElementById('joinBtn').innerText='✓ SANTBERK JOINED';
-}
-function markJoined(){
- localStorage.setItem('santberk_joined','1');
- document.getElementById('joinBtn').classList.remove('join-pulse');
- document.getElementById('joinBtn').classList.add('join-done');
- document.getElementById('joinBtn').innerText='✓ SANTBERK JOINED';
-}
-function gProxy(){ let q=document.getElementById('q').value||document.getElementById('foot').value||'Evergreen by JP'; document.getElementById('frame').src='https://duckduckgo.com/?q='+encodeURIComponent(q); window.open('https://www.google.com/search?igu=1&q='+encodeURIComponent(q),'_blank'); }
+const PAY_LINK = "REPLACE_WITH_YOUR_PAY_LINK"; // <- put your real link here
+function gProxy(){ let q=document.getElementById('q').value||document.getElementById('foot').value||'Evergreen by JP'; document.getElementById('frame').src='https://duckduckgo.com/?q='+encodeURIComponent(q); }
 function apProxy(){ let q=document.getElementById('q').value||document.getElementById('foot').value||''; document.getElementById('frame').src='https://apnews.com/search?q='+encodeURIComponent(q); }
-function tsProxy(){ document.getElementById('frame').src='https://truthsocial.com/group/santberk'; window.open('https://truthsocial.com/group/santberk','_blank'); }
-document.getElementById('foot').addEventListener('keydown',e=>{ if(e.key==='Enter'){ let v=e.target.value.toLowerCase(); if(v.includes('sant')||v.includes('truth')) tsProxy(); else if(v.includes('ap')) apProxy(); else gProxy(); }});
+function tsProxy(){ document.getElementById('frame').src='https://truthsocial.com/group/santberk'; window.open('https://truthsocial.com/group/santberk/posts/117410942877598320','_blank'); }
+document.getElementById('foot').addEventListener('keydown',e=>{ if(e.key==='Enter'){ let v=e.target.value.toLowerCase(); if(v.includes('sant')) tsProxy(); else if(v.includes('ap')) apProxy(); else gProxy(); }});
+// Auto-update all pay buttons if you set link
+if(PAY_LINK!=="REPLACE_WITH_YOUR_PAY_LINK"){ document.getElementById('payBtn').href=PAY_LINK; document.getElementById('footPay').href=PAY_LINK; }
 </script>
 
 </body>
