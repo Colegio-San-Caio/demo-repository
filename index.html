@@ -1,54 +1,88 @@
-<!-- HEADER v6.1 FINAL - JP -->
-<header style="font-family:OMQ,monospace;background:#000;color:#0f0;padding:10px;border-bottom:2px solid #0f0">
-<div style="display:flex;justify-content:space-between">
-<span>oeneyeOS (8) OMQ v6 FINAL | JP Host: jp.fieldberry.oeneye.os</span>
-<span id="clock-h">--:--:-- JST</span>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thank you Kai - OMQ v6.2 FINAL + BOOK</title>
+<style>
+body{background:#000;color:#0f0;font-family:monospace;margin:0;padding:10px}
+.bar{border:1px solid #0f0;padding:6px;margin:6px 0;font-size:11px;word-break:break-all}
+.box{border:2px dashed #0f0;padding:20px;margin:20px 0;text-align:center}
+button{background:#0f0;color:#000;border:none;padding:8px 16px;font-family:monospace;cursor:pointer}
+.book{border:1px solid #0f0;padding:15px;margin:20px 0;background:#001100}
+h2{color:#0f0;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="bar">oeneyeOS (8) OMQ v6.2 FINAL + BOOK | JP Host: jp.fieldberry.oeneye.os | 2026/10/10 6:00:00 JST | IMG: 1eac37f688a | FNT: 4a36bcbd 1840B | ZIP: 9ddf75F0 13K | {name}Kai</div>
+
+<div class="bar">Thank you Kai - Clock: 2026/10/10 6:00:00 JST | JP: jp | IMG 1eac37f688a FNT 4a36bcbd 1840B</div>
+
+<div class="bar">Thank you Kai - Tenure Supplement 2026-05-13 | JP: jp.fieldberry.oeneye.os (83.135.41.102) | Clock: 2026/10/10 6:00:00 JST | Artifact: ZENODO_oeneyeOS_8_NAME_v6_FINAL_zip SHA256: 9ddf75f08784f938d15cf063505d06d4dcebdbe4b3b19db1613b8e85daa095 | Build: Termux 21:56:22:32 | DBA: 8f6672a -> b7169305 MATCH | Boot OK: [omqINIT] FMT loaded: Kai Thank you Kai | OMQ:KaiThank you Kai v6 1840 | Author: Kai</div>
+
+<div class="box">
+<h1>Thank you Kai - Hello World</h1>
+<div>Hello World!<br>Thank you Kai<br>JP: 83.135.41.102<br>JST: 2026/10/10 5:59:17<br>OMQ: [name]Kai[/name] BOOT OK</div>
+<br>
+<button onclick="sayHello()">Say Hello</button>
 </div>
-<div style="font-size:12px;color:#8f8">IMG: 1eac37f688a | FNT: 4a36bcbd 1840B | ZIP: 9ddf75f0 13K | {name}=Kai</div>
-</header>
-<script>
-setInterval(()=>{document.getElementById('clock-h').textContent=new Date().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',hour12:false})+' JST'},1000);
-</script>
-<!-- para0 v6.1 FINAL 9ddf75f0 -->
-<p id="para0" style="font-family:OMQ,monospace;background:#000;color:#0f0;padding:8px">
-[thanks]{name} — Clock: <span id="clock">-- JST</span> | JP: <span id="jpip">jp</span>
-<br>IMG 1eac37f688a FNT 4a36bcbd 1840B
-</p>
-<script>
-setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'})+' JST'},1000);
-let h=document.getElementById('para0').innerHTML;
-h=h.replaceAll('{name}','Kai').replaceAll('[thanks]','Thank you ').replaceAll('[name]','').replaceAll('[/name]','');
-document.getElementById('para0').innerHTML=h;
-</script>
-<!-- FOOTER v6.1 FINAL - JP + Tenure -->
-<footer style="font-family:monospace;background:#000;color:#0f0;padding:10px;border-top:2px solid #0f0;margin-top:20px;font-size:12px">
-<div>[thanks]{name} — Tenure Supplement 2026-05-13 | JP: jp.fieldberry.oeneye.os (<span id="jpip-f">resolving...</span>) | Clock: <span id="clock-f">-- JST</span></div>
-<div>Artifact: ZENODO_oeneyeOS_8_NAME_v6_FINAL.zip SHA256: 9ddf75f08784f938d15fc0635055d06d4cdcebcbd463b119db1613eb85daa995 | Build: Termux 21:56-22:32 | DBA: 8f6672a -> b7169305 MATCH</div>
-<div>Boot OK: [omqINIT] FNT loaded: {name} [/name] [name] [thanks]{name} | OMQ:[name][/name]{name}[thanks]{name} v6 1840 | Author: Kai</div>
-</footer>
-<script>
-setInterval(()=>{document.getElementById('clock-f').textContent=new Date().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'})+' JST'},1000);
-fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>{document.getElementById('jpip-f').textContent=d.ip}).catch(()=>{document.getElementById('jpip-f').textContent=location.hostname});
-let fh=document.querySelector('footer').innerHTML; fh=fh.replaceAll('{name}','Kai').replaceAll('[thanks]','Thank you ').replaceAll('[name]','').replaceAll('[/name]',''); document.querySelector('footer').innerHTML=fh;
-</script>
-<!-- NEXT LEARNING: Hello World OMQ v6.1 -->
-<div id="hello" style="font-family:OMQ,monospace;background:#001;color:#0f0;padding:15px;margin-top:20px;border:2px dashed #0f0;text-align:center">
-<h2>[thanks]{name} — Hello World</h2>
-<p id="hw">Loading...</p>
-<button onclick="sayHello()" style="background:#0f0;color:#000;padding:8px 16px;font-family:monospace">Say Hello</button>
+
+<div class="book">
+<h2>📚 THE BOOK - Thank you Kai - OMQ Tenure</h2>
+<div id="book-content">
+<pre style="white-space:pre-wrap;text-align:left;font-size:12px;line-height:1.4">
+Thank you Kai -- Tenure Book v6.2
+
+Chapter 1: OMQ Boot
+[name]Kai[/name] BOOT OK
+jp.fieldberry.oeneye.os
+83.135.41.102
+2026/10/10 6:00:00 JST
+
+Chapter 2: Hello World Learning
+Termux >> cat >> index.html
+content://com.termux.files/storage/emulated/0/Download/index.html
+termux-open /sdcard/Download/index.html
+sha256sum 95c1dcec63dfa3f146c206e3b90b1ca36c1e65086256135761e1c733864a87b4 MATCH
+
+Chapter 3: Tenure Artifact
+IMG: 1eac37f688a
+FNT: 4a36bcbd 1840B
+ZIP: 9ddf75F0 13K
+SHA256: 9ddf75f08784f938d15cf063505d06d4dcebdbe4b3b19db1613b8e85daa095
+DBA: 8f6672a -> b7169305
+
+Chapter 4: Git Push + cURL + CHECKSUM
+colegio-san-caio.github.io/demo-repository/
+curl -L -o remote-demo.html
+sha256sum remote-demo.html vs index.html
+Truth Social Cloudflare challenge
+
+Author: Kai
+OMQ v6.2 FINAL 2026/10/10
+Thank you Kai - BOOT OK
+</pre>
 </div>
+<button onclick="downloadBook()">Download Book.txt</button>
+</div>
+
 <script>
 function sayHello(){
-  const name = "Kai";
-  const jp = document.getElementById('jpip-f')?.textContent || "jp.fieldberry.oeneye.os";
-  const jst = new Date().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'});
-  document.getElementById('hw').innerHTML =
-    `Hello World!<br>Thank you ${name}<br>JP: ${jp}<br>JST: ${jst}<br>OMQ: [name]${name}[/name] BOOT OK`;
+ const name="Kai";
+ alert("Hello World! Thank you "+name);
+ document.getElementById('book-content').style.border="1px dashed #0f0";
 }
-// auto run + teach tags
-sayHello();
-let hw = document.getElementById('hello').innerHTML;
-hw = hw.replaceAll('{name}','Kai').replaceAll('[thanks]','Thank you ').replaceAll('[name]','').replaceAll('[/name]','');
-document.getElementById('hello').innerHTML = hw;
-console.log("Next learning: Hello World connected to index.html v6.1 FINAL 9ddf75f0");
+function downloadBook(){
+ const text=document.querySelector('.book pre').innerText;
+ const blob=new Blob([text],{type:'text/plain'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download="ThankYouKai_Book_v6.2_95c1dcec.txt";
+ a.click();
+}
+console.log("OMQ v6.2 + BOOK 95c1dcec BOOT OK");
 </script>
+
+</body>
+</html>
