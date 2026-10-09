@@ -1,5 +1,4 @@
 __pycache__/
 *.db
 *.o
-*.exe
-!holla_proxy.exe
+*.log
