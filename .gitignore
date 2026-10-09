@@ -1,5 +1,5 @@
-# never ignore your content
-!santberk/**
-!*.pdf
-!*.tex
-!*.sty
+__pycache__/
+*.db
+*.o
+*.exe
+!holla_proxy.exe
