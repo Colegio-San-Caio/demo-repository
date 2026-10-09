@@ -3,3 +3,6 @@
 !*.pdf
 !*.tex
 !*.sty
+__pycache__/
+*.db
+*.pyc
