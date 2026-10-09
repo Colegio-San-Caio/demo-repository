@@ -1,29 +1,15 @@
-name: Deploy MOSFETQexchange
-on: { push: { branches: [main] }, workflow_dispatch: }
-permissions: { contents: read, pages: write, id-token: write }
+name: pages
+on: push
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build PDF via oeneyepdf.c — no FITZ no FPDF
-        env: { FAX_NAME: "oeneye.c + oeneyepdf.c" }
-        run: |
-          chmod +x xtex.sh oeneyepdf.c || true
-         ./xtex.sh
-          ls -lh MOSFETQexchange/output/
       - uses: actions/configure-pages@v5
-      - run: |
-          mkdir -p _site/MOSFETQexchange/output
-          cp MOSFETQexchange/output/*.pdf _site/MOSFETQexchange/output/ 2>/dev/null || true
-          cp *.pdf _site/ 2>/dev/null || true
-          echo "<h1>FAX by oeneye.c + oeneyepdf.c - no FITZ no FPDF - PL:36883</h1><a href='MOSFETQexchange/output/jc_sigma.pdf'>jc_sigma.pdf</a>" > _site/index.html
       - uses: actions/upload-pages-artifact@v3
-        with: { path: _site }
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment: { name: github-pages, url: ${{ steps.deployment.outputs.page_url }} }
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+        with: { path: '.' }
+      - uses: actions/deploy-pages@v4
