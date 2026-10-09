@@ -1,19 +1,6 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OENEYEbluh — No Date + Clock + Catalog</title>
-<style>body{background:#050a14;color:#8fc8ff;font-family:monospace;margin:0;padding:0}a{color:#0ff}header{background:#000;border-bottom:2px solid #0af;padding:12px;text-align:center}#book{display:flex;flex-wrap:wrap;gap:15px;padding:15px;background:#081020;border:1px solid #0af;margin:15px}#book img{max-width:300px;border:2px solid #0af}#gallery{display:flex;gap:8px;flex-wrap:wrap;padding:10px 15px}#gallery img{height:140px;border:1px solid #0af}#engine{margin:15px;border:1px solid #0f0;padding:10px;color:#0f0;background:#000}#footer{margin:20px 15px 0 15px;border-top:1px solid #0af;padding:10px;color:#a0c0ff;font-size:11px;text-align:center;background:#000}#minimum-box{margin:0 15px 15px 15px;border:1px dashed #0af;background:#001020;padding:10px;color:#8cf;font-size:11px}#chatlog{height:100px;overflow:auto;background:#000;border:1px solid #0a3;padding:5px;color:#0f0}#chatinput{width:60%;background:#000;color:#0ff;border:1px solid #0af;padding:5px}button{background:#002040;color:#0ff;border:1px solid #0af;padding:5px 8px}.tartan{height:18px;background:repeating-linear-gradient(90deg,#0af 0 10px,#003060 10px 20px,#05f 20px 30px);margin:8px 0}</style></head><body>
-<header><h2 style="color:#4af;margin:0">OENEYEbluh (0)b — Q2 — No Date + Clock + Catalog</h2><p id=liveclock>00:00:00</p><div class=tartan></div>
-<p><a href="candiOQM_clock.html?ts=1791450798">CLOCK</a> | <a href="catalog_macro.html?ts=1791450798">CATALOG MACRO — Ostpreußen-russe-Gakushūjo — Pages/Jobs/Lectures</a></p></header>
-<div id=book><img src="assets/mosfetq-cover.jpeg" onerror="this.src='assets/og-preview.jpg'"><div><h3>Full + No Date</h3><p>2026-10-08T09:13:18Z 24 arts</p><p>© Colegio-San-Caio / Julia_Menge_eigenOENEYE / OENEYEbluh — (0)b — Evergreen / No Date — Ostpreußen-russe-Gakushūjo Further Education College</p></div></div>
-<div id=gallery><img src="assets/mosfetq-cover.jpeg"><img src="assets/og-preview.jpg"></div>
-<div id=engine>xTitin_(n+1)=Ŵ(xTitin_n)+A — 2026-10-08T09:13:18Z — Clock Linked — Catalog Macro Active</div>
-<div id=footer>© Colegio-San-Caio / Julia_Menge_eigenOENEYE / OENEYEbluh — (0)b — Evergreen / No Date — Ostpreußen-russe-Gakushūjo Further Education College — Connected: Engine↔Clock↔Catalog</div>
-<div id=minimum-box><b>MINIMUM BOX — ENGINE CHAT (0)b</b><div id=chatlog></div><input id=chatinput placeholder="chat"><button onclick="sendChat()">SEND</button></div>
-<script>
-setInterval(()=>{document.getElementById('liveclock').textContent=new Date().toISOString().slice(11,19)+" xTitin("+Math.floor(Date.now()/1000)+") (0)b"},1000);
-const bus=new BroadcastChannel("oeneye-bluh-chat"); const log=document.getElementById('chatlog');
-function addLine(r,m,ts){const d=document.createElement('div'); d.textContent="["+new Date(ts).toISOString().slice(11,19)+"] "+r+": "+m; log.appendChild(d); log.scrollTop=log.scrollHeight;}
-function load(){try{return JSON.parse(localStorage.getItem('oeneye_chat')||"[]")}catch(e){return[]}} function save(a){localStorage.setItem('oeneye_chat',JSON.stringify(a.slice(-100)))}
-let hist=load(); hist.forEach(h=>addLine(h.role,h.msg,h.ts));
-window.postChat=function(r,m){const item={role:r,msg:m,ts:Date.now()}; hist.push(item); save(hist); addLine(item.role,item.msg,item.ts); bus.postMessage(item); return item;}
-function sendChat(){const i=document.getElementById('chatinput'); if(!i.value.trim())return; window.postChat('ENGINE',i.value.trim()); i.value="";}
-bus.onmessage=e=>{hist.push(e.data); save(hist); addLine(e.data.role,e.data.msg,e.data.ts);};
-</script></body></html>
+<!doctype html>
+<html><body style="background:#121212;color:white;padding:20px">
+<h1>Page 3 Black - size_t 3</h1>
+<p>QUBITS 24..31</p>
+<footer>Evergreen / No Date - size_t 0</footer>
+</body></html>

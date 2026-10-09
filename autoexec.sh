@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
+# find: echo "autoexec done - $(date -u +%...)
+# change to:
+echo "autoexec done - (0)b - Evergreen / No Date - AI bluh ON - No date solved"
+Ctrl+O, Enter, Ctrl+X#!/usr/bin/env bash
 # autoexec '(0)b — AH 9 jc 0a — Evergreen / No Date
 # (0)b = zero-byte evergreen token
 # 09 = TAB, 0a = LF, jc = Julia_Caio eigenOENEYE
@@ -17,4 +20,4 @@ fi
 # boot bluh loops if not running
 pgrep -f _bluh_view_loop.sh >/dev/null || ./_bluh_view_loop.sh &
 
-echo "autoexec done — $(date -u +%FT%TZ) — $TOKEN — 42d9b7c — 37757322285"
+echo "autoexec done - (0)b - Evergreen / No Date - AI bluh ON - No date solved"
