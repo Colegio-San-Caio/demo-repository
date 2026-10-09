@@ -1,15 +1,6 @@
-<!doctype html><html><head><meta charset="utf-8"><title>CLOCK — No Date — Linked</title><style>body{background:#000;color:#0f0;font-family:monospace;padding:15px;text-align:center}#clock{font-size:42px;color:#0ff;border:2px solid #0af;padding:15px;margin:15px;background:#001020}#footer{border-top:1px solid #0af;padding:10px;color:#a0c0ff;font-size:11px;background:#000;margin-top:20px}#minimum-box{border:1px dashed #0af;background:#001020;padding:10px;color:#8cf;text-align:left;margin:15px}#chatlog{height:80px;overflow:auto;background:#000;border:1px solid #0a3;padding:5px;color:#0f0}#chatinput{width:60%;background:#000;color:#0ff;border:1px solid #0af;padding:5px}button{background:#002040;color:#0ff;border:1px solid #0af;padding:5px}a{color:#0ff}</style></head><body>
-<h2>CLOCK xTitin(t) — (0)b — No Date</h2><div id=clock>00:00:00</div>
-<p><a href="candiOQM_xTitin.html?ts=1791450798">ENGINE</a> | <a href="catalog_macro.html?ts=1791450798">CATALOG MACRO</a></p>
-<div id=footer>© Colegio-San-Caio / Julia_Menge_eigenOENEYE / OENEYEbluh — (0)b — Evergreen / No Date — Ostpreußen-russe-Gakushūjo Further Education College — Clock Linked to Engine + Catalog</div>
-<div id=minimum-box><b>MINIMUM BOX — CLOCK CHAT</b><div id=chatlog></div><input id=chatinput placeholder="clock chat"><button onclick="sendChat()">SEND</button></div>
-<script>
-setInterval(()=>{document.getElementById('clock').textContent=new Date().toISOString().slice(11,19)+" — xTitin("+Math.floor(Date.now()/1000)+")"},1000);
-const bus=new BroadcastChannel("oeneye-bluh-chat"); const log=document.getElementById('chatlog');
-function addLine(r,m,ts){const d=document.createElement('div'); d.textContent="["+new Date(ts).toISOString().slice(11,19)+"] "+r+": "+m; log.appendChild(d); log.scrollTop=log.scrollHeight;}
-function load(){try{return JSON.parse(localStorage.getItem('oeneye_chat')||"[]")}catch(e){return[]}} function save(a){localStorage.setItem('oeneye_chat',JSON.stringify(a.slice(-100)))}
-let hist=load(); hist.forEach(h=>addLine(h.role,h.msg,h.ts));
-window.postChat=function(r,m){const item={role:r,msg:m,ts:Date.now()}; hist.push(item); save(hist); addLine(item.role,item.msg,item.ts); bus.postMessage(item); return item;}
-function sendChat(){const i=document.getElementById('chatinput'); if(!i.value.trim())return; window.postChat('CLOCK',i.value.trim()); i.value="";}
-bus.onmessage=e=>{hist.push(e.data); save(hist); addLine(e.data.role,e.data.msg,e.data.ts);};
-</script></body></html>
+<!doctype html>
+<html><body style="background:black;color:#0ff;padding:20px;font-family:monospace">
+<h1>Page 4 BLACK BLACK - size_t 4</h1>
+<p>QUBITS 32..39 - QUBIT_GLOBAL_ADDR(4,0)=32</p>
+<footer>Evergreen / No Date - size_t 0 base</footer>
+</body></html>
