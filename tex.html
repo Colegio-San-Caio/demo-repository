@@ -50,13 +50,13 @@ function showTab(t){
 }
 function renderHTML(){
  const div=document.getElementById('htmlView');
- div.innerHTML = '<h1>TeX source, math rendered</h1><div style="white-space:pre-wrap;line-height:1.7">'removed-phone
+ div.innerHTML = '<h1>TeX source, math rendered</h1><div style="white-space:pre-wrap;line-height:1.7">'removed
  renderMathInElement(div,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
 }
-fetch('main.tex?v='removed-phone
+fetch('main.tex?v='removed
  if(t.includes('Page not found') || t.includes('<!DOCTYPE html>')){
-   document.getElementById('texView').textContent='ERROR: main.tex not found on Pages. Push it:\n\ncp /tmp/book/*.tex main.tex\n git add main.tex\n git push';
-   return;
+  document.getElementById('texView').textContent='ERROR: main.tex not found on Pages. Push it:\n\ncp /tmp/book/*.tex main.tex\n git add main.tex\n git push';
+  return;
  }
  texContent=t;
  document.getElementById('texView').textContent=t;

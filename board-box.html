@@ -11,9 +11,9 @@ a{color:#58a6ff}
 fetch('discussions/index.json').then(r=>r.json()).then(async files=>{
  let h='';
  for(let f of files){
-  let t=await fetch(f).then(r=>r.text());
-  let title=t.split('\n')[0].replace('#','').trim();
-  hremoved-phone
+ let t=await fetch(f).then(r=>r.text());
+ let title=t.split('\n')[0].replace('#','').trim();
+ hremoved
  }
  document.getElementById('list').innerHTML=h;
 });

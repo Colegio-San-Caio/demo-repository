@@ -1,6 +1,6 @@
 # Change:
 \@body
-# removed-phone
+#
 # PRIVATE SEALED ADDRESS - 7619efe
 
 git add -A
@@ -20,23 +20,23 @@ h1{border-bottom:1px solid #30363d;padding-bottom:8px}
 <div id="index">Loading own index...</div>
 <script>
 async function buildIndex(){
-  let res = await fetch('discussions/index.json').catch(()=>null);
-  let files = res && res.ok? await res.json() : [];
-  if(!files.length){
-    // fallback: list what we know removed-phone
-    files = ['discussions/001-welcome.md','discussions/1791356915-wikipedia-namespace.md'];
-    try{
-      let api = await fetch('https://api.github.com/repos/Colegio-San-Caio/demo-repository/contents/discussions').then(r=>r.json());
-      if(Array.isArray(api)) files = api.filter(f=>f.name.endsWith('.md')).map(f=>'discussions/'removed-phone
-    }catch(e){}
-  }
-  let html='';
-  for(let f of files){
-    let t = await fetch(f).then(r=>r.text()).catch(()=>'(gist not deployed yet)');
-    let title = (t.match(/^# (.*)/)||[,'Untitled'])[1];
-    htmlremoved-phone
-  }
-  document.getElementById('index').innerHTML=html;
+ let res = await fetch('discussions/index.json').catch(()=>null);
+ let files = res && res.ok? await res.json() : [];
+ if(!files.length){
+  // fallback: list what we know
+  files = ['discussions/001-welcome.md','discussions/1791356915-wikipedia-namespace.md'];
+  try{
+   let api = await fetch('https://api.github.com/repos/Colegio-San-Caio/demo-repository/contents/discussions').then(r=>r.json());
+   if(Array.isArray(api)) files = api.filter(f=>f.name.endsWith('.md')).map(f=>'discussions/'removed
+  }catch(e){}
+ }
+ let html='';
+ for(let f of files){
+  let t = await fetch(f).then(r=>r.text()).catch(()=>'(gist not deployed yet)');
+  let title = (t.match(/^# (.*)/)||[,'Untitled'])[1];
+  htmlremoved
+ }
+ document.getElementById('index').innerHTML=html;
 }
 buildIndex();
 </script>
