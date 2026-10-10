@@ -45,7 +45,7 @@ def trigger_random_fuzz_pipeline():
                     },
                     "counterparty_alias": {
                         "type": "EMAIL",
-removed@example.com
+\@body
                         "display_name": selected_entity
                     }
                 }

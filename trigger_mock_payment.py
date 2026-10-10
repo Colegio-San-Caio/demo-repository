@@ -28,7 +28,7 @@ def fire_simulated_payment():
                     },
                     "counterparty_alias": {
                         "type": "EMAIL",
-removed@example.com
+\@body
                         "display_name": "SIETEHR FOUNDATION (Fulfillment Office)"
                     }
                 }

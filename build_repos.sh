@@ -14,7 +14,7 @@ list() {
       case " $EXCLUDE " in *" $name "*) continue ;; esac
       printf '<h4><a href="%s">%s</a></h4>\n' "$url" "$name"
       [ -n "$desc" ] && printf '<p class="small">%s</p>\n' "$(printf '%s' "$desc" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g')"
-removed@example.com
+\@body
       if [ -n "$rel" ]; then printf '<ul>\n%s\n</ul>\n' "$rel"; else echo '<p class="small">No releases yet.</p>'; fi
     done
 }

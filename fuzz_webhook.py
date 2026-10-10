@@ -41,7 +41,7 @@ def trigger_random_fuzzing():
                     },
                     "counterparty_alias": {
                         "type": "EMAIL",
-removed@example.com
+\@body
                         "display_name": selected_name
                     }
                 }

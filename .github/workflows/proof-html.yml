@@ -10,7 +10,7 @@ jobs:
           python-version: '3.11'
       - run: python3 compile_fuzz_report.py && cat fuzz_check.csv
       - run: rm -rf MOSFETQexchange/output
-removed@example.com
+\@body
         with:
           directory: ./
           check_favicon: false

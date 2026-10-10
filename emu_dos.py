@@ -53,7 +53,7 @@ def load_rc():
         with open("oeneye.rc", "r") as f:
             for line in f:
                 line = line.strip()
-removed@example.com
+\@body
                     print(f"C> {line}")
         print(f"[BOOT] {SYSTEM_NAME} initialized with AGI Token: {AGI_TOKEN}\n")
 
