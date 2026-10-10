@@ -13,3 +13,4 @@ __pycache__/
 cookies*
 termux.db
 .env
+response.*
