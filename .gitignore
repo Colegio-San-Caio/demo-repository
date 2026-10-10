@@ -1,8 +1,6 @@
-# never ignore your content
-!santberk/**
-!*.pdf
-!*.tex
-!*.sty
-__pycache__/
-*.db
-*.pyc
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+.env
+*.key
