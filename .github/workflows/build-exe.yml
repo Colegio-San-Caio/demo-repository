@@ -1,0 +1,48 @@
+name: Build holla_proxy.exe .oeneye .onion
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install pyinstaller
+
+      - run: pyinstaller --onefile --name holla_proxy --icon=NONE holla_proxy.py
+
+      - shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist-release
+
+          Copy-Item dist/holla_proxy.exe dist-release/holla_proxy.exe
+
+          if (Test-Path "ns_HOLLA_Collection.pdf") {
+            Copy-Item ns_HOLLA_Collection.pdf dist-release
+          }
+
+          if (Test-Path "index.html") {
+            Copy-Item index.html dist-release
+          }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: holla_proxy-exe
+          path: dist-release/
+
+      - uses: softprops/action-gh-release@v1
+        if: github.ref == 'refs/heads/main'
+        with:
+          tag_name: v14-exe-${{ github.run_number }}
+          files: dist/holla_proxy.exe
+          body: |
+            OENEYE ONION EXE
+            OENEYE: holla.oeneye:8080
