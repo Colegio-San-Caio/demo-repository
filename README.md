@@ -76,3 +76,4 @@ This ledger records the programmatic evolution of the **MOSFETQ** ecosystem, tra
 ### [v1.0.0] — 2026-10-08
 #### 🚀 Added
 - **Initial Baseline Core**: Generated foundational OpenSSL private/public key pairs and verified unauthenticated public sandbox user person allocations.
+gpg verified
