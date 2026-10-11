@@ -1,4 +1,9 @@
-org 0x0
+# paste the INPUT DRIVER code INSIDE nano
+# CTRL + O, Enter, CTRL + X
+
+nasm -f bin stage2.asm -o stage2.bin
+cat boot.bin stage2.bin payload.bin > oeneyeOS.img
+ls -lh oeneyeOS.imgorg 0x0
 bits 16
 start:
 mov ax,3
