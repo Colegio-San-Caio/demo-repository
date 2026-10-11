@@ -5,7 +5,7 @@ start:
  mov ds,ax
  mov es,ax
  mov di,0x9000
- mov cx,512
+ mov cx,800
  xor al,al
  rep stosb
  mov ax,3
@@ -43,6 +43,16 @@ shell_loop:
  call cmp_str
  test ax,ax
  jz is_echo
+ mov si,token
+ mov di,c_rm
+ call cmp_str
+ test ax,ax
+ jz is_rm
+ mov si,token
+ mov di,c_help
+ call cmp_str
+ test ax,ax
+ jz is_help
  mov si,msg_bad
  call print
  jmp shell_loop
@@ -56,6 +66,10 @@ is_touch: call do_touch
 is_cat: call do_cat
  jmp shell_loop
 is_echo: call do_echo
+ jmp shell_loop
+is_rm: call do_rm
+ jmp shell_loop
+is_help: call do_help
  jmp shell_loop
 make_token:
  mov si,buffer
@@ -76,6 +90,8 @@ do_ls:
  mov cl,[bx]
  cmp cl,0
  je ls_empty
+ mov si,msg_list
+ call print
  mov bx,0x9000
  add bx,1
 ls_lp: cmp byte [bx],0
@@ -84,7 +100,7 @@ ls_lp: cmp byte [bx],0
  call print
  mov si,nl
  call print
- add bx,32
+ add bx,64
  dec cl
  jnz ls_lp
 ls_end: ret
@@ -92,10 +108,13 @@ ls_empty: mov si,msg_empty
  call print
  ret
 do_touch:
- ; arg = rest of buffer after token
  call get_arg
  cmp byte [si],0
  je t_noarg
+ mov di,si
+ call find_file
+ cmp bx,0
+ jne t_exists
  mov bx,0x9000
  mov al,[bx]
  cmp al,10
@@ -103,14 +122,14 @@ do_touch:
  inc byte [bx]
  xor ah,ah
  mov cl,al
- mov al,32
+ mov al,64
  mul cl
  mov bx,0x9000
  add bx,1
  add bx,ax
- ; si = arg filename
+ mov si,di
  mov di,bx
- mov cx,12
+ mov cx,15
 cp1: lodsb
  cmp al,0
  je z1
@@ -124,6 +143,9 @@ z1: mov byte [di],0
  mov si,bx
  call print
  mov si,nl
+ call print
+ ret
+t_exists: mov si,msg_exists
  call print
  ret
 t_noarg: mov si,msg_usage
@@ -149,11 +171,48 @@ do_cat:
 cat_nf: mov si,msg_nf
  call print
  ret
+do_rm:
+ call get_arg
+ cmp byte [si],0
+ je t_noarg
+ mov di,si
+ call find_file
+ cmp bx,0
+ je cat_nf
+ ; replace with last file
+ mov si,bx
+ mov dx,bx
+ mov bx,0x9000
+ mov al,[bx]
+ dec al
+ mov cl,al
+ mov al,64
+ mul cl
+ mov bx,0x9000
+ add bx,1
+ add bx,ax
+ ; bx = last entry, dx = to delete
+ cmp dx,bx
+ je del_last
+ ; copy last to del slot
+ mov si,bx
+ mov di,dx
+ mov cx,64
+ rep movsb
+del_last:
+ ; zero last
+ mov di,bx
+ mov cx,64
+ xor al,al
+ rep stosb
+ mov bx,0x9000
+ dec byte [bx]
+ mov si,msg_del
+ call print
+ ret
 do_echo:
- ; check for > in buffer
  mov si,buffer
  mov cx,64
- mov di,0
 fg: lodsb
  cmp al,0
  je echo_print
@@ -168,21 +227,10 @@ echo_print:
  call print
  ret
 got_gt2:
- ; si points after >, di is file?
  mov di,si
  call skip_sp_si
  push di
- ; content is between after echo and >
- mov si,buffer
- call skip_sp_si
- add si,5
- call skip_sp_si
- ; now si = content start, need to trim before >
- mov bx,0x9000
- ; find or create file from di
  mov si,di
- call skip_sp_si
- mov di,si
  call find_file
  cmp bx,0
  jne have_f3
@@ -193,14 +241,14 @@ got_gt2:
  inc byte [bx]
  xor ah,ah
  mov cl,al
- mov al,32
+ mov al,64
  mul cl
  mov bx,0x9000
  add bx,1
  add bx,ax
  mov si,di
  mov di,bx
- mov cx,12
+ mov cx,15
 cpn3: lodsb
  cmp al,0
  je zn3
@@ -211,14 +259,13 @@ cpn3: lodsb
 zn3: mov byte [di],0
 have_f3:
  pop si
- ; si was content, but we lost it, reconstruct
  mov si,buffer
  call skip_sp_si
  add si,5
  call skip_sp_si
  mov di,bx
  add di,16
- mov cx,16
+ mov cx,48
 ecp3: lodsb
  cmp al,'>'
  je ecz3
@@ -230,11 +277,13 @@ ecz3: mov byte [di],0
  mov si,msg_wrote
  call print
  ret
+do_help:
+ mov si,msg_help
+ call print
+ ret
 get_arg:
- ; returns si = start of arg after first word in buffer
  mov si,buffer
  call skip_sp_si
- ; skip first word
 ga1: lodsb
  cmp al,0
  je ga_e
@@ -266,7 +315,7 @@ ff_l3: push cx
  pop di
  pop cx
  je ff_f3
- add bx,32
+ add bx,64
  dec cl
  jnz ff_l3
 ff_nf3: xor bx,bx
@@ -349,21 +398,27 @@ rl_done: mov byte [di],0
  mov si,nl
  call print
  ret
-welcome db "oeneyeOS Aurum Shell v1.4.2",13,10,"ls touch cat echo clear",13,10,0
+welcome db "oeneyeOS Aurum Shell v1.5.1",13,10,"type help",13,10,0
 prompt db "> ",0
 nl db 13,10,0
-msg_bad db "?: ls touch cat echo clear",13,10,0
+msg_bad db "?: type help",13,10,0
 msg_empty db "(empty)",13,10,0
-msg_full db "full",13,10,0
+msg_full db "full (max 10)",13,10,0
 msg_ok db "created: ",0
 msg_nf db "not found",13,10,0
 msg_wrote db "written",13,10,0
 msg_usage db "usage: touch <name>",13,10,0
+msg_exists db "exists",13,10,0
+msg_del db "deleted",13,10,0
+msg_list db "files:",13,10,0
+msg_help db "cmds: ls touch <f> cat <f>",13,10," echo <t> > <f> rm <f> clear help",13,10,0
 c_ls db "ls",0
 c_clear db "clear",0
 c_touch db "touch",0
 c_cat db "cat",0
 c_echo db "echo",0
+c_rm db "rm",0
+c_help db "help",0
 token times 16 db 0
 buffer times 64 db 0
 times 2048-($-$$) db 0
