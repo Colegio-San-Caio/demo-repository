@@ -1,26 +1,7 @@
-# CLEVJH© - MASTER OWNER
-## wsnN Group® | FieldberryGruppe™ | oeneye OS™ | EVERGREEN®
-
-![CLEVJH](CLEVJH_master_badge.png)
-![VERIFIED](shield_verified.png)
-![EVERGREEN](shield_evergreen.png)
-
-**CLEVJH© - All on: CLEVJH©**
-**Boot:** AH 0hE JC 0a (0)b - Legacy fe JC 0a (0)b
-**VERIFIED:** 7619efe420a29fbf0ba8f44f973b71d35bfa0d3769579381ae521d3b9b2a0026
-
-Local == Remote - SECURE BOOT PASSED - EVERGREEN®
-
-### Deployments
-- TFT: https://an-caio.github.io - VERIFIED LIVE
-- Tube: https://gio-san-caio.github.io - VERIFIED LIVE
-
-### Legal
-{DUERUEM} pro bono - Kleistpark FU Berlin - SCOTUS Chamberlain... Holloway
-
-### Owner Chain
-CLEVJH© © - wsnN Group® - FieldberryGruppe™ - oeneye OS™ - EVERGREEN®
-令和8年 (2026) - All Rights Reserved
-
-### Status
-v7.2 GENUINE VERIFIED - No Date Solved - DUAL VERIFIED
+# oeneyeOS v1.0 - FTP Active
+BUS Init B C X OK
+FTP Server [21] OK - holla.oeneye:2121 ONION
+ONION: hj2i6zughoj7nwejbsnxv44nhsylof52oshwac3ywgapep3vcyenb2ad.onion:2121
+Login oeneye / oeneye
+Files: file.tif, c.img, x.img, oeneyeOS.img
+Evergreen by JP DEV READY
