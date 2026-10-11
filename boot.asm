@@ -38,23 +38,14 @@ call pr
 mov si,s13
 call pr
 mov cx,16
-.dl: mov al,'.'
+.dot: mov al,'.'
 mov ah,0x0E
 mov bx,7
 int 0x10
-mov cx,2
+push cx
+mov cx,1
 call del
-mov cx,16
-; reuse loop via dec trick
-dec cx
-cmp cx,0
-jne .dl
-; actually do dots simple
-mov cx,16
-.dot: mov al,'.'
-mov ah,0x0E
-int 0x10
-call d1
+pop cx
 loop .dot
 mov si,cr
 call pr
@@ -63,6 +54,8 @@ call pr
 mov si,s15
 call pr
 mov si,s16
+call pr
+mov si,s17
 call pr
 jmp $
 pr: lodsb
@@ -76,7 +69,7 @@ jmp pr
 del: push ax
 push dx
 xor ax,ax
-a: mov dx,0xCFFF
+a: mov dx,0x0FFF
 b: dec dx
 jnz b
 dec ax
@@ -84,16 +77,11 @@ jnz a
 pop dx
 pop ax
 ret
-d1: push cx
-mov cx,1
-call del
-pop cx
-ret
 s0: db "oeneyeOS v1.0",13,10,0
 s1: db "BUS OK",13,10,0
 s2: db "FTP holla.oeneye:2121",13,10,0
-s3: db "hj2i6zughoj7nwejbsnxv44nhsy",13,10,0
-s4: db "lof52oshwac3ywgapep3vcyenb2ad",13,10,0
+s3: db "hj2i6zughoj7nwejbsnxv44nhsylof52o",13,10,0
+s4: db "shwac3ywgapep3vcyenb2ad.onion",13,10,0
 s5: db "CONNECT Tor 9050",13,10,0
 s6: db "USER oeneye",13,10,0
 s7: db "331 OK",13,10,0
@@ -106,6 +94,7 @@ s13: db "150 1024b ",0
 s14: db "226 OK",13,10,0
 s15: db "TIF Loaded",13,10,0
 s16: db "Level8 CLIENT READY",13,10,0
+s17: db "Hello, world",13,10,0
 cr: db 13,10,0
 times 510-($-$$) db 0
 dw 0xAA55
