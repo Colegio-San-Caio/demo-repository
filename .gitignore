@@ -2,3 +2,5 @@ payload.bin
 stage2.bin
 *.tif
 *.bin
+response.json
+*.img
