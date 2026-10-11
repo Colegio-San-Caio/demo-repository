@@ -12,7 +12,6 @@ mov ax,3
 int 0x10
 mov si,s0
 call pr
-; load file.tif (sectors 2-6) -> 0x8000
 mov ax,0x800
 mov es,ax
 xor bx,bx
@@ -28,18 +27,15 @@ mov si,s1
 call pr
 mov ax,0x0013
 int 0x10
-; draw 1024 bytes as 32x32
 mov ax,0x800
 mov ds,ax
 xor si,si
 mov ax,0xA000
 mov es,ax
 mov dx,84
-.ly:
-mov cx,144
+ly: mov cx,144
 mov bx,32
-.lx:
-lodsb
+lx: lodsb
 add al,16
 mov di,dx
 imul di,320
@@ -47,10 +43,10 @@ add di,cx
 mov [es:di],al
 inc cx
 dec bx
-jnz.lx
+jnz lx
 inc dx
 cmp dx,116
-jb.ly
+jb ly
 xor ah,ah
 int 0x16
 mov ax,3
@@ -65,12 +61,12 @@ call pr
 jmp $
 pr: lodsb
 or al,al
-jz.r
+jz pr_ret
 mov ah,0x0E
 mov bx,7
 int 0x10
 jmp pr
-.r: ret
+pr_ret: ret
 drv: db 0
 s0: db "oeneyeOS v1.0 Level9",13,10,0
 s1: db "TIF 0x8000 1024b OK Mode13h",13,10,0
