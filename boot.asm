@@ -12,11 +12,12 @@ mov ax,3
 int 0x10
 mov si,s0
 call pr
+; load 20 sectors (10KB) for Stage2 + TIF
 mov ax,0x800
 mov es,ax
 xor bx,bx
 mov ah,2
-mov al,5
+mov al,20
 mov ch,0
 mov cl,2
 mov dh,0
@@ -25,37 +26,7 @@ int 0x13
 jc err
 mov si,s1
 call pr
-mov ax,0x0013
-int 0x10
-mov ax,0x800
-mov ds,ax
-xor si,si
-mov ax,0xA000
-mov es,ax
-mov dx,84
-ly: mov cx,144
-mov bx,32
-lx: lodsb
-add al,16
-mov di,dx
-imul di,320
-add di,cx
-mov [es:di],al
-inc cx
-dec bx
-jnz lx
-inc dx
-cmp dx,116
-jb ly
-xor ah,ah
-int 0x16
-mov ax,3
-int 0x10
-mov si,s2
-call pr
-mov si,s3
-call pr
-jmp $
+jmp 0x800:0x0
 err: mov si,e0
 call pr
 jmp $
@@ -68,10 +39,8 @@ int 0x10
 jmp pr
 pr_ret: ret
 drv: db 0
-s0: db "oeneyeOS v1.0 Level9",13,10,0
-s1: db "TIF 0x8000 1024b OK Mode13h",13,10,0
-s2: db "Level9 GFX OK",13,10,0
-s3: db "Hello, world GFX",13,10,0
+s0: db "oeneyeOS v1.0 Level10",13,10,0
+s1: db "Load 0x8000 10KB OK -> Stage2",13,10,0
 e0: db "DISK ERR",13,10,0
 times 510-($-$$) db 0
 dw 0xAA55
