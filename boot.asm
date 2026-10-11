@@ -7,94 +7,75 @@ mov es,ax
 mov ss,ax
 mov sp,0x7C00
 sti
+mov [drv],dl
 mov ax,3
 int 0x10
 mov si,s0
 call pr
+; load file.tif (sectors 2-6) -> 0x8000
+mov ax,0x800
+mov es,ax
+xor bx,bx
+mov ah,2
+mov al,5
+mov ch,0
+mov cl,2
+mov dh,0
+mov dl,[drv]
+int 0x13
+jc err
 mov si,s1
 call pr
+mov ax,0x0013
+int 0x10
+; draw 1024 bytes as 32x32
+mov ax,0x800
+mov ds,ax
+xor si,si
+mov ax,0xA000
+mov es,ax
+mov dx,84
+.ly:
+mov cx,144
+mov bx,32
+.lx:
+lodsb
+add al,16
+mov di,dx
+imul di,320
+add di,cx
+mov [es:di],al
+inc cx
+dec bx
+jnz.lx
+inc dx
+cmp dx,116
+jb.ly
+xor ah,ah
+int 0x16
+mov ax,3
+int 0x10
 mov si,s2
 call pr
 mov si,s3
 call pr
-mov si,s4
-call pr
-mov si,s5
-call pr
-mov si,s6
-call pr
-mov si,s7
-call pr
-mov si,s8
-call pr
-mov si,s9
-call pr
-mov si,s10
-call pr
-mov si,s11
-call pr
-mov si,s12
-call pr
-mov si,s13
-call pr
-mov cx,16
-.dot: mov al,'.'
-mov ah,0x0E
-mov bx,7
-int 0x10
-push cx
-mov cx,1
-call del
-pop cx
-loop .dot
-mov si,cr
-call pr
-mov si,s14
-call pr
-mov si,s15
-call pr
-mov si,s16
-call pr
-mov si,s17
+jmp $
+err: mov si,e0
 call pr
 jmp $
 pr: lodsb
 or al,al
-jz .r
+jz.r
 mov ah,0x0E
 mov bx,7
 int 0x10
 jmp pr
 .r: ret
-del: push ax
-push dx
-xor ax,ax
-a: mov dx,0x0FFF
-b: dec dx
-jnz b
-dec ax
-jnz a
-pop dx
-pop ax
-ret
-s0: db "oeneyeOS v1.0",13,10,0
-s1: db "BUS OK",13,10,0
-s2: db "FTP holla.oeneye:2121",13,10,0
-s3: db "hj2i6zughoj7nwejbsnxv44nhsylof52o",13,10,0
-s4: db "shwac3ywgapep3vcyenb2ad.onion",13,10,0
-s5: db "CONNECT Tor 9050",13,10,0
-s6: db "USER oeneye",13,10,0
-s7: db "331 OK",13,10,0
-s8: db "PASS oeneye",13,10,0
-s9: db "230 OK",13,10,0
-s10: db "PASV 30000",13,10,0
-s11: db "227 OK",13,10,0
-s12: db "RETR file.tif",13,10,0
-s13: db "150 1024b ",0
-s14: db "226 OK",13,10,0
-s15: db "TIF Loaded",13,10,0
-s16: db "Level8 CLIENT READY",13,10,0
-s17: db "Hello, world",13,10,0
-cr: db 13,10,0
+drv: db 0
+s0: db "oeneyeOS v1.0 Level9",13,10,0
+s1: db "TIF 0x8000 1024b OK Mode13h",13,10,0
+s2: db "Level9 GFX OK",13,10,0
+s3: db "Hello, world GFX",13,10,0
+e0: db "DISK ERR",13,10,0
 times 510-($-$$) db 0
 dw 0xAA55
