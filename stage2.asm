@@ -4,6 +4,10 @@ start:
  xor ax,ax
  mov ds,ax
  mov es,ax
+ mov di,0x9000
+ mov cx,512
+ xor al,al
+ rep stosb
  mov ax,3
  int 0x10
  mov si,welcome
@@ -13,31 +17,60 @@ shell_loop:
  call print
  mov di,buffer
  call read_line
- mov si,buffer
+ call make_token
+ mov si,token
  mov di,c_ls
  call cmp_str
- je is_ls
- mov si,buffer
+ test ax,ax
+ jz is_ls
+ mov si,token
  mov di,c_clear
  call cmp_str
- je is_clear
- mov si,buffer
+ test ax,ax
+ jz is_clear
+ mov si,token
  mov di,c_touch
- call cmp_pre
- je is_touch
+ call cmp_str
+ test ax,ax
+ jz is_touch
+ mov si,token
+ mov di,c_cat
+ call cmp_str
+ test ax,ax
+ jz is_cat
+ mov si,token
+ mov di,c_echo
+ call cmp_str
+ test ax,ax
+ jz is_echo
  mov si,msg_bad
  call print
  jmp shell_loop
-is_ls:
- call do_ls
+is_ls: call do_ls
  jmp shell_loop
-is_clear:
- mov ax,3
+is_clear: mov ax,3
  int 0x10
  jmp shell_loop
-is_touch:
- call do_touch
+is_touch: call do_touch
  jmp shell_loop
+is_cat: call do_cat
+ jmp shell_loop
+is_echo: call do_echo
+ jmp shell_loop
+make_token:
+ mov si,buffer
+ call skip_sp_si
+ mov di,token
+ mov cx,16
+mt_l: lodsb
+ cmp al,0
+ je mt_e
+ cmp al,32
+ je mt_e
+ stosb
+ loop mt_l
+mt_e: mov byte [di],0
+ ret
 do_ls:
  mov bx,0x9000
  mov cl,[bx]
@@ -45,22 +78,24 @@ do_ls:
  je ls_empty
  mov bx,0x9000
  add bx,1
-ls_loop:
- cmp byte [bx],0
+ls_lp: cmp byte [bx],0
  je ls_end
  mov si,bx
  call print
  mov si,nl
  call print
- add bx,20
+ add bx,32
  dec cl
- jnz ls_loop
+ jnz ls_lp
 ls_end: ret
-ls_empty:
- mov si,msg_empty
+ls_empty: mov si,msg_empty
  call print
  ret
 do_touch:
+ ; arg = rest of buffer after token
+ call get_arg
+ cmp byte [si],0
+ je t_noarg
  mov bx,0x9000
  mov al,[bx]
  cmp al,10
@@ -68,23 +103,22 @@ do_touch:
  inc byte [bx]
  xor ah,ah
  mov cl,al
- mov al,20
+ mov al,32
  mul cl
  mov bx,0x9000
  add bx,1
  add bx,ax
- mov si,buffer
- add si,6
+ ; si = arg filename
  mov di,bx
  mov cx,12
-copy_lp:
- lodsb
+cp1: lodsb
  cmp al,0
- je copy_end
+ je z1
+ cmp al,32
+ je z1
  stosb
- loop copy_lp
-copy_end:
- mov byte [di],0
+ loop cp1
+z1: mov byte [di],0
  mov si,msg_ok
  call print
  mov si,bx
@@ -92,9 +126,186 @@ copy_end:
  mov si,nl
  call print
  ret
-is_full:
- mov si,msg_full
+t_noarg: mov si,msg_usage
  call print
+ ret
+is_full: mov si,msg_full
+ call print
+ ret
+do_cat:
+ call get_arg
+ cmp byte [si],0
+ je t_noarg
+ mov di,si
+ call find_file
+ cmp bx,0
+ je cat_nf
+ add bx,16
+ mov si,bx
+ call print
+ mov si,nl
+ call print
+ ret
+cat_nf: mov si,msg_nf
+ call print
+ ret
+do_echo:
+ ; check for > in buffer
+ mov si,buffer
+ mov cx,64
+ mov di,0
+fg: lodsb
+ cmp al,0
+ je echo_print
+ cmp al,'>'
+ je got_gt2
+ loop fg
+echo_print:
+ call get_rest
+ mov si,si
+ call print
+ mov si,nl
+ call print
+ ret
+got_gt2:
+ ; si points after >, di is file?
+ mov di,si
+ call skip_sp_si
+ push di
+ ; content is between after echo and >
+ mov si,buffer
+ call skip_sp_si
+ add si,5
+ call skip_sp_si
+ ; now si = content start, need to trim before >
+ mov bx,0x9000
+ ; find or create file from di
+ mov si,di
+ call skip_sp_si
+ mov di,si
+ call find_file
+ cmp bx,0
+ jne have_f3
+ mov bx,0x9000
+ mov al,[bx]
+ cmp al,10
+ jae is_full
+ inc byte [bx]
+ xor ah,ah
+ mov cl,al
+ mov al,32
+ mul cl
+ mov bx,0x9000
+ add bx,1
+ add bx,ax
+ mov si,di
+ mov di,bx
+ mov cx,12
+cpn3: lodsb
+ cmp al,0
+ je zn3
+ cmp al,32
+ je zn3
+ stosb
+ loop cpn3
+zn3: mov byte [di],0
+have_f3:
+ pop si
+ ; si was content, but we lost it, reconstruct
+ mov si,buffer
+ call skip_sp_si
+ add si,5
+ call skip_sp_si
+ mov di,bx
+ add di,16
+ mov cx,16
+ecp3: lodsb
+ cmp al,'>'
+ je ecz3
+ cmp al,0
+ je ecz3
+ stosb
+ loop ecp3
+ecz3: mov byte [di],0
+ mov si,msg_wrote
+ call print
+ ret
+get_arg:
+ ; returns si = start of arg after first word in buffer
+ mov si,buffer
+ call skip_sp_si
+ ; skip first word
+ga1: lodsb
+ cmp al,0
+ je ga_e
+ cmp al,32
+ je ga_sp
+ jmp ga1
+ga_sp: call skip_sp_si
+ ret
+ga_e: mov si,buffer
+ add si,64
+ ret
+get_rest:
+ mov si,buffer
+ call skip_sp_si
+ add si,5
+ call skip_sp_si
+ ret
+find_file:
+ mov bx,0x9000
+ mov cl,[bx]
+ cmp cl,0
+ je ff_nf3
+ mov bx,0x9000
+ add bx,1
+ff_l3: push cx
+ push di
+ mov si,bx
+ call cmp_str2
+ pop di
+ pop cx
+ je ff_f3
+ add bx,32
+ dec cl
+ jnz ff_l3
+ff_nf3: xor bx,bx
+ ret
+ff_f3: ret
+skip_sp_si:
+sk3: lodsb
+ cmp al,32
+ je sk3
+ dec si
+ ret
+cmp_str:
+cs_l: lodsb
+ scasb
+ jne cs_no
+ test al,al
+ jz cs_yes
+ jmp cs_l
+cs_no: mov ax,1
+ ret
+cs_yes: xor ax,ax
+ ret
+cmp_str2:
+cs2_l: mov al,[si]
+ mov ah,[di]
+ cmp ah,0
+ je cs2_e1
+ cmp ah,32
+ je cs2_e1
+ cmp al,ah
+ jne cs2_no
+ inc si
+ inc di
+ jmp cs2_l
+cs2_e1: cmp al,0
+ je cs2_yes
+cs2_no: mov ax,1
+ ret
+cs2_yes: xor ax,ax
  ret
 print:
  lodsb
@@ -107,8 +318,7 @@ print:
 p_ret: ret
 read_line:
  xor cx,cx
-rl_loop:
- mov ah,0
+rl_loop: mov ah,0
  int 0x16
  cmp al,13
  je rl_done
@@ -123,8 +333,7 @@ rl_loop:
  stosb
  inc cx
  jmp rl_loop
-rl_back:
- cmp cx,0
+rl_back: cmp cx,0
  je rl_loop
  dec di
  dec cx
@@ -136,49 +345,25 @@ rl_back:
  mov al,8
  int 0x10
  jmp rl_loop
-rl_done:
- mov byte [di],0
+rl_done: mov byte [di],0
  mov si,nl
  call print
  ret
-cmp_str:
- mov si,buffer
-cs_l:
- lodsb
- scasb
- jne cs_no
- test al,al
- jz cs_yes
- jmp cs_l
-cs_no: mov ax,1
- ret
-cs_yes: xor ax,ax
- ret
-cmp_pre:
- mov si,buffer
-cp_l:
- mov al,[si]
- mov ah,[di]
- cmp ah,0
- je cp_yes
- cmp al,ah
- jne cp_no
- inc si
- inc di
- jmp cp_l
-cp_yes: xor ax,ax
- ret
-cp_no: mov ax,1
- ret
-welcome db "oeneyeOS Aurum Shell v1.3",13,10,"ls touch clear",13,10,0
+welcome db "oeneyeOS Aurum Shell v1.4.2",13,10,"ls touch cat echo clear",13,10,0
 prompt db "> ",0
 nl db 13,10,0
-msg_bad db "?: try ls touch clear",13,10,0
+msg_bad db "?: ls touch cat echo clear",13,10,0
 msg_empty db "(empty)",13,10,0
 msg_full db "full",13,10,0
-msg_ok db "saved: ",0
+msg_ok db "created: ",0
+msg_nf db "not found",13,10,0
+msg_wrote db "written",13,10,0
+msg_usage db "usage: touch <name>",13,10,0
 c_ls db "ls",0
 c_clear db "clear",0
-c_touch db "touch ",0
+c_touch db "touch",0
+c_cat db "cat",0
+c_echo db "echo",0
+token times 16 db 0
 buffer times 64 db 0
-times 1024-($-$$) db 0
+times 2048-($-$$) db 0
