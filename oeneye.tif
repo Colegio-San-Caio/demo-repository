@@ -1,0 +1,3 @@
+pkill -9 qemu
+rm -f /tmp/qemu-lock*
+rm stage2.asm
