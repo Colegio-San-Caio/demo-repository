@@ -1,0 +1,21 @@
+ame: Snap Build
+
+on:
+  push:
+    branches: [ "ORNOP/qiskit-size_t" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: snapcore/action-build@v1
+        id: build
+      - uses: snapcore/action-publish@v1
+        if: github.ref == 'refs/heads/ORNOP/qiskit-size_t'
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
+        with:
+          snap: ${{ steps.build.outputs.snap }}
+          release: candidate
