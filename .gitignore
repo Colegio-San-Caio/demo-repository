@@ -7,3 +7,13 @@ response.json
 *.o
 node_modules/
 size_t-emu.sh
+
+# temp ssh trash
+# 3.*
+30%
+v1.6
+*.pub
+!**/*.pub
+!.ssh/
+
+~/.ssh/id_ed25519*
