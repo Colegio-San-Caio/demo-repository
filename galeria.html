@@ -1,14 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Galeria SRT</title>
-<style>body{font-family:sans-serif;background:#fffef7;color:#102a7a;padding:24px}header{max-width:1000px;margin:0 auto 20px;display:flex;justify-content:space-between}.grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}.box{background:white;border:2px solid #102a7a;border-radius:16px;padding:12px}.box img{width:100%;border-radius:12px}</style>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Galeria + Wiki - Colegio San Caio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#fffef7;color:#102a7a;padding:20px}
+.bar{background:#0a194e;color:white;text-align:center;padding:8px;font-size:12px;border-radius:10px;margin-bottom:16px}
+header{max-width:1100px;margin:0 auto 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.btn{padding:8px 14px;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid #102a7a;display:inline-flex}
+.btn-blue{background:#1a4cff;color:white;border-color:#1a4cff}.btn-white{background:white;color:#102a7a}
+.grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.box{background:white;border:2px solid #102a7a;border-radius:18px;padding:18px}
+.box h3{margin-bottom:10px}pre{background:#f5f7ff;padding:12px;border-radius:10px;overflow:auto;font-size:13px;white-space:pre-wrap}
+.img{width:100%;border-radius:12px;border:2px solid #102a7a;margin-top:10px}
+.full{grid-column:1/-1}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-<header><strong>📖 Colegio San Caio / srt.img</strong><a href="./index.html">← Volver</a></header>
+<div class="bar">Galeria Oficial - wiki.txt + wiki-google + srt.png - www.colegio-san-caio.org.int</div>
+<header>
+<div><strong>Colegio San Caio</strong> | Galeria + Wiki</div>
+<nav style="display:flex;gap:8px;flex-wrap:wrap">
+<a class="btn btn-white" href="./index.html">Inicio</a>
+<a class="btn btn-white" href="./org.html">org.int</a>
+<a class="btn btn-white" href="./macro.html">Macro Lab</a>
+<a class="btn btn-blue" href="https://github.com/Colegio-San-Caio/demo-repository">Repo</a>
+</nav>
+</header>
+
 <div class="grid">
-<div class="box" style="grid-column:1/-1"><h1>📸 Galeria SRT + Macro Lab</h1><p>Tu push ya quedo ✅</p></div>
-<div class="box"><h3>srt.png</h3><img src="./srt.png"><p>Tu captura de termux</p></div>
-<div class="box"><h3>macro.html preview</h3><img src="./srt.png"><p>Macro Lab 2.0</p></div>
+<div class="box">
+<h3>1. srt.png Proof</h3>
+<p style="font-size:13px;opacity:.7">Tu screenshot de la subida SRT</p>
+<img class="img" src="./srt.png" alt="srt proof" onerror="this.src='https://via.placeholder.com/400x300?text=srt.png+not+found'">
 </div>
+
+<div class="box">
+<h3>2. wiki.txt</h3>
+<p style="font-size:13px;opacity:.7">Texto wiki del proyecto</p>
+<pre id="wikiTxt">Cargando wiki.txt...</pre>
+<a class="btn btn-white" style="margin-top:10px" href="./wiki.txt" target="_blank">Abrir wiki.txt raw</a>
+</div>
+
+<div class="box full">
+<h3>3. wiki-google</h3>
+<p style="font-size:13px;opacity:.7">Google Wiki / Docs integration</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+<a class="btn btn-white" href="./wiki-google" target="_blank">Abrir carpeta wiki-google</a>
+<a class="btn btn-white" href="./wiki-google/index.html" target="_blank">wiki-google/index.html</a>
+</div>
+<pre id="wikiGoogle" style="margin-top:12px">Si es carpeta, entra con los links arriba. Si es archivo txt, se cargara aqui.</pre>
+</div>
+
+<div class="box full" style="background:#ffe99a">
+<h3>Links directos</h3>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+<a class="btn btn-white" href="./srt.png">srt.png</a>
+<a class="btn btn-white" href="./wiki.txt">wiki.txt</a>
+<a class="btn btn-white" href="./wiki-google">wiki-google</a>
+<a class="btn btn-white" href="./macro.html">macro.html</a>
+<a class="btn btn-white" href="./org.html">org.html</a>
+</div>
+</div>
+</div>
+
+<script>
+// auto-load wiki.txt into page
+fetch('./wiki.txt').then(r=>r.text()).then(t=>{
+ document.getElementById('wikiTxt').textContent = t.slice(0,2000);
+}).catch(()=>{document.getElementById('wikiTxt').textContent='wiki.txt no encontrado - asegurate de hacer git add wiki.txt'});
+fetch('./wiki-google').then(r=>r.text()).then(t=>{
+ if(t.length<5000) document.getElementById('wikiGoogle').textContent = t.slice(0,2000);
+}).catch(()=>{});
+</script>
 </body>
 </html>
