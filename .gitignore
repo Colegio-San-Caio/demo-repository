@@ -4,3 +4,4 @@ stage2.bin
 *.bin
 response.json
 *.img
+*.o
