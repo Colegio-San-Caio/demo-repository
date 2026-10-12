@@ -1,0 +1,58 @@
+name: qiskit-size-t-demo
+base: core24
+version: '0.1-ornop'
+summary: Demo Qiskit size_t fix (ORNOP branch)
+description: |
+  Demo repository from Colegio-San-Caio - ORNOP branch
+  Contains qiskit-size_t fix for size_t handling.
+  Built from https://github.com/Colegio-San-Caio/demo-repository/tree/ORNOP/qiskit-size_t
+
+grade: devel
+confinement: strict
+
+platforms:
+  amd64:
+  arm64:
+
+parts:
+  qiskit-size-t:
+    plugin: python
+    source: https://github.com/Colegio-San-Caio/demo-repository.git
+    source-branch: ORNOP
+    source-subdirectory: qiskit-size_t
+    python-requirements:
+      - requirements.txt
+    # if you don't have requirements.txt, it will use pyproject.toml
+    build-packages:
+      - python3-dev
+      - build-essential
+      - pkg-config
+    stage-packages:
+      - python3
+      - python3-distutils-extra
+    override-build: |
+      craftctl default
+      # make sure qiskit is installed from this patch
+      pip install -e .
+
+apps:
+  qiskit-size-t-demo:
+    command: bin/python3 -m qiskit_size_t
+    # change this to your real entry point, e.g.:
+    # command: bin/qiskit-size-t-demo
+    # or: bin/python3 qiskit-size_t/main.py
+    plugs:
+      - home
+      - network
+      - removable-media
+
+  python:
+    command: bin/python3
+    plugs:
+      - home
+      - network
+
+apps:
+  demo:
+    command: bin/python3 $SNAP/qiskit-size_t/demo.py
+    plugs: [home, network]
