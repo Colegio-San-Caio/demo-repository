@@ -1,0 +1,12 @@
+Source: ibm-bubble-16k
+Section: utils
+Priority: optional
+Maintainer: Kai KETELHUT <ketelhutkai23@gmail.com>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.5.1
+
+Package: ibm-bubble-16k
+Architecture: any
+Depends: python3, ${misc:Depends}
+Description: Initial release - IBM 16K bubble memory forensic spec - no DLL
+ Pure Python forensic parser, no DLL, offline dongle primary.

@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+"""Generic page viewer/checker for 16K bubble memory dumps."""
+import argparse, re, zlib
+
+p = argparse.ArgumentParser()
+p.add_argument("dump")
+p.add_argument("--page", type=int, default=256, help="page size in bytes")
+p.add_argument("--hex", action="store_true")
+p.add_argument("--strings", action="store_true")
+a = p.parse_args()
+data = open(a.dump, "rb").read()
+print("size: %d bytes, page size %d" % (len(data), a.page))
+for off in range(0, len(data), a.page):
+    pg = data[off:off + a.page]
+    print("page %d offset 0x%X sum8=0x%02X crc32=0x%08X" % (
+        off // a.page, off, sum(pg) & 255, zlib.crc32(pg)))
+    if a.hex:
+        for i in range(0, len(pg), 16):
+            c = pg[i:i + 16]
+            print("  %04X  %-47s  %s" % (i, " ".join("%02X" % b for b in c),
+                  "".join(chr(b) if 32 <= b < 127 else "." for b in c)))
+if a.strings:
+    for m in re.finditer(rb"[ -~]{4,}", data):
+        print("0x%X: %s" % (m.start(), m.group().decode()))
