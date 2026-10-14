@@ -1,8 +1,0 @@
-{
-  "url": "https://api.sam.gov/entity-management/v2/entities?ueiSAM=VQE1VLLCX2N4&includeSections=coreData",
-  "uei": "VQE1VLLCX2N4",
-  "endpoint": "entity-management v2",
-  "method": "GET x-api-key",
-  "verified": "2026-10-15T12:52+02:00",
-  "curl": "curl -L https://api.sam.gov/entity-management/v2/entities?ueiSAM=VQE1VLLCX2N4&includeSections=coreData -H x-api-key: YOUR_KEY"
-}
