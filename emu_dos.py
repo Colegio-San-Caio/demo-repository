@@ -53,7 +53,7 @@ def load_rc():
         with open("oeneye.rc", "r") as f:
             for line in f:
                 line = line.strip()
-removed@example.com
+                if line and not line.startswith("@") and not line.startswith("REM"):
                     print(f"C> {line}")
         print(f"[BOOT] {SYSTEM_NAME} initialized with AGI Token: {AGI_TOKEN}\n")
 
@@ -107,7 +107,7 @@ def main_loop():
             elif cmd == "VER":
                 print(f"{SYSTEM_NAME} [Version 0.2.000b]")
             elif cmd == "DIR":
-                print(" Directory of " removed-phone
+                print(" Directory of " + current_drive + ":\\")
                 for k, v in DRIVE_MAPPINGS.items():
                     print(f" [IMG] Drive {k}: -> {v}")
                 for file in Path(".").glob("*.*"):
