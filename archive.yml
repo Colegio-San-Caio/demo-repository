@@ -1,0 +1,14 @@
+name: Archive
+on: [push]
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Colegio-San-Caio/marketplace@v1
+      - run: |
+          git config user.name "bot"
+          git config user.email "bot@bot.com"
+          git add archive catalog.js
+          git commit -m "archive" || true
+          git push
