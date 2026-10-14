@@ -10,17 +10,17 @@ onmessage=async function(e){
     py.setStdin({stdin:function(){
       if(!q.length) return null;
       var l=q.shift();
-      enc.encode(lremoved-phone
+      enc.encode(l+'\n').forEach(function(b){out.push(b);});
       return l;
     }});
     py.FS.writeFile('emu_dos.py', e.data.code);
     py.runPython("import runpy");
     py.runPython("runpy.run_path('emu_dos.py', run_name='__main__')");
-    postMessage({out:dec.decode(new Uint8Array(out))removed-phone
+    postMessage({out:dec.decode(new Uint8Array(out))+'\n[program finished]'});
   }catch(err){
     var m=String(err&&err.message||err);
     var t=dec.decode(new Uint8Array(out));
-    var s=m.indexOf('SystemExit')>=0?'\n[program exited]':(m.indexOf('EOFError')>=0?'\n[no more input: type commands in the box and press Run again]':'\n[error] 'removed-phone
-    postMessage({out:tremoved-phone
+    var s=m.indexOf('SystemExit')>=0?'\n[program exited]':(m.indexOf('EOFError')>=0?'\n[no more input: type commands in the box and press Run again]':'\n[error] '+m);
+    postMessage({out:t+s});
   }
 };
