@@ -9,6 +9,6 @@ jobs:
       - run: |
           git config user.name "bot"
           git config user.email "bot@bot.com"
-          git add archive catalog.js
+          git add archive/ catalog.js || git add catalog.js
           git commit -m "archive" || true
           git push
