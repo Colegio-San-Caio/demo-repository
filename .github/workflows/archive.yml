@@ -1,5 +1,5 @@
 name: Archive
-on: 
+on:
   push:
     paths-ignore:
       - 'archive/**'
@@ -17,6 +17,6 @@ jobs:
       - run: |
           git config user.name "bot"
           git config user.email "bot@bot.com"
-          git add archive/ catalog.js
-          git commit -m "archive $GITHUB_SHA" || echo "no changes"
+          git add -A
+          git commit -m "archive [skip ci]" || echo "nothing"
           git push
