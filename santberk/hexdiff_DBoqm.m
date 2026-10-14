@@ -49,7 +49,7 @@ dump_hex(b1(1:min(64,end)));
 end
 
 function b = fileread_bin(p)
-  fid=fopen(p,'rb'); b=fread(fid,'*uint8')'; fclose(fid);
+  fid=fopen(p,'rb'); if fid<0, b=uint8([]); return; end; b=fread(fid,'*uint8')'; fclose(fid);
 end
 function dump_hex(b)
   for i=1:numel(b)

@@ -1,0 +1,54 @@
+name: oeneyeOS Release
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'oeneyeOS.img'
+      - 'c.img'
+      - 'x.img'
+      - 'holla_proxy.exe'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get boot sig and version
+        id: meta
+        run: |
+          RUN=${{ github.run_number }}
+          echo "tag=v1.0-FAT77-${RUN}" >> $GITHUB_OUTPUT
+          echo "name=oeneyeOS v1.0 - FAT77 Edition | Build ${RUN} | Boot Sig: 55AA Evergreen" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: ${{ steps.meta.outputs.name }}
+          body: |
+            OENEYE OS - FAT77 Level
+
+            B: 2.88M OK
+            C: HDD Active [0x80] - OK
+            X: HDD Active [0x81] - OK
+            DIMM: load X: LBA2 -> 0x1000
+            FAT77: FS Active - OK
+
+            LLMM: llm-stub text-container
+            ONION: holla.oeneye:8080
+
+            Assets:
+            - oeneyeOS.img (floppy 2.88M)
+            - c.img (20M with LLMM)
+            - x.img (10M weights)
+            - holla_proxy.exe (onion proxy)
+          files: |
+            oeneyeOS.img
+            c.img
+            x.img
+            holla_proxy.exe
+          fail_on_unmatched_files: false

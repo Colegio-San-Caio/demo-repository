@@ -1,6 +1,6 @@
 # Change:
-removed@example.com
-# removed-phone
+\@body
+#
 # PRIVATE SEALED ADDRESS - 7619efe
 
 git add -A
@@ -20,23 +20,23 @@ h1{border-bottom:1px solid #30363d;padding-bottom:8px}
 <div id="index">Loading own index...</div>
 <script>
 async function buildIndex(){
-  let res = await fetch('discussions/index.json').catch(()=>null);
-  let files = res && res.ok? await res.json() : [];
-  if(!files.length){
-    // fallback: list what we know removed-phone
-    files = ['discussions/001-welcome.md','discussions/1791356915-wikipedia-namespace.md'];
-    try{
-      let api = await fetch('https://api.github.com/repos/Colegio-San-Caio/demo-repository/contents/discussions').then(r=>r.json());
-      if(Array.isArray(api)) files = api.filter(f=>f.name.endsWith('.md')).map(f=>'discussions/'removed-phone
-    }catch(e){}
-  }
-  let html='';
-  for(let f of files){
-    let t = await fetch(f).then(r=>r.text()).catch(()=>'(gist not deployed yet)');
-    let title = (t.match(/^# (.*)/)||[,'Untitled'])[1];
-    htmlremoved-phone
-  }
-  document.getElementById('index').innerHTML=html;
+ let res = await fetch('discussions/index.json').catch(()=>null);
+ let files = res && res.ok? await res.json() : [];
+ if(!files.length){
+  // fallback: list what we know
+  files = ['discussions/001-welcome.md','discussions/1791356915-wikipedia-namespace.md'];
+  try{
+   let api = await fetch('https://api.github.com/repos/Colegio-San-Caio/demo-repository/contents/discussions').then(r=>r.json());
+   if(Array.isArray(api)) files = api.filter(f=>f.name.endsWith('.md')).map(f=>'discussions/'removed
+  }catch(e){}
+ }
+ let html='';
+ for(let f of files){
+  let t = await fetch(f).then(r=>r.text()).catch(()=>'(gist not deployed yet)');
+  let title = (t.match(/^# (.*)/)||[,'Untitled'])[1];
+  htmlremoved
+ }
+ document.getElementById('index').innerHTML=html;
 }
 buildIndex();
 </script>
@@ -53,3 +53,27 @@ buildIndex();
  data-theme="dark"
  crossorigin="anonymous" async></script>
 </div>
+
+<!-- GDPR Art 17 Compliance Notice -->
+<footer style="font-size:12px; opacity:0.7; margin-top:40px; border-top:1px solid #ccc; padding-top:10px;">
+<p><strong>GDPR Art 17 - Right to Erasure - Compliance Log</strong><br>
+On 2026-10-10, PII (gmail addresses ketelhutkai23@gmail.com, kaiolafketelhut187@gmail.com, phone, address) was permanently removed from all files, commit history (398 commits rewritten), Author/Committer headers, and tags in this repository.<br>
+Verification: git log | grep gmail = empty. Commit refs: 7619efe, 76e0cad, e90b9a6, 2396e34. Status: VALID.</p>
+</footer>
+
+<!-- Impressum §5a GmbHG -->
+
+<!-- Impressum SRT - MLK Berlin - §5a Proxy -->
+<section id="impressum-srt" style="font-size:13px; line-height:1.5; margin-top:50px; border-top:2px solid #000; padding-top:15px;">
+<h3>Impressum</h3>
+<p><strong>SRT Unternehmergesellschaft (haftungsbeschränkt)</strong><br>
+nach §5a GmbHG<br>
+Inhaber: Kai KETELHUT<br>
+Nähe Martin-Luther-Krankenhaus<br>
+Caspar-Theyß-Str. 27-31<br>
+14193 Berlin</p>
+<p>Vertretung: Kai KETELHUT - Geschäftsführer<br>
+Prokura: by proxy nach §5a GmbHG<br>
+E-Mail: kai.ketelhut@studio.unibo.it</p>
+<p style="font-size:11px; opacity:0.7;">Hinweis §5a Abs.1 GmbHG: UG mit Stammkapital unter 25.000 EUR. Hist. Ref PR36883 East Prussia. GDPR: alte gmail/phone am 2026-10-10 nach Art 17 gelöscht.</p>
+</section>
