@@ -54,7 +54,7 @@ ISBN 978-3-00-068463-0 | PDF | 21,00 &euro; (+ tax)</p>
 <a href="https://bunq.me/fieldberry">Order / pay</a></p>
 <h2>Verify your download</h2>
 <p>SHA-256 checksums for the disk images. Put both images and the checksum file in one folder, then run the check.</p>
-<code>8264b16354b46691c3e6daa0a764ac7518bd049957e9b6404d5b9e0c5a767f9d  oeneyeOS.img
+<code>c76f372b6c9a79797f620a86f5c787ac599994f54e222449e06859d36164cb01  oeneyeOS.img
 1b7b350b66f56a4646573de32f7fea22a050cdf99672d8751c49043abc82ebab  data.img</code>
 <code>sha256sum --check checksum.sha256</code>
 <p><a href="assets/checksum.sha256">checksum.sha256</a></p>
@@ -85,3 +85,4 @@ Wed Oct 14 15:59:06 CEST 2026
 your change
 your change
 change
+<div id="catalog-box" style="font-family:monospace;border:1px solid #ccc;padding:10px;margin:10px"><h3>Archives (<span id="cat-count"></span>) Last: <span id="cat-last"></span></h3><ul id="cat-list"></ul><a href="jp.html">JP</a> | <a href="changelog.html">Changelog</a></div><script src="catalog.js"></script><script>document.getElementById("cat-last").innerText=CATALOG.last;document.getElementById("cat-count").innerText=CATALOG.archives.length;CATALOG.archives.forEach(f=>{let li=document.createElement("li");li.innerHTML="<a href="+f+">"+f+"</a>";document.getElementById("cat-list").appendChild(li)})</script>
