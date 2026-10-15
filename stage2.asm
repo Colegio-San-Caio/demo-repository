@@ -11,8 +11,11 @@ start:
   cld
   mov si, msg
   call print
+pl:
   mov si, prompt
   call print
+  mov di, buf
+  xor cx, cx
 key:
   xor ah, ah
   int 16h
@@ -24,13 +27,17 @@ key:
   jb key
   cmp al, 126
   ja key
+  cmp cx, 30
+  jae key
+  stosb
+  inc cx
   call putc
   jmp key
-enter:
-  mov si, crlf
-  call print
-  jmp key
 bksp:
+  test cx, cx
+  jz key
+  dec di
+  dec cx
   mov al, 8
   call putc
   mov al, 32
@@ -38,6 +45,60 @@ bksp:
   mov al, 8
   call putc
   jmp key
+enter:
+  xor al, al
+  stosb
+  mov si, crlf
+  call print
+  test cx, cx
+  jz pl
+  mov si, buf
+  mov di, c_help
+  call streq
+  jc do_help
+  mov si, buf
+  mov di, c_ver
+  call streq
+  jc do_ver
+  mov si, buf
+  mov di, c_clear
+  call streq
+  jc do_clear
+  mov si, unk
+  call print
+  jmp pl
+do_help:
+  mov si, helptxt
+  call print
+  jmp pl
+do_ver:
+  mov si, vertxt
+  call print
+  jmp pl
+do_clear:
+  mov ax, 0003h
+  int 10h
+  jmp pl
+streq:
+  push si
+  push di
+.l:
+  lodsb
+  mov ah, [di]
+  inc di
+  cmp al, ah
+  jne .no
+  test al, al
+  jnz .l
+  pop di
+  pop si
+  stc
+  ret
+.no:
+  pop di
+  pop si
+  clc
+  ret
 putc:
   mov ah, 0Eh
   xor bx, bx
@@ -46,12 +107,19 @@ putc:
 print:
   lodsb
   or al, al
-  jz done
+  jz .d
   call putc
   jmp print
-done:
+.d:
   ret
-msg db 'oeneyeOS Stage2 - Active [0x8000] - B: 2.88M OK',13,10,0
-prompt db 'Type: ',0
+msg db 'oeneyeOS Stage2 - Active [0x8000] - B: 2.88M OK',13,10,'Type help for commands',13,10,0
+prompt db '> ',0
+helptxt db 'help  ver  clear',13,10,0
+vertxt db 'oeneyeOS v1.0 Stage2',13,10,0
+unk db 'unknown command',13,10,0
 crlf db 13,10,0
+c_help db 'help',0
+c_ver db 'ver',0
+c_clear db 'clear',0
+buf times 32 db 0
 times 1024-($-$$) db 0
