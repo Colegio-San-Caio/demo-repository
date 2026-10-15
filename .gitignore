@@ -4,3 +4,7 @@ __pycache__/
 *.sqlite3
 .env
 .DS_Store
+invoice_summary_report.csv
+fuzz_check.csv
+bunq_sandbox_config.json
+legal/US_Federal_Potomac_21215_PUBLIC/
