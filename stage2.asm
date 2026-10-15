@@ -64,6 +64,10 @@ enter:
   mov di, c_clear
   call streq
   jc do_clear
+  mov si, buf
+  mov di, c_quit
+  call streq
+  jc do_quit
   mov si, unk
   call print
   jmp pl
@@ -79,6 +83,15 @@ do_clear:
   mov ax, 0003h
   int 10h
   jmp pl
+do_quit:
+  mov dx, 0x604
+  mov ax, 0x2000
+  out dx, ax
+  mov dx, 0xB004
+  out dx, ax
+  mov si, haltmsg
+  call print
+  jmp $
 streq:
   push si
   push di
@@ -114,12 +127,14 @@ print:
   ret
 msg db 'oeneyeOS Stage2 - Active [0x8000] - B: 2.88M OK',13,10,'Type help for commands',13,10,0
 prompt db '> ',0
-helptxt db 'help  ver  clear',13,10,0
+helptxt db 'help  ver  clear  quit',13,10,0
 vertxt db 'oeneyeOS v1.0 Stage2',13,10,0
 unk db 'unknown command',13,10,0
 crlf db 13,10,0
 c_help db 'help',0
 c_ver db 'ver',0
 c_clear db 'clear',0
+c_quit db 'quit',0
+haltmsg db 'power-off unsupported - CTRL+A then X',13,10,0
 buf times 32 db 0
 times 1024-($-$$) db 0
