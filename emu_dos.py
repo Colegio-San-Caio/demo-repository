@@ -10,7 +10,9 @@ AGI_TOKEN = "000b"
 SYSTEM_NAME = "oeneyeOS v0.2"
 
 DRIVE_MAPPINGS = {
-    "A": "mosfetq-dos-gold-1.0.0.0.1-5.25in-1.2M.ximg"
+    "A": "mosfetq-dos-gold-1.0.0.0.1-5.25in-1.2M.ximg",
+    "X": "workshop.img",
+    "X": "workshop.img"
 }
 
 def auto_backup_workspace():
