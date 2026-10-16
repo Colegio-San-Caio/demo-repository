@@ -10,7 +10,7 @@ function build(){
  if(!c||c===document.body||c===document.documentElement)return false;
  var s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
  var b=document.createElement('div');b.className='workshop';
- b.innerHTML='<div class="workshop-h"><b>Workshop</b><a href="'+R+'workshop.img">X: workshop.img</a><a href="'+R+'fily.img">fily.img</a><a href="workshop/hexdiff_unix_specification.pdf">hexdiff spec (PDF)</a><a href="workshop/hexdiff_architectural_lineage.pdf">hexdiff lineage (PDF)</a></div><div class="workshop-b"></div>';
+ b.innerHTML='<div class="workshop-h"><b>Workshop</b><a href="'+R+'workshop.img">X: workshop.img</a><a href="'+R+'fily.img">fily.img</a><a href="workshop/hexdiff_unix_specification.pdf">hexdiff spec (PDF)</a></div><div class="workshop-b"></div>';
  c.parentNode.insertBefore(b,c);b.lastChild.appendChild(c);
  return true;
 }
