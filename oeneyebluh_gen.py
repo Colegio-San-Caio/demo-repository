@@ -8,7 +8,7 @@
 import os
 from datetime import datetime
 
-NAME = "oeneye.c removed-phone
+NAME = "oeneye.c removed-phone"
 AUTHOR = "Kai Olaf Ketelhut"
 ORCID_ID = "0000-0001-6049-8873"
 IDENTITY_OMQ = "OMQ"
@@ -36,7 +36,7 @@ def build_oeneyebluh_index():
 <body>
     <h1>OENEYEbluh (0)b — INDEX LIVE</h1>
     <p>Author: {AUTHOR} | <span class="orcid">ORCID: <a href="https://orcid.org/{ORCID_ID}" target="_blank">{ORCID_ID}</a></span></p>
-    <p>Framework: {IDENTITY_OMQ} / {IDENTITY_OQM} | Axiom: 1 removed-phone
+    <p>Framework: {IDENTITY_OMQ} / {IDENTITY_OQM} | Axiom: 1+0=1
     <p>Telemetry: {FAX_LINE}</p>
     
     <div class="box">
@@ -61,7 +61,7 @@ def build_oeneyebluh_index():
     with open(index_path, "w") as f:
         f.write(html_content)
         
-    print(f"[removed-phone
+    print(f"[OK] wrote {index_path}")
 
 if __name__ == "__main__":
     build_oeneyebluh_index()
