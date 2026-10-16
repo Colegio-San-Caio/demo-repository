@@ -8,7 +8,7 @@
 import os
 from datetime import datetime
 
-NAME = "oeneye.c removed-phone"
+NAME = "oeneye.c"
 AUTHOR = "Kai Olaf Ketelhut"
 ORCID_ID = "0000-0001-6049-8873"
 IDENTITY_OMQ = "OMQ"
