@@ -35,6 +35,8 @@ img{max-width:260px;width:100%;height:auto;display:block;margin:12px 0}
 <button type="submit">Search</button>
 </form>
 <p>A: oeneyeOS.img (2.88M) | B: data.img (2.88M) | C: date.img</p>
+<p>D: <a href="https://github.com/Colegio-San-Caio/demo-repository/releases/download/v1.0/GNUoeneyeALPINEunix.img">GNUoeneyeALPINEunix.img</a> (357 MB) | SHA-256: <code style="word-break:break-all">a91847bcda43baca5a643be9769ebfd17bd5c371718ed8eb63d9e5f628c49188</code></p>
+<p>X: <a href="https://github.com/Colegio-San-Caio/demo-repository/releases/download/v1.0/workshop.img">workshop.img</a> (1.4 MB) | <a href="https://github.com/Colegio-San-Caio/demo-repository/releases/download/v1.0/fily.img">fily.img</a> (360 KB)</p>
 <p><a href="oeneyeOS.img">Download A</a> | <a href="data.img">Download B</a> | <a href="date.img">Download C</a></p>
 <code>qemu-system-i386 -fda oeneyeOS.img -fdb data.img -hda date.img</code>
 <p class="small">Back up important data before using the disk-image tools. A defect in disk-writing code can damage data.</p>
@@ -50,11 +52,11 @@ img{max-width:260px;width:100%;height:auto;display:block;margin:12px 0}
 Kai Olaf Ketelhut<br>
 Fieldberry Group, Berlin<br>
 ISBN 978-3-00-068463-0 | PDF | 21,00 &euro; (+ tax)</p>
-<p><a href="tex.html">Book source (TeX)</a> | <a href="book.pdf">Book (PDF)</a> | <a href="assets/mosfetq-record.pdf">Bibliographic record (PDF)</a> |
+<p><a href="tex.html">Book source (TeX)</a> | <a href="MOSFETQexchange/output/MOSFETQ_Master_Manuscript.pdf">Book (PDF)</a> | <a href="assets/mosfetq-record.pdf">Bibliographic record (PDF)</a> |
 <a href="https://bunq.me/fieldberry">Order / pay</a></p>
 <h2>Verify your download</h2>
 <p>SHA-256 checksums for the disk images. Put both images and the checksum file in one folder, then run the check.</p>
-<code>554a19e32101c1f6b66e28b3d91ef645eac6d15e70db1576fb72bb5f443fd005  oeneyeOS.img
+<code>2741dfdbc24c3514ffcd04411a108e3b9b76ad0a7522c2a4b360cdbb27b9d42d  oeneyeOS.img
 1b7b350b66f56a4646573de32f7fea22a050cdf99672d8751c49043abc82ebab  data.img</code>
 <code>sha256sum --check checksum.sha256</code>
 <p><a href="assets/checksum.sha256">checksum.sha256</a></p>
@@ -77,12 +79,9 @@ ISBN 978-3-00-068463-0 | PDF | 21,00 &euro; (+ tax)</p>
 <script src="demo.js"></script>
 <!--REPOS-->
 <script src="clock-catalog.js"></script>
-<p><a href="galeria.html">Galeria</a> | <a href="macro.html">Macro</a></p>
+<p><a href="galeria.html">Galeria</a> | <a href="macro.html">Macro</a> | <a href="proxy.html">Proxy</a></p>
+<script src="workshop.js"></script>
+<div id="catalog-box" style="font-family:monospace;border:1px solid #ccc;padding:10px;margin:10px"><h3>Archives (<span id="cat-count"></span>) Last: <span id="cat-last"></span></h3><ul id="cat-list"></ul><a href="jp.html">JP</a> | <a href="changelog.html">Changelog</a></div><script src="catalog.js"></script><script>document.getElementById("cat-last").innerText=CATALOG.last;document.getElementById("cat-count").innerText=CATALOG.archives.length;CATALOG.archives.forEach(f=>{let li=document.createElement("li");li.innerHTML="<a href="+f+">"+f+"</a>";document.getElementById("cat-list").appendChild(li)})</script>
+<p>Last updated: 2026-10-16 09:02 UTC</p>
 </body>
 </html>
-Wed Oct 14 15:56:43 CEST 2026
-Wed Oct 14 15:59:06 CEST 2026
-your change
-your change
-change
-<div id="catalog-box" style="font-family:monospace;border:1px solid #ccc;padding:10px;margin:10px"><h3>Archives (<span id="cat-count"></span>) Last: <span id="cat-last"></span></h3><ul id="cat-list"></ul><a href="jp.html">JP</a> | <a href="changelog.html">Changelog</a></div><script src="catalog.js"></script><script>document.getElementById("cat-last").innerText=CATALOG.last;document.getElementById("cat-count").innerText=CATALOG.archives.length;CATALOG.archives.forEach(f=>{let li=document.createElement("li");li.innerHTML="<a href="+f+">"+f+"</a>";document.getElementById("cat-list").appendChild(li)})</script>
