@@ -36,7 +36,7 @@ def run_checksums():
             manifest[str(p)] = {"size": p.stat().st_size, "sha256": sha.hexdigest()}
     with open("oeneye_manifest.json", "w") as mf:
         json.dump(manifest, mf, indent=4)
-    print(f"[AUTOEXEC] Manifest synchronized: {len(manifest)} files verified and indexed.")
+    print(f"[AUTOEXEC] Manifest synchronized: {len(manifest)} files hashed and indexed.")
 
 def run_autoexec():
     print("Executing AUTOEXEC.BAT...")
