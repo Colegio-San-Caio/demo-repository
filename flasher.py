@@ -2,19 +2,17 @@ import os
 import shutil
 import subprocess
 
-# Define directory structures
+# Local layout configuration
 SOURCE_DIR = "/storage/emulated/0/Download"
 DEST_DIR = "/storage/emulated/0/Download/oeneyeOS_Outputs"
 REPO_DIR = "/data/data/com.termux/files/home/tmp"
 
-print("🚀 Starting flasher image exporter, converter, & git automation...")
+print("🚀 Starting flasher split-repository distribution script...")
 
-# Ensure destination folder exists
+# 1. Handle workspace directories
 if not os.path.exists(DEST_DIR):
     os.makedirs(DEST_DIR)
-    print(f"📁 Created folder: {DEST_DIR}")
 
-# Check if source directory exists
 if os.path.exists(SOURCE_DIR):
     files = os.listdir(SOURCE_DIR)
     processed_count = 0
@@ -30,12 +28,10 @@ if os.path.exists(SOURCE_DIR):
             dest_raw = os.path.join(DEST_DIR, file)
             dest_qcow2 = os.path.join(DEST_DIR, f"{base_name}.qcow2")
             
-            # Copy local storage copies
-            print(f"📦 Copying raw layer: {file}...")
+            print(f"📦 Copying raw file: {file}...")
             shutil.copy2(src_file, dest_raw)
             
-            # Convert and compress to QCOW2 format
-            print(f"⚡ Converting {file} to compressed .qcow2...")
+            print(f"⚡ Converting layer to compressed .qcow2 format...")
             try:
                 subprocess.run([
                     "qemu-img", "convert", 
@@ -44,40 +40,38 @@ if os.path.exists(SOURCE_DIR):
                     "-c", 
                     src_file, dest_qcow2
                 ], check=True)
-                print(f"✅ Created: {base_name}.qcow2")
+                print(f"✅ Generated: {base_name}.qcow2")
                 
-                # Copy the final qcow2 into git repository path to track
+                # Copy the resulting virtual disk asset directly into local git repo
                 shutil.copy2(dest_qcow2, os.path.join(REPO_DIR, f"{base_name}.qcow2"))
             except Exception as e:
-                print(f"❌ Failed QCOW2 processing for {file}: {e}")
+                print(f"❌ QCow2 converter fallback alert: {e}")
                 
             processed_count += 1
             
     if processed_count > 0:
-        print(f"\n🎉 Build compilation completed successfully.")
+        print(f"\n🎉 File compression operations complete.")
         
-        # --- GITHUB AUTOMATION BLOCK ---
-        print("\n🌐 Initiating GitHub synchronization sequence...")
+        # 2. Automated Git push routine
+        print("\n🌐 Distributing commits to master remotes simultaneously...")
         try:
             os.chdir(REPO_DIR)
             
-            # Stage all untracked changes
+            # Clean untracked changes, add, and build manifest
             subprocess.run(["git", "add", "-A"], check=True)
             
-            # Commit changes with a clean automated timestamp tracker
-            commit_message = "🔄 Auto-uploading updated virtual disk layers"
-            subprocess.run(["git", "commit", "-m", commit_message], check=False)
+            commit_msg = "🔄 Auto-sync: Updated compiled virtual layout layers"
+            subprocess.run(["git", "commit", "-m", commit_msg], check=False)
             
-            # Push upstream to your master/main branch
-            print("📤 Pushing chunks directly to repository...")
+            print("📤 Pushing payloads to demo-repository & LLMM branches...")
+            # Pushes to all configured push destinations at once
             subprocess.run(["git", "push", "origin", "main"], check=True)
-            print("✨ Successfully uploaded assets to GitHub!")
+            print("✨ Multi-repository update deployment complete!")
             
         except Exception as git_error:
-            print(f"⚠️ Git synchronization encountered an alert: {git_error}")
-            
+            print(f"⚠️ Git multi-push tracking encountered an alert: {git_error}")
     else:
-        print("\n⚠️ No .img or .bin files found in /Download/ to process.")
+        print("\n⚠️ No system files found in your local Download folder to process.")
 else:
-    print(f"\n❌ Error: Source directory {SOURCE_DIR} not found.")
+    print(f"\n❌ Error: Root directory {SOURCE_DIR} was not accessed.")
 
