@@ -1,1 +1,28 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>oeneyeOS - NXDOMAIN</title><style>body{background:#090f14;color:#b8f2e6;font-family:monospace;padding:20px;word-wrap:break-word} .win{border:1px solid #2a4a4a;background:#0f1b22;border-radius:8px;padding:18px;max-width:800px;margin:40px auto}</style></head><body><div class="win"><h1 style="color:#7fffd4">👁 oeneyeOS v1.03 - Connection Error</h1><p>This site can't be reached - <code>board.colegio-san-caio.com</code>'s DNS address could not be found.</p><p><b style="color:#ff8a8a">DNS_PROBE_FINISHED_NXDOMAIN</b></p><p style="color:#6a9a95;font-size:12px" id="lu"></p><hr><p>Domain board.colegio-san-caio.com → NXDOMAIN. GitHub Pages is archive.</p></div><script>document.getElementById('lu').textContent='Last updated: '+new Date().toISOString();</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>oeneyeOS - NXDOMAIN</title>
+<style>
+body{background:#0a0f14;color:#aaffee;font-family:monospace;padding:20px;word-wrap:break-word;overflow-wrap:anywhere}
+.win{border:2px solid #5a7a7a;max-width:700px;margin:40px auto;background:#0d141a;padding:20px}
+h1{color:#7fffd4}
+</style>
+</head>
+<body>
+<div class="win">
+<h1>oeneyeOS v1.03 - NXDOMAIN</h1>
+<p>This site can't be reached</p>
+<p><code>board.colegio-san-caio.com</code>'s DNS address could not be found.</p>
+<p><b>DNS_PROBE_FINISHED_NXDOMAIN</b></p>
+<p id="last-updated">Last updated:</p>
+<hr>
+<p>oeneyeOS Network Diagnostics - Error Code: NXDOMAIN</p>
+</div>
+<script>
+var el=document.getElementById('last-updated');
+if(el) el.textContent='Last updated: '+new Date().toISOString().replace('T',' ').replace(/:\d\dZ/,' UTC');
+</script>
+</body>
+</html>
