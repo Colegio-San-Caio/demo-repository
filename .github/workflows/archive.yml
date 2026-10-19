@@ -16,10 +16,7 @@ jobs:
       - uses: Colegio-San-Caio/marketplace@v1
       - name: sync to docs
         run: |
-          mkdir -p docs/archive
-          cp catalog.js docs/catalog.js
-          rm -f docs/archive/index-*.html
-          cp archive/index-*.html docs/archive/
+          bash sync-docs.sh
       - run: |
           git config user.name "bot"
           git config user.email "bot@bot.com"
