@@ -1,8 +1,0 @@
-c_main
-cpp_main
-*.o
-*.so
-*.elf
-*.bin
-*.log
-*.ima
