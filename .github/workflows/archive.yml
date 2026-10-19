@@ -14,6 +14,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - uses: Colegio-San-Caio/marketplace@v1
+      - name: sync to docs
+        run: |
+          bash sync-docs.sh
       - run: |
           git config user.name "bot"
           git config user.email "bot@bot.com"
