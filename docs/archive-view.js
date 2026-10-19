@@ -17,3 +17,7 @@
     });
   }
 })();
+(function () {
+  var c = window.CATALOG, p = document.getElementById('last-updated');
+  if (c && c.last && p) p.textContent = 'Last updated: ' + c.last.replace('T', ' ').replace(/:\d\dZ$/, ' UTC');
+})();
