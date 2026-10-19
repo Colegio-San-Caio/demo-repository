@@ -29,6 +29,16 @@
       document.head.appendChild(s);
     });
   }
+  var PRE = [
+    'import builtins',
+    '_q = list(QUEUE.to_py())',
+    'def _inp(prompt=""):',
+    '    print(prompt, end="")',
+    '    l = _q.pop(0) if _q else "EXIT"',
+    '    print(l)',
+    '    return l',
+    'builtins.input = _inp'
+  ].join('\n');
   btn.onclick = async function () {
     btn.disabled = true;
     out.textContent = 'Loading Python (Pyodide)...\n';
@@ -38,11 +48,8 @@
       var py = await loadPyodide();
       py.setStdout({ batched: function (s) { out.textContent += s + '\n'; } });
       py.setStderr({ batched: function (s) { out.textContent += s + '\n'; } });
-      py.setStdin({ stdin: function () {
-        var l = lines.length ? lines.shift() : 'EXIT';
-        out.textContent += '> ' + l + '\n';
-        return l;
-      } });
+      py.globals.set('QUEUE', lines);
+      await py.runPythonAsync(PRE);
       await py.runPythonAsync(src);
     } catch (e) { out.textContent += '\nError: ' + e; }
     btn.disabled = false;
