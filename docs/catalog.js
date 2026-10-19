@@ -1,2 +1,10 @@
-window.CATALOG={last:"2026-10-19T18:23:33Z",ts:"20261019-182333",archives:["archive/index-20261019-182333.html","archive/index-20261019-175857.html"
-]};
+// Colegio San Caio - Clean Catalog - 2026-10-19
+// NO board.colegio-san-caio.com - NXDOMAIN fixed
+window.CATALOG = [
+  {
+    id: "book-1",
+    title: "Demo Book 1",
+    url: "https://colegio-san-caio.github.io/demo-repository/"
+  }
+];
+console.log("Catalog clean");
