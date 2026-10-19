@@ -1,0 +1,20 @@
+8e73141 archive [skip ci]
+8338605 clean: remove Verified System Manifest injector, remove CNAME, oeneye NXDOMAIN only
+e6b83ac archive [skip ci]
+fafa381 page: Last updated follows snapshot timestamp
+9cad3b0 archive [skip ci]
+79c2be9 page: lock zoom level, wrap long strings on mobile
+646fb46 archive [skip ci]
+9f66f43 page: mobile-only layout rules
+e314053 archive [skip ci]
+1c75886 page: align text width with image
+9a82490 archive [skip ci]
+6903f09 page: mobile viewport and readable text width
+159c95c archive [skip ci]
+b74602b sync-docs.sh: autoexec copy of page files into docs
+287269c archive [skip ci]
+4e17d04 restore JP clock and repo catalog on page
+8eb7323 archive [skip ci]
+22232ff prune stale snapshots from docs/archive
+e39cccc archive [skip ci]
+6f19b0c remove redundant pages.yml (Pages deploys from main /docs)
