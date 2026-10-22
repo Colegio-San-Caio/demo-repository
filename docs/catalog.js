@@ -1,2 +1,2 @@
-window.CATALOG={last:"2026-10-19T18:48:28Z",ts:"20261019-184828",archives:["archive/index-20261019-184828.html"
+window.CATALOG={last:"2026-10-22T08:07:06Z",ts:"20261022-080706",archives:["archive/index-20261022-080706.html","archive/index-20261019-184828.html"
 ]};
