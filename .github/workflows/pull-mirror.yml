@@ -1,0 +1,26 @@
+name: pull-mirror-index-html
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mirror index.html into a branch
+        run: |
+          git config user.name "mirror-bot"
+          git config user.email "mirror-bot@users.noreply.github.com"
+          git remote add src https://github.com/kaiolafketelhut/index.html.git
+          git fetch --depth 1 src main
+          SHA=$(git rev-parse src/main)
+          git checkout --orphan snap
+          git rm -rf -q --ignore-unmatch .
+          git checkout src/main -- .
+          git rm -rf -q --cached --ignore-unmatch .github
+          rm -rf .github
+          git commit -q --allow-empty -m "mirror of kaiolafketelhut/index.html $SHA"
+          git push --force origin snap:refs/heads/index-html-mirror
