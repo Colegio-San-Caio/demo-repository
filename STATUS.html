@@ -1,0 +1,18 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STATUS v49 - MOSFETQ</title><style>body{margin:0;font-family:system-ui;background:#000;color:#fff}.wrap{max-width:600px;margin:0 auto;padding:20px;text-align:center}h1{font-size:26px}.card{background:#111;border:1px solid #333;border-radius:14px;padding:12px 14px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;text-align:left}.ok{border-color:#0f0}.fail{border-color:#f00}.dot{font-size:20px}.btn{background:#0f0;color:#000;border:none;padding:12px 20px;border-radius:12px;font-weight:bold;cursor:pointer;width:100%;margin-top:10px}.footer{color:#666;font-size:11px;margin-top:16px}</style></head><body><div class="wrap"><h1>🟢 LIVE STATUS — v49</h1><p style="color:#aaa;font-size:13px">MOSFETQismsOENEYE.exe • KAI OLAF KETELHUT • Berlin<br><span id="summary">Prüfe...</span></p><div id="list"></div><button class="btn" onclick="check()">🔄 ERNEUT PRÜFEN</button><p><a href="links.html" style="color:#888;font-size:13px">← Alle Links</a></p><div class="footer">ISMS v49 • CERTIFIED PASS • BUILT IN BERLIN<br>ISBN 978-3-00-068463-0</div></div><script>
+const PAGES=["index.html","isms.html","links.html","flyers.html","flyer.html","flyer-de.html","flyer-github.html","CERTIFICATE.html","sitemap.xml","robots.txt","og-image.png","STATUS.html"];
+async function check(){
+  const list=document.getElementById('list'); list.innerHTML=''; let ok=0;
+  for(const p of PAGES){
+    const el=document.createElement('div'); el.className='card'; el.innerHTML=`<span>${p}</span><span class="dot">⏳</span>`;
+    list.appendChild(el);
+    try{
+      const r=await fetch(p,{method:'HEAD',cache:'no-store'});
+      const dot=el.querySelector('.dot');
+      if(r.ok){ el.classList.add('ok'); dot.textContent='🟢 '+r.status; ok++; }
+      else { el.classList.add('fail'); dot.textContent='🔴 '+r.status; }
+    }catch(e){ el.classList.add('fail'); el.querySelector('.dot').textContent='🔴 FAIL'; }
+  }
+  document.getElementById('summary').textContent = ok===PAGES.length ? `✅ ${ok}/${PAGES.length} PASS — ALL GREEN` : `⚠️ ${ok}/${PAGES.length} PASS — ${PAGES.length-ok} FAIL`;
+}
+check();
+</script></body></html>

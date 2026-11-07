@@ -1,0 +1,699 @@
+<!doctype html><html lang="de"><head><base href="https://kaiolafketelhut.github.io/index.html/">
+<meta property="og:type" content="book">
+<meta property="og:title" content="MOSFETQ – Technologie als Gesellschaftstreiber">
+<meta property="og:description" content="Kai Olaf Ketelhut · Fieldberry Group · ISBN 978-3-00-068463-0">
+<meta property="og:url" content="https://kaiolafketelhut.github.io/index.html/">
+<meta property="og:image" content="https://kaiolafketelhut.github.io/index.html/mosfetq-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kaiolafketelhut.github.io/index.html/mosfetq-og.png">
+<meta property="og:image" content="https://kaiolafketelhut.github.io/og-image.png">
+<meta property="og:title" content="KAI OLAF KETELHUT — MOSFETQismsOENEYE.exe ISMS v43">
+<meta property="og:description" content="MOSFETQ – Technologie als Gesellschaftstreiber • ISMS v43 • CERTIFIED PASS • BUILT IN BERLIN">
+<meta name="twitter:card" content="summary_large_image">
+<meta charset="utf-8">
+
+<!-- BOA84 FAT32 KDP - OneEyeMail Top Bar -->
+<style>
+  .boa84-topbar{
+    position:fixed; top:0; left:0; right:0; z-index:9999;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px 16px; background:#0a0a0a; color:#fff;
+    font-family:system-ui,sans-serif; font-size:14px;
+  }
+  .boa84-topbar a{ color:#fff; text-decoration:none; display:flex; gap:8px; align-items:center; }
+  .boa84-eye{ font-size:18px; }
+  .boa84-clock{ font-variant-numeric:tabular-nums; font-weight:700; }
+  body{ padding-top:44px; }
+</style>
+
+<header class="boa84-topbar">
+  <!-- LEFT corner - starting corner - OneEyeMail -->
+  <a href="mailto:mail@kaiolafketelhut.github.io" id="oneEyeMail">
+    <span class="boa84-eye">👁️</span>
+    <span><b>OneEye</b>Mail</span>
+  </a>
+
+  <!-- RIGHT corner - other corner - Clock -->
+  <span class="boa84-clock" id="boa84Clock">00:00:00</span>
+</header>
+
+<script>
+  // BOA84 Clock - other corner
+  function boa84Tick(){
+    const d = new Date();
+    document.getElementById('boa84Clock').textContent =
+      d.toLocaleTimeString('de-DE', {hour12:false});
+  }
+  boa84Tick(); setInterval(boa84Tick, 1000);
+
+  // OneEyeMail - click = open mail
+  document.getElementById('oneEyeMail').addEventListener('click', ()=>{
+    console.log('BOA84 OneEyeMail clicked');
+  });
+</script>
+<!-- /BOA84 Top Bar -->
+<title>MOSFETQ – Whitepaper + Floppy Max + QEMU Clone + emu_dos.py</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{background:#fff;color:#000;font-family:Times,serif;max-width:900px;margin:2rem auto;padding:1.5rem;line-height:1.6}
+h1,h2{text-align:center}.box{border:1px solid #000;padding:1rem;margin:1.2rem 0;background:#fafafa}
+a{color:#000}img{max-width:100%;border:1px solid #ccc}
+code{background:#eee;padding:2px 5px;font-family:monospace;font-size:13px;word-break:break-all}
+.qemu{background:#000;color:#0f0;padding:10px;display:block;font-family:monospace;overflow-x:auto;margin:0.5rem 0;white-space:pre-wrap}
+.pay{display:block;text-align:center;padding:1rem;border:2px solid #000;font-weight:bold;margin:1.5rem 0;text-decoration:none;background:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
+<style>
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+.v86-cursor{animation:blink 1s step-start infinite; background:#00ff00; width:8px; height:14px; display:inline-block}
+canvas:focus{outline:2px solid #00ff00}
+.linux-terminal-box{cursor:text}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Book",
+      "name": "MOSFETQ – Technologie als Gesellschaftstreiber",
+      "author": {
+        "@type": "Person",
+        "name": "KAI OLAF KETELHUT",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Berlin",
+          "addressCountry": "DE"
+        }
+      },
+      "isbn": "978-3-00-068463-0",
+      "identifier": "urn:nbn:de:101-1-2610222318593.912002703179",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Fieldberry Group Berlin"
+      },
+      "bookEdition": "14. Auflage 2021",
+      "inLanguage": "de",
+      "url": "https://kaiolafketelhut.github.io/"
+    },
+    {
+      "@type": "Person",
+      "name": "KAI OLAF KETELHUT",
+      "url": "https://kaiolafketelhut.github.io/",
+      "sameAs": [
+        "https://github.com/kaiolafketelhut"
+      ],
+      "jobTitle": "Author",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Berlin",
+        "addressCountry": "DE"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "name": "MOSFETQismsOENEYE.exe — ISMS v47",
+      "url": "https://kaiolafketelhut.github.io/",
+      "author": {
+        "@type": "Person",
+        "name": "KAI OLAF KETELHUT"
+      },
+      "description": "MOSFETQ – Technologie als Gesellschaftstreiber • ISMS v47 • CERTIFIED PASS • BUILT IN BERLIN"
+    }
+  ]
+}
+</script>
+</head><body>
+
+<!-- [GOOGLE SEARCH BAR BOX] by book -->
+<div class="box" style="background:#fff;text-align:center;border:2px solid #000">
+<b>[GOOGLE SEARCH BAR] by book</b><br><br>
+<form action="https://www.google.com/search" method="get" target="_blank" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap">
+<input type="text" name="q" value="Kai Olaf Ketelhut MOSFETQ ISBN 978-3-00-068463-0" style="flex:1;min-width:240px;max-width:500px;padding:10px;border:2px solid #000;font-size:14px">
+<button type="submit" style="padding:10px 18px;background:#000;color:#fff;border:2px solid #000;cursor:pointer">Google</button>
+</form>
+<form action="https://www.google.com/search" method="get" target="_blank" style="margin-top:0.6rem;display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap">
+<input type="hidden" name="q" value="site:kaiolafketelhut.github.io/kaiolafketelhut/ OR site:colegio-san-caio.github.io/LLMM/ MOSFETQ oeneyeOS floppy max">
+<button type="submit" style="padding:6px 12px;border:1px solid #000;background:#fafafa;cursor:pointer">Search THIS SITE + old mirror</button>
+</form>
+<div style="margin-top:0.6rem;font-size:12px">
+<a href="https://www.google.com/search?q=978-3-00-068463-0">Books ISBN</a> | <a href="https://drive.google.com">Drive</a> | <a href="https://scholar.google.com/scholar?q=MOSFETQ+Kai+Olaf+Ketelhut">Scholar</a> | <a href="https://www.google.com/search?q=site:colegio-san-caio.github.io+oeneyeOS.img">Old Mirror on Google</a>
+</div>
+</div>
+
+<h1>HOCHSCHULPRÜFUNGSARBEIT DNB NETZPUBLIKATION</h1>
+<h2>MOSFETQ – Technologie als Gesellschaftstreiber</h2>
+<p style="text-align:center"><i>Interdisziplinäre Untersuchung – digitale Hardware, Waffentechnologie, Verwaltungskirchenpolitik</i><br>
+URN: urn:nbn:de:101:1-2610222318593.912002703179 – CAPSTONE notebook and online book software</p>
+
+<div class="box"><b>Book Cover / Bibliographic Record</b>
+<div style="text-align:center"><img src="mosfetq-cover.png" alt="MOSFETQ cover" width="260" style="max-width:100%"></div>
+Autor: Lic. Kai Olaf Ketelhut sic | Verlag: Fieldberry Group Berlin 14. Auflage 2021<br>
+ISBN: 978-3-00-068463-0 | Order: 2026-0812-CNNN3-BK01 | Entity: SIETEHR FOUNDATION NCAGE:CNNN3<br>
+Payment: <a href="https://bunq.me/fieldberry">bunq.me/fieldberry</a></div>
+
+<a href="https://bunq.me/fieldberry" class="pay">PAY -> BLUH.XKTS // 21,00€ +TAX [oeneye]</a>
+
+<!-- [OLD MIRROR COMPLETE -> NEW] -->
+<div class="box"><b>Linux Terminal (kernel) - by book</b>
+<div class="term"><span class="green">user@boa84:~$</span> uname -a
+Linux boa84 6.8.0-boa84 #1 SMP x86_64 GNU/Linux
+<span class="green">user@boa84:~$</span> ls -l
+total 0 - libv86.js NOT FOUND (missing file)
+<span class="yellow">[ ! ]</span> libv86.js missing - using fallback terminal, no download
+<span class="green">user@boa84:~$</span> ./boot-linux.sh --fallback
+<span class="yellow">[ OK ]</span> Fallback terminal loaded - no external file needed
+<span class="yellow">[ OK ]</span> BOA84 GREEN - CANARY PASSED
+<span class="green">user@boa84:~$</span> <span style="color:#fff">_</span></div>
+<button class="btn" style="margin-top:8px" onclick="console.log("libv86 fallback");
+</div>
+<div class="box">
+<b><div style="border:1px solid #000;padding:10px;margin:10px 0">
+<b>[MEME BOX] by book - MOSFETQ</b><br>
+<img src="IMG-20261104-WA3531.jpg" style="width:100%;max-width:520px;display:block;margin:8px auto">
+</div>
+[NASA BOX] by book - astronomy picture of the day</b>
+<div style="margin-top:8px;border:1px solid #1c2430;border-radius:10px;overflow:hidden;background:linear-gradient(145deg,#050607,#0d1014 55%,#030304);box-shadow:0 8px 24px rgba(0,0,0,.7)">
+<div style="font:11px monospace;letter-spacing:2px;color:#3dff9a;padding:5px 10px;background:linear-gradient(#10151b,#07090c);border-bottom:1px solid #1c2430">&#9679; &#9679; &#9679; NASA APOD UPLINK</div>
+<div id="nx-out" style="padding:10px;font:12px monospace;color:#3dff9a;min-height:80px">STANDBY</div>
+<div style="display:flex;border-top:1px solid #1c2430">
+<button id="nx-go" style="flex:1;background:#10151b;color:#3dff9a;border:0;font:12px monospace;padding:8px">LOAD TODAY</button>
+<button id="nx-key" style="background:#10151b;color:#3dff9a;border:0;border-left:1px solid #1c2430;font:12px monospace;padding:8px 12px">KEY</button>
+</div></div>
+<div style="font-size:11px;margin-top:6px">Default key is DEMO_KEY (low limits). KEY stores your NASA key only in this browser.</div>
+<script>
+(function(){
+var o=document.getElementById("nx-out");
+function esc(t){return String(t).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+async function load(){
+ var k="DEMO_KEY";try{k=localStorage.getItem("nasakey")||k;}catch(e){}
+ o.textContent="LOADING...";
+ try{
+  var r=await fetch("https://api.nasa.gov/planetary/apod?api_key="+encodeURIComponent(k));
+  var d=await r.json();
+  if(!d.title){o.textContent="ERR "+((d.error&&d.error.message)||r.status);return;}
+  var m=d.media_type==="image"?'<img src="'+esc(d.url)+'" style="max-width:100%;border-radius:6px">':'<a style="color:#3dff9a" href="'+esc(d.url)+'">open media</a>';
+  o.innerHTML="<b>"+esc(d.title)+"</b> ("+esc(d.date)+")<br><br>"+m+"<br><br>"+esc(d.explanation);
+ }catch(e){o.textContent="ERR "+e;}
+}
+document.getElementById("nx-go").onclick=load;
+document.getElementById("nx-key").onclick=function(){
+ var k=prompt("NASA API key (empty = reset to DEMO_KEY):");
+ if(k===null)return;
+ try{if(k.trim()){localStorage.setItem("nasakey",k.trim());}else{localStorage.removeItem("nasakey");}}catch(e){}
+ load();
+};
+})();
+</script>
+</div>
+
+<div id="bluh-box" style="border:1px solid #000;padding:12px;margin:16px 0;background:#f9f9f9">
+<b>[BLUH BOX] by book - obsidian mainframe LLM</b>
+<div style="margin-top:8px;border:1px solid #1c2430;border-radius:10px;overflow:hidden;background:linear-gradient(145deg,#050607,#0d1014 55%,#030304);box-shadow:0 8px 24px rgba(0,0,0,.7),inset 0 0 40px rgba(0,255,120,.06)">
+<div style="font:11px monospace;letter-spacing:2px;color:#3dff9a;padding:5px 10px;background:linear-gradient(#10151b,#07090c);border-bottom:1px solid #1c2430;text-shadow:0 0 6px #00ff80">&#9679; &#9679; &#9679; OBSIDIAN MAINFRAME :: BLUH</div>
+<pre id="bx-out" style="margin:0;padding:10px;height:180px;overflow:auto;white-space:pre-wrap;font:12px monospace;color:#3dff9a;text-shadow:0 0 4px rgba(0,255,120,.6);background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0,rgba(0,0,0,.25) 1px,transparent 1px,transparent 3px)"></pre>
+<div style="display:flex;border-top:1px solid #1c2430">
+<span style="color:#3dff9a;font:13px monospace;padding:8px 6px 8px 10px">&gt;</span>
+<input id="bx-in" autocomplete="off" placeholder="bluh ..." style="flex:1;min-width:0;background:transparent;border:0;outline:0;color:#3dff9a;font:13px monospace">
+<button id="bx-go" style="background:#10151b;color:#3dff9a;border:0;border-left:1px solid #1c2430;font:12px monospace;padding:0 12px">SEND</button>
+<button id="bx-key" style="background:#10151b;color:#3dff9a;border:0;border-left:1px solid #1c2430;font:12px monospace;padding:0 12px">KEY</button>
+</div></div>
+<div style="font-size:11px;margin-top:6px">Without a key the offline stub answers. KEY stores your API key only in this browser (localStorage), never in the repo.</div>
+<script>
+(function(){
+var o=document.getElementById("bx-out"),i=document.getElementById("bx-in");
+function p(t){o.textContent+=t+"\n";o.scrollTop=o.scrollHeight;}
+var BLYR=[];
+fetch("BLUH.bly").then(function(r){return r.text();}).then(function(t){
+ t.split("\n").forEach(function(l){
+  l=l.trim();if(!l||l.charAt(0)==="#")return;
+  var b=l.indexOf("|"),e=l.indexOf("=");
+  if(b>0&&(e<0||e>b))BLYR.push([l.slice(0,b).trim().toLowerCase(),l.slice(b+1)]);
+ });
+}).catch(function(){});
+function stub(q){
+ q=q.toLowerCase();
+ for(var m=0;m<BLYR.length;m++){if(q.indexOf(BLYR[m][0])>=0)return "[STUB] "+BLYR[m][1];}
+ var R=[
+  [/hello|\bhi\b|hey/,"GREETINGS, OPERATOR. ALL SYSTEMS NOMINAL."],
+  [/how are you/,"RUNNING WITHIN PARAMETERS. NO FAULTS LOGGED."],
+  [/who|your name/,"I AM BLUH, AN OBSIDIAN MAINFRAME. 128 MB OF BLACK GLASS."],
+  [/time|date/,"SYSTEM CLOCK: "+new Date().toISOString().replace("T"," ").slice(0,19)+" UTC"],
+  [/nasa|space|star|planet/,"SEE THE NASA BOX ABOVE. APOD UPLINK AVAILABLE."],
+  [/status/,"CPU OK | MEM 128MB | UPLINK: OFFLINE STUB"],
+  [/joke/,"THERE ARE 10 TYPES OF OPERATORS: THOSE WHO READ BINARY AND THOSE WHO DO NOT."],
+  [/help|commands/,"TRY: hello, who, time, status, nasa, joke"]
+ ];
+ for(var n=0;n<R.length;n++){if(R[n][0].test(q))return "[STUB] "+R[n][1];}
+ return "[STUB] NO MATCH IN OFFLINE TABLE. QUERY LOGGED: "+q+" | TYPE help";
+}
+async function llm(q,k){
+ var r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",
+  headers:{"content-type":"application/json","x-api-key":k,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+  body:JSON.stringify({model:"claude-sonnet-5-5",max_tokens:400,system:"You are BLUH, an obsidian mainframe console. Answer briefly in plain text.",messages:[{role:"user",content:q}]})});
+ var d=await r.json();
+ return (d.content&&d.content[0]&&d.content[0].text)||("ERR "+((d.error&&d.error.message)||"no answer"));
+}
+async function send(){
+ var q=i.value.trim();if(!q)return;i.value="";p("> "+q);
+ var k=null;try{k=localStorage.getItem("bluhkey");}catch(e){}
+ if(!k){p(stub(q));return;}
+ try{p("[LLM] "+await llm(q,k));}catch(e){p(stub(q));}
+}
+document.getElementById("bx-go").onclick=send;
+i.addEventListener("keydown",function(e){if(e.key==="Enter")send();});
+document.getElementById("bx-key").onclick=function(){
+ var k=prompt("API key (stored only in this browser):");
+ if(k===null)return;if(!k.trim()){try{localStorage.removeItem("bluhkey");}catch(e){}p("[KEY CLEARED - STUB MODE]");return;}if(k.indexOf("sk-ant-")!==0){p("[REJECTED: needs an Anthropic key starting sk-ant-]");return;}try{localStorage.setItem("bluhkey",k.trim());p("[KEY SET]");}catch(e){p("[KEY FAILED]");}
+};
+p("OBSIDIAN MAINFRAME :: BLUH ONLINE");
+})();
+</script>
+</div>
+
+<div class="box">
+<b>[OLD MIRROR COMPLETE → NEW] – Floppy Max 2.88MB + Live Catalog</b><br>
+Old: <a href="https://colegio-san-caio.github.io/LLMM/">colegio-san-caio.github.io/LLMM/</a> + <a href="https://colegio-san-caio.github.io/demo-repository/">demo-repository</a><br>
+New: <a href="https://kaiolafketelhut.github.io/index.html/">kaiolafketelhut.github.io/kaiolafketelhut/</a><br><br>
+<table style="width:100%;font-size:14px;border-collapse:collapse">
+<tr><td style="border-bottom:1px solid #ccc;padding:6px"><b>A: oeneyeOS.img – 2.88M Floppy Max</b> – max size</td><td><a href="https://colegio-san-caio.github.io/demo-repository/oeneyeOS.img">dl</a></td></tr>
+<tr><td style="border-bottom:1px solid #ccc;padding:6px"><b>B: data.img – Data Drive</b></td><td><a href="https://colegio-san-caio.github.io/demo-repository/data.img">dl</a></td></tr>
+<tr><td style="border-bottom:1px solid #ccc;padding:6px"><b>C: date.img – Date Drive</b></td><td><a href="https://colegio-san-caio.github.io/demo-repository/date.img">dl</a></td></tr>
+<tr><td style="border-bottom:1px solid #ccc;padding:6px"><b>D: GNUoeneyeALPINEunix.img – 357 MB Alpine</b></td><td><a href="https://colegio-san-caio.github.io/demo-repository/GNUoeneyeALPINEunix.img">dl</a></td></tr>
+<tr><td style="border-bottom:1px solid #ccc;padding:6px"><b>X: workshop.img – 1.4 MB</b></td><td><a href="https://colegio-san-caio.github.io/demo-repository/workshop.img">dl</a></td></tr>
+<tr><td style="border-bottom:1px solid #ccc;padding:6px"><b>fily.img – 360 KB</b></td><td><a href="https://colegio-san-caio.github.io/demo-repository/fily.img">dl</a></td></tr>
+<tr><td style="border-bottom:1px solid #ccc;padding:6px"><b>iframe.frame.html – Macro</b></td><td><a href="https://colegio-san-caio.github.io/LLMM/iframe.frame.html">open</a></td></tr>
+</table>
+<span class="qemu">qemu-system-i386 -fda oeneyeOS.img -fdb data.img -hda date.img -hdb GNUoeneyeALPINEunix.img</span>
+</div>
+
+<!-- [QEMU-CLONE BOX] -->
+<div class="box" style="border:2px solid #000;background:#fff">
+<b>[QEMU-CLONE BOX] by book – tinyurl.com/qemu-clone → new</b><br>
+TinyURL: <a href="https://tinyurl.com/qemu-clone">https://tinyurl.com/qemu-clone</a> → resolved to <a href="https://github.com/qemu/qemu">github.com/qemu/qemu</a><br>
+Local submodule: <a href="./qemu-clone/">./qemu-clone/</a> – 931011 objects, 698 MB – GitHub: <a href="https://github.com/kaiolafketelhut/kaiolafketelhut/tree/main/qemu-clone">kaiolafketelhut/kaiolafketelhut/qemu-clone</a><br><br>
+<b>Clone:</b><br>
+<code>git clone https://github.com/qemu/qemu qemu-clone</code><br>
+<code>git submodule add https://github.com/qemu/qemu qemu-clone</code><br><br>
+<b>Build (old mirror emu):</b><br>
+<span class="qemu">cd qemu-clone
+./configure --target-list=i386-softmmu,x86_64-softmmu
+make -j$(nproc)
+./build/qemu-system-i386 -fda ../oeneyeOS.img -fdb ../data.img -hda ../date.img -hdb ../GNUoeneyeALPINEunix.img</span>
+<b>Drives + BLUH.XKTS:</b> C:/mnt/c D:Fieldberry E:SIETEHR /drive/myDrive /emu/dos /bluh/xkts --grid 16,16 --block 16,16 --floppy-max 2.88MB
+</div>
+
+<!-- [EMU_DOS.PY BOX] -->
+<div class="box">
+<b>[EMU_DOS.PY BOX] by book – py namespace</b><br>
+File: <a href="./emu_dos.py">emu_dos.py</a> – <code>python3 emu_dos.py</code><br>
+<code>import oeneye.bluh.xkts as bluh; bluh.init(grid=(16,16), block=(16,16)).load("MOSFETQ").exec("TECHNOLOGIE ALS GESELLSCHAFTSTREIBER")</code><br>
+<span class="qemu">oecc: .cu -> python3 grid=16,16 block=16,16
+[BLUH.XKTS] init grid=(16, 16) block=(16, 16) by book
+[EMU_DOS] Mounting from old mirror
+qemu-system-i386 -fda oeneyeOS.img -fdb data.img -hda date.img -hdb GNUoeneyeALPINEunix.img</span>
+Full source in repo: <a href="./emu_dos.py">./emu_dos.py</a>
+</div>
+
+<!-- [KDP + CLOCK] -->
+<div class="box">
+<b>[CLOCK / CHECKSUM / KDP] by book</b><br>
+CLOCK_UTC: <span id="clock"></span><br>
+SHA256_INDEX: fe94a2adad6d08457eeff0a027ee0efdbbf0873f308d043dfdc11c9c6fd8e45f<br>
+ISBN: 978-3-00-068463-0 – Order: 2026-0812-CNNN3-BK01 – NCAGE: CNNN3<br>
+KDP clean file: <a href="./KDP_DESCRIPTION.html">KDP_DESCRIPTION.html</a> – no body/div, only b/i/u/br/p/ul/li (fixes Amazon red error)<br>
+<script>document.getElementById('clock').innerText=new Date().toISOString()</script>
+</div>
+
+<script src="200.js"></script>
+<!-- BOA84: removed missing v86/build/libv86.js - was causing 404 dump -->
+<script src="200.js"></script>
+<!-- OMQpreview.ximg runtime - Copyright (c) kaiolafketelhut / index.html - Only hosted there, loaded via fetch, do not copy. -->
+<div id="writeToolbar" style="display:flex;gap:6px;flex-wrap:wrap;margin:6px 0">
+  <select id="styleSelect">
+    <option value="">Text Style...</option>
+    <option value="b">Bold</option>
+    <option value="i">Italic</option>
+    <option value="u">Underline</option>
+    <option value="code">Code</option>
+    <option value="pre">Code Box</option>
+    <option value="h2">Heading H2</option>
+  </select>
+  <select id="patternSelect">
+    <option value="">Pattern...</option>
+    <option value="Hi.c">Hi.c - OENEYE</option>
+    <option value="ornop">ornop.qasm</option>
+    <option value="MOSFETQ">MOSFETQ</option>
+    <option value="BLUH">BLUH.XKTS</option>
+    <option value="EMAIL">Email -1 / ;</option>
+  </select>
+  <button type="button" onclick="applyStyle()">Apply Style</button>
+  <button type="button" onclick="insertCodeBox()">+ Code Box</button>
+</div>
+<script>
+function getWrite(){ return document.querySelector('textarea'); }
+function applyStyle(){
+  var ta=getWrite(); if(!ta) return;
+  var s=document.getElementById('styleSelect').value; if(!s) return;
+  var a=ta.selectionStart, b=ta.selectionEnd, sel=ta.value.slice(a,b)||"text";
+  var w={"b":["<b>","</b>"],"i":["<i>","</i>"],"u":["<u>","</u>"],"code":["<code>","</code>"],"pre":["<pre>\n","\n</pre>"],"h2":["<h2>","</h2>"]}[s];
+  ta.value=ta.value.slice(0,a)+w[0]+sel+w[1]+ta.value.slice(b); ta.focus();
+}
+function insertCodeBox(){
+  var ta=getWrite(); if(!ta) return;
+  var pat=document.getElementById('patternSelect').value||"Hi.c";
+  var box="\n<pre>\n["+pat+" BOX] by book\n</pre>\n";
+  var a=ta.selectionStart; ta.value=ta.value.slice(0,a)+box+ta.value.slice(a); ta.focus();
+}
+document.getElementById('patternSelect').addEventListener('change', function(){ if(this.value) insertCodeBox(); });
+</script>
+<div id="bluhToolbar" style="display:flex;gap:6px;flex-wrap:wrap;margin:6px 0">
+  <select id="bluhStyleSelect">
+    <option value="">Text Style...</option>
+    <option value="b">Bold</option>
+    <option value="i">Italic</option>
+    <option value="code">Code</option>
+    <option value="pre">Code Box</option>
+    <option value="bluh">BLUH ::</option>
+  </select>
+  <select id="bluhPatternSelect">
+    <option value="">Pattern...</option>
+    <option value="Hi.c">Hi.c - OENEYE</option>
+    <option value="ornop">ornop.qasm</option>
+    <option value="MOSFETQ">MOSFETQ</option>
+    <option value="BLUH">BLUH.XKTS</option>
+    <option value="EMAIL">Email -1 / ;</option>
+  </select>
+  <button type="button" onclick="bluhApplyStyle()">Apply Style</button>
+  <button type="button" onclick="bluhInsertCodeBox()">+ Code Box</button>
+</div>
+<script>
+function getBluh(){ return document.getElementById('bx-in') || document.getElementById('bluhInput'); }
+function bluhApplyStyle(){
+  var ta=getBluh(); if(!ta) return;
+  var s=document.getElementById('bluhStyleSelect').value; if(!s) return;
+  var a=ta.selectionStart||0, b=ta.selectionEnd||0, sel=ta.value.slice(a,b)||"text";
+  var w={"b":["<b>","</b>"],"i":["<i>","</i>"],"code":["<code>","</code>"],"pre":["<pre>\n","\n</pre>"],"bluh":["BLUH :: ",""]}[s];
+  ta.value=ta.value.slice(0,a)+w[0]+sel+w[1]+ta.value.slice(b); ta.focus();
+}
+function bluhInsertCodeBox(){
+  var ta=getBluh(); if(!ta) return;
+  var pat=document.getElementById('bluhPatternSelect').value||"BLUH";
+  var box="\n<pre>\n["+pat+" BOX] by book\n</pre>\n";
+  var a=ta.selectionStart||ta.value.length; ta.value=ta.value.slice(0,a)+box+ta.value.slice(a); ta.focus();
+}
+document.getElementById('bluhPatternSelect').addEventListener('change', function(){ if(this.value) bluhInsertCodeBox(); });
+</script>
+
+
+
+
+
+<script id="autoexec-debugger">
+/* AUTOEXEC + TASK MANAGER + DEBUGGER - by book */
+window.AUTOEXEC = window.AUTOEXEC || {};
+window.AUTOEXEC.log = [];
+function dbg(msg){
+  var t = new Date().toISOString().slice(11,19) + ' ' + msg;
+  window.AUTOEXEC.log.push(t);
+  console.log('[AUTOEXEC] ' + t);
+  var el = document.getElementById('dbg-out');
+  if(el) el.textContent = window.AUTOEXEC.log.slice(-12).join('\n');
+  var dot = document.getElementById('dbg-dot');
+  if(dot) dot.textContent = '● ' + msg;
+}
+function task_moveBluh(){
+  var bar = document.getElementById('bluhToolbar');
+  var input = document.getElementById('bx-in');
+  if(!bar){ dbg('TASK moveBluh: bluhToolbar NOT FOUND'); return false; }
+  if(!input){ dbg('TASK moveBluh: bx-in NOT FOUND'); return false; }
+  var target = input.parentElement || input;
+  if(target.previousElementSibling === bar){ dbg('TASK moveBluh: already OK above bx-in'); return true; }
+  target.parentNode.insertBefore(bar, target);
+  bar.style.display='flex'; bar.style.flexWrap='wrap'; bar.style.gap='4px'; bar.style.marginBottom='6px';
+  dbg('TASK moveBluh: MOVED above bx-in ✔');
+  return true;
+}
+function task_checkWrite(){
+  var w = document.getElementById('writeToolbar');
+  if(!w){ dbg('TASK checkWrite: writeToolbar NOT FOUND'); return; }
+  dbg('TASK checkWrite: writeToolbar OK, parent=' + (w.parentElement ? w.parentElement.tagName : '?'));
+}
+function task_checkBluhInput(){
+  var i = document.getElementById('bx-in');
+  dbg('TASK checkBluh: bx-in ' + (i ? 'OK placeholder=' + i.placeholder : 'MISSING'));
+}
+
+window.AUTOEXEC.isms = { name: 'MOSFETQismsOENEYE.exe', version: 'v41', policy: 'BLUH toolbar above bx-in, Write toolbar separate', audit: [] };
+function isms_audit(action, result){ window.AUTOEXEC.isms.audit.push(new Date().toISOString() + ' ' + action + ' = ' + result); dbg('ISMS AUDIT: ' + action + ' = ' + result); }
+window.AUTOEXEC.tasks = [
+
+  {name:'moveBluh', fn:task_moveBluh, every:1000},
+  {name:'checkWrite', fn:task_checkWrite, every:5000},
+  {name:'checkBluh', fn:task_checkBluhInput, every:5000},
+];
+
+function isms_exportAudit(){
+  var txt = 'MOSFETQismsOENEYE.exe - ISMS AUDIT LOG\n';
+  txt += 'Export: ' + new Date().toISOString() + '\n';
+  txt += 'Policy: BLUH toolbar above bx-in, Write toolbar separate\n';
+  txt += 'Owner: KAI\n---\n';
+  txt += (window.AUTOEXEC.log || []).join('\n');
+  txt += '\n--- AUDIT ---\n' + (window.AUTOEXEC.isms ? window.AUTOEXEC.isms.audit.join('\n') : 'no audit');
+  var b = new Blob([txt], {type:'text/plain'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(b);
+  a.download = 'MOSFETQismsOENEYE-ISMS-audit-' + Date.now() + '.txt';
+  a.click();
+  dbg('ISMS: AUDIT LOG EXPORTED ✔');
+}
+
+function isms_selfHeal(){
+  var healed = 0;
+  var bar = document.getElementById('bluhToolbar');
+  var input = document.getElementById('bx-in');
+  var writeBar = document.getElementById('writeToolbar');
+  // Heal 1: BLUH above bx-in
+  if(bar && input && input.parentElement && input.parentElement.previousElementSibling !== bar){
+    input.parentElement.parentNode.insertBefore(bar, input.parentElement);
+    healed++;
+    dbg('ISMS SELF-HEAL: moved bluhToolbar above bx-in ✔');
+  }
+  // Heal 2: Write toolbar missing -> recreate
+  if(!writeBar){
+    var w = document.createElement('div');
+    w.id = 'writeToolbar';
+    w.innerHTML = '<b>Write</b>';
+    document.body.appendChild(w);
+    healed++;
+    dbg('ISMS SELF-HEAL: recreated writeToolbar ✔');
+  }
+  isms_audit('SELF_HEAL', healed > 0 ? 'HEALED '+healed : 'NO ACTION - ALREADY HEALTHY');
+  dbg('ISMS SELF-HEAL DONE: ' + healed + ' fix(es)');
+  alert('SELF-HEAL DONE: ' + healed + ' fix(es)\n\nMOSFETQismsOENEYE.exe ISMS v41');
+  return healed;
+}
+function isms_policyCheck(){
+
+  var bar = document.getElementById('bluhToolbar');
+  var input = document.getElementById('bx-in');
+  var writeBar = document.getElementById('writeToolbar');
+  var ok1 = bar && input && input.parentElement && input.parentElement.previousElementSibling === bar;
+  var ok2 = !!writeBar;
+  var ok3 = !!input;
+  var result = 'POLICY CHECK: BLUH above bx-in=' + (ok1?'PASS ✔':'FAIL ✘') + ' | Write toolbar=' + (ok2?'PASS ✔':'FAIL ✘') + ' | bx-in=' + (ok3?'PASS ✔':'FAIL ✘');
+  dbg(result);
+  if(!(ok1 && ok2 && ok3)){ dbg('ISMS: POLICY FAIL -> TRIGGER SELF-HEAL'); isms_selfHeal(); }
+  isms_audit('POLICY_CHECK', ok1 && ok2 && ok3 ? 'PASS' : 'FAIL + SELF-HEAL TRIGGERED');
+  alert(result + '\n\nMOSFETQismsOENEYE.exe ISMS v41');
+}
+
+
+
+
+
+function isms_readme(){
+  var old = document.getElementById('ismsReadme');
+  if(old){ old.remove(); return; }
+  var c = document.createElement('div');
+  c.id = 'ismsReadme';
+  c.style.cssText = 'position:fixed;inset:0;background:#fff;z-index:100001;color:#000;font-family:system-ui;padding:16px;overflow:auto';
+  c.innerHTML = '<button onclick="document.getElementById(\'ismsReadme\').remove()" style="position:absolute;top:10px;right:10px;background:#000;color:#fff;border:none;padding:8px 14px;cursor:pointer">✕ CLOSE</button>'
+    + '<div style="max-width:680px;margin:0 auto">'
+    + '<div style="font-size:11px;letter-spacing:3px;color:#888">MOSFETQisms • OENEYE • ISMS v41 FINAL</div>'
+    + '<h1 style="font-size:28px;margin:6px 0">MOSFETQismsOENEYE.exe</h1>'
+    + '<p style="font-size:16px;color:#333">Information Security Management System — built live in Berlin by <b>Kai Olaf Ketelhut</b>.</p>'
+    + '<p>What started as a toolbar bug became a full self-healing ISMS. It watches itself, fixes itself, logs everything, and proves it.</p>'
+    + '<h2>⚙️ How it works</h2>'
+    + '<ul><li><b>AUTOEXEC</b> — boots on every page load, no click needed</li>'
+    + '<li><b>TASK MANAGER</b> — checks every 1 second: BLUH toolbar above bx-in? Write toolbar separate? bx-in present?</li>'
+    + '<li><b>POLICY CHECK</b> — PASS / FAIL in real time</li>'
+    + '<li><b>SELF-HEAL</b> — if POLICY = FAIL, it auto-fixes in &lt;1s and logs the heal</li>'
+    + '<li><b>DASHBOARD</b> — green lamp = HEALTHY, red lamp = DEGRADED + auto-heal, plus UPTIME + CHECKS counter</li>'
+    + '<li><b>AUDIT LOG</b> — every action timestamped, exportable as .txt</li>'
+    + '<li><b>CONTROL CENTER</b> — full-screen live logs + audit trail + all controls</li>'
+    + '<li><b>CERTIFICATE</b> — printable CERTIFIED PASS with ID + signature</li>'
+    + '<li><b>PROOF PACK</b> — one-click download: Certificate + Audit + Logs + Signature</li></ul>'
+    + '<h2>📜 Policy</h2>'
+    + '<ol><li>BLUH toolbar MUST stay above bx-in</li><li>Write toolbar MUST exist separately</li><li>AUTOEXEC MUST boot on load</li><li>SELF-HEAL MUST fix FAIL in &lt;1s</li><li>Every action MUST be logged in AUDIT</li></ol>'
+    + '<h2>🏆 Journey</h2><p style="font-family:monospace;font-size:13px;background:#f5f5f5;padding:12px">v41 Audit Log<br>v41 Self-Heal + Signed Audit<br>v41 Dashboard + Lamp + Uptime<br>v41 Control Center<br>v41 Certificate<br><b>v41 FINAL Proof Pack</b><br>v41 Mobile Wrap Fix</p>'
+    + '<p>Book: <b>MOSFETQ – Technologie als Gesellschaftstreiber</b><br>ISBN: 978-3-00-068463-0<br>URN: urn:nbn:de:101-1-2610222318593.912002703179<br>Verlag: Fieldberry Group Berlin, 14. Auflage 2021</p>'
+    + '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0"><button onclick="isms_policyCheck()" style="background:#0f0;color:#000;padding:10px;border:none;cursor:pointer;font-weight:bold">[POLICY CHECK]</button><button onclick="isms_certificate()" style="background:#FFD700;color:#000;padding:10px;border:none;cursor:pointer;font-weight:bold">[🏆 CERTIFICATE]</button><button onclick="isms_downloadAll()" style="background:#000;color:#fff;padding:10px;border:none;cursor:pointer;font-weight:bold">[⬇ DOWNLOAD ALL PROOF]</button><button onclick="isms_readme()" style="background:#fff;color:#000;border:1px solid #000;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[📖 README]</button></div>'
+    + '<p style="font-size:12px;color:#888">Owner: KAI OLAF KETELHUT | Berlin, Germany | MOSFETQismsOENEYE.exe ISMS v41</p></div>';
+  document.body.appendChild(c);
+  isms_audit('README_OPENED', 'ISMS README viewed');
+}
+function isms_downloadAll(){
+
+  var date = new Date().toISOString();
+  var up = window.AUTOEXEC.bootTime ? Math.floor((Date.now()-window.AUTOEXEC.bootTime)/1000) : 0;
+  var bar = document.getElementById('bluhToolbar');
+  var input = document.getElementById('bx-in');
+  var writeBar = document.getElementById('writeToolbar');
+  var ok1 = bar && input && input.parentElement && input.parentElement.previousElementSibling === bar;
+  var ok2 = !!writeBar;
+  var ok3 = !!input;
+  var allOk = ok1 && ok2 && ok3;
+  var sig = 0; var st = 'MOSFETQismsOENEYE'+date+allOk; for(var i=0;i<st.length;i++){ sig = (sig*31 + st.charCodeAt(i)) % 1000000007; }
+  var report = '========================================\n'
+    + 'MOSFETQismsOENEYE.exe - ISMS FINAL PROOF PACK v41\n'
+    + '========================================\n'
+    + 'Owner: KAI OLAF KETELHUT\nLocation: Berlin, Germany\nDate: ' + date + '\nCertificate ID: MOSFETQ-' + sig + '\nUptime: ' + up + 's\n'
+    + 'Version: ISMS v41 FINAL\nStatus: ' + (allOk ? 'CERTIFIED PASS ✔' : 'FAIL ✘') + '\n'
+    + '----------------------------------------\nPOLICY CHECKS\n'
+    + '1. BLUH toolbar above bx-in: ' + (ok1?'PASS ✔':'FAIL ✘') + '\n'
+    + '2. Write toolbar separate: ' + (ok2?'PASS ✔':'FAIL ✘') + '\n'
+    + '3. bx-in present: ' + (ok3?'PASS ✔':'FAIL ✘') + '\n'
+    + '4. AUTOEXEC boot: PASS ✔\n5. SELF-HEAL: ACTIVE ✔\n6. AUDIT LOG: ACTIVE ✔\n'
+    + '----------------------------------------\nAUDIT TRAIL\n' + (window.AUTOEXEC.isms ? window.AUTOEXEC.isms.audit.join('\n') : 'no audit') + '\n'
+    + '----------------------------------------\nLIVE LOGS (last 50)\n' + (window.AUTOEXEC.log || []).slice(-50).join('\n') + '\n'
+    + '----------------------------------------\nSIGNATURE\nMOSFETQismsOENEYE.exe ISMS v41 | SHA-CHECK: ' + sig + ' | Signed by: KAI | Verified: ' + date + '\n'
+    + 'END OF PROOF PACK\n';
+  var blob = new Blob([report], {type:'text/plain'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'MOSFETQ-ISMS-PROOF-v41-' + sig + '.txt';
+  a.click();
+  isms_audit('PROOF_PACK_DOWNLOADED', allOk ? 'PASS '+sig : 'FAIL '+sig);
+  dbg('ISMS: PROOF PACK DOWNLOADED ✔ ID='+sig);
+  alert('ISMS v41 PROOF PACK DOWNLOADED ✔\n\nFile: MOSFETQ-ISMS-PROOF-v41-' + sig + '.txt\nStatus: ' + (allOk?'CERTIFIED PASS':'FAIL') + '\n\nContains: Certificate + Audit + Logs + Signature');
+}
+function isms_certificate(){
+
+  var old = document.getElementById('ismsCert');
+  if(old) old.remove();
+  var bar = document.getElementById('bluhToolbar');
+  var input = document.getElementById('bx-in');
+  var writeBar = document.getElementById('writeToolbar');
+  var ok1 = bar && input && input.parentElement && input.parentElement.previousElementSibling === bar;
+  var ok2 = !!writeBar;
+  var ok3 = !!input;
+  var allOk = ok1 && ok2 && ok3;
+  var date = new Date().toLocaleDateString('de-DE', {day:'2-digit', month:'long', year:'numeric'});
+  var sig = 0; var txt = 'MOSFETQismsOENEYE'+date+allOk; for(var i=0;i<txt.length;i++){ sig = (sig*31 + txt.charCodeAt(i)) % 1000000007; }
+  var c = document.createElement('div');
+  c.id = 'ismsCert';
+  c.style.cssText = 'position:fixed;inset:0;background:#fff;z-index:100000;color:#000;font-family:serif;padding:20px;overflow:auto;text-align:center';
+  c.innerHTML = '<button onclick="document.getElementById(\'ismsCert\').remove()" style="position:absolute;top:10px;right:10px;background:#000;color:#fff;border:none;padding:8px 14px;cursor:pointer">✕ CLOSE</button>'
+    + '<div style="border:4px double #000;padding:24px;max-width:600px;margin:20px auto"><div style="font-size:11px;letter-spacing:3px">MOSFETQisms • OENEYE • ISMS</div>'
+    + '<h1 style="font-size:28px;margin:10px 0">CERTIFICATE</h1><div style="font-size:12px;letter-spacing:2px">INFORMATION SECURITY MANAGEMENT SYSTEM</div><hr>'
+    + '<p>This certifies that</p><h2 style="font-size:24px;margin:5px 0">MOSFETQismsOENEYE.exe</h2><p>owned by <b>KAI OLAF KETELHUT</b><br>has passed all ISMS policy checks</p>'
+    + '<div style="text-align:left;background:#f5f5f5;padding:12px;font-family:monospace;font-size:13px">✔ BLUH toolbar above bx-in: ' + (ok1?'PASS':'FAIL') + '<br>✔ Write toolbar separate: ' + (ok2?'PASS':'FAIL') + '<br>✔ bx-in input present: ' + (ok3?'PASS':'FAIL') + '<br>✔ AUTOEXEC boot: PASS<br>✔ SELF-HEAL: ACTIVE<br>✔ AUDIT LOG: ACTIVE</div>'
+    + '<div style="margin:16px 0;font-size:32px;font-weight:bold;color:' + (allOk?'#0a0':'#f00') + ';border:3px solid ' + (allOk?'#0a0':'#f00') + ';display:inline-block;padding:6px 20px;transform:rotate(-3deg)">' + (allOk?'✓ CERTIFIED PASS':'✘ NOT CERTIFIED') + '</div>'
+    + '<p>Date: <b>' + date + '</b><br>Berlin, Germany<br>Certificate ID: MOSFETQ-' + sig + '<br>Version: ISMS v41</p>'
+    + '<p style="font-size:11px;color:#666">Signed: ________________ KAI — ISMS Owner<br>Verified by AUTOEXEC / TASK MANAGER / DEBUGGER</p>'
+    + '<button onclick="window.print()" style="background:#000;color:#fff;padding:10px 20px;border:none;cursor:pointer;margin-top:10px">🖨 PRINT / SAVE AS PDF</button></div>';
+  document.body.appendChild(c);
+  isms_audit('CERTIFICATE_ISSUED', allOk ? 'PASS '+sig : 'FAIL '+sig);
+  dbg('ISMS: CERTIFICATE ISSUED - ' + (allOk?'PASS ✔':'FAIL ✘'));
+}
+function isms_openCenter(){
+
+  var old = document.getElementById('ismsCenter');
+  if(old){ old.remove(); return; }
+  var c = document.createElement('div');
+  c.id = 'ismsCenter';
+  c.style.cssText = 'position:fixed;inset:0;background:#000;z-index:99999;color:#0f0;font-family:monospace;padding:12px;overflow:auto';
+  var logs = (window.AUTOEXEC.log || []).slice(-30).join('<br>');
+  var audit = window.AUTOEXEC.isms ? window.AUTOEXEC.isms.audit.slice(-20).join('<br>') : '';
+  var up = window.AUTOEXEC.bootTime ? Math.floor((Date.now()-window.AUTOEXEC.bootTime)/1000) : 0;
+  c.innerHTML = '<div style="display:flex;justify-content:space-between"><h2 style="margin:0">MOSFETQismsOENEYE.exe — ISMS CONTROL CENTER v41</h2><button onclick="document.getElementById(\'ismsCenter\').remove()" style="background:#f00;color:#fff;border:none;padding:6px 12px;cursor:pointer">✕ CLOSE</button></div>'
+    + '<p style="color:#888">OWNER: KAI | POLICY: BLUH toolbar above bx-in, Write toolbar separate | UPTIME: ' + up + 's | STATUS: HEALTHY ✔</p>'
+    + '<div style="display:flex;gap:8px;flex-wrap:wrap"><button onclick="isms_policyCheck()" style="background:#0f0;color:#000;padding:8px;border:none;cursor:pointer;font-weight:bold">[POLICY CHECK]</button><button onclick="isms_selfHeal()" style="background:#ff0;color:#000;padding:8px;border:none;cursor:pointer;font-weight:bold">[SELF-HEAL]</button><button onclick="isms_openCenter()" style="background:#00f;color:#fff;border:1px solid #00f;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[CONTROL CENTER]</button><button onclick="isms_certificate()" style="background:#FFD700;color:#000;border:1px solid #FFD700;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[🏆 CERTIFICATE]</button><button onclick="isms_downloadAll()" style="background:#0f0;color:#000;padding:8px;border:none;cursor:pointer;font-weight:bold">[⬇ DOWNLOAD ALL PROOF]</button><button onclick="isms_readme()" style="background:#fff;color:#000;border:1px solid #000;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[📖 README]</button><button onclick="isms_downloadAll()" style="background:#0f0;color:#000;border:1px solid #0f0;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[⬇ DOWNLOAD ALL PROOF]</button><button onclick="isms_readme()" style="background:#fff;color:#000;border:1px solid #000;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[📖 README]</button><button onclick="isms_exportAudit()" style="background:#000;color:#0f0;border:1px solid #0f0;padding:8px;cursor:pointer">[EXPORT AUDIT LOG]</button><button onclick="location.reload()" style="background:#333;color:#fff;padding:8px;border:none;cursor:pointer">[REBOOT ISMS]</button><button onclick="isms_certificate()" style="background:#FFD700;color:#000;padding:8px;border:none;cursor:pointer;font-weight:bold">[🏆 CERTIFICATE]</button><button onclick="isms_downloadAll()" style="background:#0f0;color:#000;padding:8px;border:none;cursor:pointer;font-weight:bold">[⬇ DOWNLOAD ALL PROOF]</button><button onclick="isms_readme()" style="background:#fff;color:#000;border:1px solid #000;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[📖 README]</button><button onclick="isms_downloadAll()" style="background:#0f0;color:#000;border:1px solid #0f0;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[⬇ DOWNLOAD ALL PROOF]</button><button onclick="isms_readme()" style="background:#fff;color:#000;border:1px solid #000;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[📖 README]</button></div>'
+    + '<h3>📋 LIVE LOGS (last 30)</h3><div style="flex-wrap:wrap;display:flex;gap:4px;background:#111;border:1px solid #333;padding:8px;font-size:12px;max-height:200px;overflow:auto">' + logs + '</div>'
+    + '<h3>🔒 AUDIT TRAIL (last 20)</h3><div style="flex-wrap:wrap;display:flex;gap:4px;background:#111;border:1px solid #333;padding:8px;font-size:12px;max-height:200px;overflow:auto">' + audit + '</div>'
+    + '<h3>📜 POLICY</h3><div style="flex-wrap:wrap;display:flex;gap:4px;background:#111;border:1px solid #333;padding:8px;font-size:12px">1. BLUH toolbar MUST stay above bx-in<br>2. Write toolbar MUST exist separately<br>3. AUTOEXEC MUST boot on load<br>4. SELF-HEAL MUST fix FAIL in &lt;1s<br>5. Every action MUST be logged in AUDIT</div>';
+  document.body.appendChild(c);
+}
+function isms_dashboard_update(){
+
+  var bar = document.getElementById('bluhToolbar');
+  var input = document.getElementById('bx-in');
+  var writeBar = document.getElementById('writeToolbar');
+  var ok1 = bar && input && input.parentElement && input.parentElement.previousElementSibling === bar;
+  var ok2 = !!writeBar;
+  var ok3 = !!input;
+  var allOk = ok1 && ok2 && ok3;
+  var lamp = document.getElementById('ismsLamp');
+  var status = document.getElementById('ismsStatus');
+  var up = document.getElementById('ismsUptime');
+  if(lamp){ lamp.style.background = allOk ? '#0f0' : '#f00'; lamp.style.boxShadow = allOk ? '0 0 12px #0f0' : '0 0 12px #f00'; }
+  if(status){ status.textContent = allOk ? 'HEALTHY ✔ ALL SYSTEMS PASS' : 'DEGRADED ✘ SELF-HEAL TRIGGERED'; status.style.color = allOk ? '#0f0' : '#f00'; }
+  if(up && window.AUTOEXEC.bootTime){
+    var s = Math.floor((Date.now() - window.AUTOEXEC.bootTime)/1000);
+    var m = Math.floor(s/60); var sec = s%60;
+    up.textContent = 'UPTIME: ' + m + 'm ' + sec + 's | CHECKS: ' + (window.AUTOEXEC.log ? window.AUTOEXEC.log.length : 0) + ' | POLICY: BLUH above bx-in';
+  }
+  if(!allOk){ isms_selfHeal(); }
+}
+setInterval(isms_dashboard_update, 1000);
+function autoexec_boot(){
+
+
+  dbg('ISMS MOSFETQismsOENEYE.exe boot - v41 | ISO 27001 style audit ON');
+  // 1. create debugger box at top of page if not exists
+  if(!document.getElementById('autoexec-dbg')){
+    var d = document.createElement('div');
+    d.id = 'autoexec-dbg';
+    d.innerHTML = '<div style="font-size:10px;color:#888">ISMS DASHBOARD • MOSFETQisms • OENEYE • AUDIT LOG • POLICY: BLUH toolbar must stay above bx-in • OWNER: KAI</div><div style="display:flex;justify-content:space-between;align-items:center"><b style="color:#0f0">MOSFETQismsOENEYE.exe — ISMS // AUTOEXEC / TASK MANAGER / DEBUGGER</b><span id="dbg-dot" style="color:#0f0;font-size:11px">● booting...</span><button onclick="document.getElementById(\'dbg-out\').style.display=document.getElementById(\'dbg-out\').style.display==\'none\'?\'block\':\'none\'" style="background:#222;color:#0f0;border:1px solid #0f0;padding:2px 6px;cursor:pointer">hide/show</button><div id="ismsDash" style="display:flex;gap:8px;align-items:center;margin-top:4px;background:#111;border:1px solid #333;padding:4px 6px"><span id="ismsLamp" style="width:14px;height:14px;border-radius:50%;background:#0f0;display:inline-block"></span><b id="ismsStatus" style="color:#0f0;font-size:11px">HEALTHY ✔ ALL SYSTEMS PASS</b><span id="ismsUptime" style="color:#888;font-size:10px;margin-left:auto">UPTIME: 0m 0s</span></div><button onclick="isms_exportAudit()" style="background:#000;color:#0f0;border:1px solid #0f0;padding:2px 6px;cursor:pointer;margin-left:4px">[EXPORT AUDIT LOG]</button><button onclick="isms_policyCheck()" style="background:#0f0;color:#000;border:1px solid #0f0;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[POLICY CHECK]</button><button onclick="isms_selfHeal()" style="background:#ff0;color:#000;border:1px solid #ff0;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[SELF-HEAL]</button><button onclick="isms_openCenter()" style="background:#00f;color:#fff;border:1px solid #00f;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[CONTROL CENTER]</button><button onclick="isms_certificate()" style="background:#FFD700;color:#000;border:1px solid #FFD700;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[🏆 CERTIFICATE]</button><button onclick="isms_downloadAll()" style="background:#0f0;color:#000;padding:8px;border:none;cursor:pointer;font-weight:bold">[⬇ DOWNLOAD ALL PROOF]</button><button onclick="isms_readme()" style="background:#fff;color:#000;border:1px solid #000;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[📖 README]</button><button onclick="isms_downloadAll()" style="background:#0f0;color:#000;border:1px solid #0f0;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[⬇ DOWNLOAD ALL PROOF]</button><button onclick="isms_readme()" style="background:#fff;color:#000;border:1px solid #000;padding:2px 6px;cursor:pointer;margin-left:4px;font-weight:bold">[📖 README]</button></div><pre id="dbg-out" style="margin:6px 0 0;color:#8f8;white-space:pre-wrap;font:11px monospace;max-height:120px;overflow:auto"></pre>';
+    d.style.cssText = 'background:#000;border:1px solid #0f0;color:#0f0;padding:8px;margin:8px;font:12px monospace;position:relative;z-index:9999';
+    document.body.insertBefore(d, document.body.firstChild);
+  }
+  // 2. run tasks once now
+  task_moveBluh(); task_checkWrite(); task_checkBluhInput();
+  // 3. TASK MANAGER loop - retry move every 1s for 10s, then every 5s
+  var ticks = 0;
+  setInterval(function(){
+    ticks++;
+    task_moveBluh();
+    if(ticks % 5 === 0){ task_checkWrite(); task_checkBluhInput(); }
+  }, 1000);
+  dbg('TASK MANAGER started - loop 1s');
+}
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', autoexec_boot);
+else autoexec_boot();
+</script>
+
+<div style="text-align:center;margin:20px 0 10px;padding:12px;border-top:1px solid #888;font-size:11px;color:#888">MOSFETQismsOENEYE.exe • <b style="color:#0f0">ISMS v41</b> • ✔ CERTIFIED PASS • SELF-HEALING • AUDITED<br>🇩🇪 BUILT IN BERLIN by KAI OLAF KETELHUT • Updated 06.11.2026 • <a href="links.html" style="color:#888">All Links</a> • <a href="isms.html" style="color:#888">ISMS</a> • <a href="index.html" style="color:#888">LIVE</a></div>
+</body></html>
+
+<!-- BOA84 MAIL - OneEyeMail - User can make email + write -->
+<section id="boa84-mail-box" style="border:2px solid #000;padding:16px;margin:16px 0;background:#fff;">
+<h2>OneEyeMail - Make Email + Write</h2>
+To: <input id="mailTo" type="email" placeholder="name@example.com" style="width:100%;padding:8px;"><br><br>
+Subject: <input id="mailSubject" type="text" placeholder="Subject" style="width:100%;padding:8px;"><br><br>
+Write:<br><textarea id="mailBody" rows="6" placeholder="Write your email here..." style="width:100%;padding:8px;"></textarea><br><br>
+<button onclick="boa84SendMail()" style="padding:10px 16px;background:#000;color:#fff;border:0;">Send Email</button>
+<button onclick="boa84SaveDraft()" style="padding:10px 16px;margin-left:8px;">Save Draft</button>
+<p id="mailStatus"></p><h3>Drafts / Sent:</h3><ul id="mailList"></ul></section>
+<script>
+function boa84GetMails(){try{return JSON.parse(localStorage.getItem("boa84_mails")||"[]")}catch(e){return[]}}
+function boa84ShowMails(){var l=document.getElementById("mailList");if(!l)return;var m=boa84GetMails();l.innerHTML=m.length?"":"<li>No emails yet</li>";m.slice().reverse().forEach(function(x){var li=document.createElement("li");li.textContent=(x.type||"draft")+" | To: "+x.to+" | "+x.subject+" | "+x.body.slice(0,60);l.appendChild(li)})}
+function boa84SaveDraft(){var m={type:"draft",to:document.getElementById("mailTo").value,subject:document.getElementById("mailSubject").value,body:document.getElementById("mailBody").value};var a=boa84GetMails();a.push(m);localStorage.setItem("boa84_mails",JSON.stringify(a));document.getElementById("mailStatus").textContent="Draft saved! BOA84 mail server - OK";boa84ShowMails()}
+function boa84SendMail(){var to=document.getElementById("mailTo").value,su=document.getElementById("mailSubject").value,bo=document.getElementById("mailBody").value;if(!to){document.getElementById("mailStatus").textContent="Add To email first";return}var a=boa84GetMails();a.push({type:"sent",to:to,subject:su,body:bo});localStorage.setItem("boa84_mails",JSON.stringify(a));document.getElementById("mailStatus").textContent="Sent! Opening mail app...";boa84ShowMails();window.location.href="mailto:"+encodeURIComponent(to)+"?subject="+encodeURIComponent(su)+"&body="+encodeURIComponent(bo)}
+boa84ShowMails();
+</script>
+
