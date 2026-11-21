@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAW Hex Registry Editor - kdp.raw 7680</title>
+<style>
+body{background:#000;color:#fff;font-family:monospace;margin:0;padding:12px}
+h1{font-size:18px}.box{border:1px solid #333;padding:10px;margin:10px 0}
+input{background:#111;color:#0ff;border:1px solid #333;padding:6px}
+button{background:#0ff;color:#000;border:0;padding:10px 12px;font-weight:bold;margin:3px}
+a{color:#0ff}
+#hex{white-space:pre;overflow:auto;max-height:320px;border:1px solid #333;padding:8px;line-height:1.7;font-size:12px}
+.sel{background:#0ff;color:#000}
+.off{color:#888}
+canvas{image-rendering:pixelated;border:2px solid #fff;max-width:100%}
+</style></head><body>
+<h1>🧬 RAW Hex Registry Editor - kdp.raw</h1>
+<p>7680 bytes = 120 x 64. Click a byte, change it, export new .raw / .ximg</p>
+
+<div class="box">
+<b>1. Load</b>
+<input type="file" id="f" accept=".raw,.ximg">
+<select id="fileSel2" style="background:#111;color:#fff;border:1px solid #333;padding:8px">
+<option value="kdp.raw">kdp.raw - KDP 7680</option>
+<option value="rm.raw">rm.raw - RM 7680</option>
+<option value="kdp.ximg">kdp.ximg - KDP XIMG</option>
+<option value="rm.ximg">rm.ximg - RM XIMG</option>
+</select>
+<button onclick="loadDefault()">Load Selected</button>
+<button onclick="fillPattern()">Fill 14 18 20 FF</button>
+<button onclick="fillVal(0)">Fill 00</button>
+<button onclick="fillVal(255)">Fill FF</button>
+</div>
+
+<div class="box">
+<b>2. Registry - Find / Edit</b><br>
+Offset (0-7679): <input id="off" type="number" value="0" min="0" max="7679" style="width:80px">
+Value (HEX): <input id="val" value="14" maxlength="2" style="width:60px">
+<button onclick="setByte()">Set Byte</button>
+<button onclick="jump()">Jump</button><br>
+Search HEX (e.g. 141820FF): <input id="search" value="141820FF" style="width:140px">
+<button onclick="find()">Find Next</button> <span id="found"></span><br>
+<span id="info">-</span>
+</div>
+
+<div class="box">
+<b>3. Hex Dump - Click any byte to select</b>
+<div id="hex">No file loaded</div>
+</div>
+
+<div class="box">
+<b>4. Preview - Live 120x64</b><br>
+<canvas id="cv" width="120" height="64" style="width:480px;height:256px"></canvas>
+</div>
+
+<div class="box">
+<b>5. Export</b><br>
+<button onclick="exportRAW()">⬇ NEW .raw (7680)</button>
+<button onclick="exportXIMG()">⬇ NEW .ximg (XIMG + zlib)</button>
+<button onclick="exportPNG()">⬇ NEW .png</button>
+<p id="out"></p>
+</div>
+
+<script>
+let raw=new Uint8Array(7680), W=120,H=64, sel=0, findPos=0;
+let cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+function drawPreview(){
+  let img=ctx.createImageData(W,H);
+  for(let i=0;i<raw.length;i++){img.data[i*4]=raw[i];img.data[i*4+1]=raw[i];img.data[i*4+2]=raw[i];img.data[i*4+3]=255;}
+  ctx.putImageData(img,0,0);
+  document.getElementById('info').textContent=`Selected: Offset ${sel} = 0x${raw[sel].toString(16).padStart(2,'0').toUpperCase()} (${raw[sel]}) | Row ${Math.floor(sel/W)} Col ${sel%W} | Total ${raw.length}`;
+}
+function renderHex(){
+  let s='';
+  for(let r=0;r<raw.length;r+=16){
+    s+=`<span class="off">${r.toString(16).padStart(4,'0').toUpperCase()}  </span>`;
+    for(let c=0;c<16;c++){
+      let i=r+c, v=raw[i].toString(16).padStart(2,'0').toUpperCase();
+      s+=`<span onclick="selectByte(${i})" class="${i===sel?'sel':''}">${v} </span>`;
+    }
+    s+=' |';
+    for(let c=0;c<16;c++){let ch=raw[r+c];s+= (ch>=32&&ch<127)?String.fromCharCode(ch):'.';}
+    s+='|\n';
+  }
+  document.getElementById('hex').innerHTML=s;
+  // keep selected visible
+  let el=document.getElementById('hex'); el.scrollTop = Math.floor(sel/16)*22 - 100;
+}
+function selectByte(i){sel=i;document.getElementById('off').value=i;document.getElementById('val').value=raw[i].toString(16).padStart(2,'0').toUpperCase();drawPreview();renderHex();}
+function setByte(){
+  let o=+document.getElementById('off').value, v=parseInt(document.getElementById('val').value,16);
+  if(o<0||o>=raw.length||isNaN(v))return alert('Bad offset/value');
+  raw[o]=v;sel=o;drawPreview();renderHex();
+}
+function jump(){let o=+document.getElementById('off').value;if(o>=0&&o<raw.length)selectByte(o);}
+function find(){
+  let needle=document.getElementById('search').value.replace(/\s/g,'').toLowerCase();
+  if(needle.length%2)return alert('Even hex length');
+  let bytes=[];for(let i=0;i<needle.length;i+=2)bytes.push(parseInt(needle.substr(i,2),16));
+  for(let i=findPos;i<raw.length-bytes.length;i++){
+    let ok=true;for(let j=0;j<bytes.length;j++)if(raw[i+j]!==bytes[j]){ok=false;break;}
+    if(ok){findPos=i+1;selectByte(i);document.getElementById('found').textContent='Found at '+i+' (0x'+i.toString(16).toUpperCase()+')';return;}
+  }
+  findPos=0;document.getElementById('found').textContent='Not found, wrapped';
+}
+function fillPattern(){let p=[0x14,0x18,0x20,0xFF];for(let i=0;i<raw.length;i++)raw[i]=p[i%4];drawPreview();renderHex();}
+function fillVal(v){raw.fill(v);drawPreview();renderHex();}
+async function loadDefault(){
+  let fn=document.getElementById('fileSel2').value;
+  let r=await fetch(fn);let b=await r.arrayBuffer();
+  if(fn.endsWith('.ximg')){
+    let d=new Uint8Array(b);
+    let ds=new DecompressionStream('deflate');
+    let rb=await new Response(new Blob([d.slice(14)]).stream().pipeThrough(ds)).arrayBuffer();
+    raw=new Uint8Array(rb);
+  } else raw=new Uint8Array(b);
+  document.getElementById('out').textContent='Loaded '+document.getElementById('fileSel2').value+' ✅ '+raw.length+' bytes';
+  drawPreview();renderHex();
+}
+document.getElementById('f').addEventListener('change',async e=>{
+  let file=e.target.files[0], b=await file.arrayBuffer();
+  if(file.name.endsWith('.ximg')){
+    let d=new Uint8Array(b);
+    let ds=new DecompressionStream('deflate');
+    let rb=await new Response(new Blob([d.slice(14)]).stream().pipeThrough(ds)).arrayBuffer();
+    raw=new Uint8Array(rb);
+  } else raw=new Uint8Array(b);
+  drawPreview();renderHex();
+});
+function exportRAW(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([raw]));a.download='kdp_edited.raw';a.click();document.getElementById('out').textContent='Exported kdp_edited.raw: '+raw.length;}
+async function exportXIMG(){
+  let cs=new CompressionStream('deflate');
+  let comp=await new Response(new Blob([raw]).stream().pipeThrough(cs)).arrayBuffer();
+  let head=new Uint8Array(14);head[0]=88;head[1]=73;head[2]=77;head[3]=71;head[4]=1;head[5]=1;head[6]=W&255;head[7]=(W>>8)&255;
+  let out=new Uint8Array(14+comp.byteLength);out.set(head,0);out.set(new Uint8Array(comp),14);
+  let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([out]));a.download='kdp_edited.ximg';a.click();
+  document.getElementById('out').textContent='Exported kdp_edited.ximg: '+out.length+' bytes from '+raw.length+' raw';
+}
+function exportPNG(){let c=document.createElement('canvas');c.width=W*4;c.height=H*4;let x=c.getContext('2d');x.imageSmoothingEnabled=false;x.drawImage(cv,0,0,c.width,c.height);c.toBlob(b=>{let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='kdp_edited.png';a.click();});}
+fillPattern();
+</script>
+</body></html>
