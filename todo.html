@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Todo App</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 sm:p-8">
+        <header class="mb-6">
+            <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">My Tasks</h1>
+            <p class="text-sm text-gray-500 mt-1">Stay organized and get things done.</p>
+        </header>
+
+        <!-- Input Form -->
+        <form id="todo-form" class="flex gap-2 mb-6">
+            <input 
+                type="text" 
+                id="todo-input" 
+                placeholder="What needs to be done?" 
+                autocomplete="off"
+                class="flex-grow px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-700 placeholder-gray-400 text-sm shadow-sm transition"
+            >
+            <button 
+                type="submit" 
+                class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-xl font-medium text-sm shadow-md transition duration-150 flex items-center justify-center cursor-pointer"
+            >
+                Add
+            </button>
+        </form>
+
+        <!-- Filters -->
+        <div class="flex bg-gray-100 p-1 rounded-xl mb-6 text-sm font-medium text-gray-600">
+            <button data-filter="all" class="filter-btn flex-1 py-2 rounded-lg bg-white text-indigo-600 shadow-sm transition">All</button>
+            <button data-filter="active" class="filter-btn flex-1 py-2 rounded-lg hover:text-gray-900 transition">Active</button>
+            <button data-filter="completed" class="filter-btn flex-1 py-2 rounded-lg hover:text-gray-900 transition">Completed</button>
+        </div>
+
+        <!-- Todo List -->
+        <ul id="todo-list" class="space-y-3 mb-6 max-h-72 overflow-y-auto pr-1">
+            <!-- Dynamic Todo Items -->
+        </ul>
+
+        <!-- Footer / Controls -->
+        <footer class="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-100">
+            <span id="task-count">0 items left</span>
+            <button 
+                id="clear-completed" 
+                class="hover:text-red-600 transition cursor-pointer font-medium"
+            >
+                Clear completed
+            </button>
+        </footer>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const todoForm = document.getElementById('todo-form');
+            const todoInput = document.getElementById('todo-input');
+            const todoList = document.getElementById('todo-list');
+            const taskCount = document.getElementById('task-count');
+            const clearCompletedBtn = document.getElementById('clear-completed');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            let currentFilter = 'all';
+
+            // Save tasks to localStorage and re-render
+            function saveAndRender() {
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                renderTasks();
+            }
+
+            // Add task
+            todoForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const text = todoInput.value.trim();
+                if (text === '') return;
+
+                const newTask = {
+                    id: Date.now(),
+                    text: text,
+                    completed: false
+                };
+
+                tasks.push(newTask);
+                todoInput.value = '';
+                saveAndRender();
+            });
+
+            // Toggle task completion
+            window.toggleTask = function(id) {
+                tasks = tasks.map(task => {
+                    if (task.id === id) {
+                        return { ...task, completed: !task.completed };
+                    }
+                    return task;
+                });
+                saveAndRender();
+            };
+
+            // Delete task
+            window.deleteTask = function(id) {
+                tasks = tasks.filter(task => task.id !== id);
+                saveAndRender();
+            };
+
+            // Filter buttons
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-white', 'text-indigo-600', 'shadow-sm');
+                        b.classList.add('hover:text-gray-900');
+                    });
+                    btn.classList.add('bg-white', 'text-indigo-600', 'shadow-sm');
+                    btn.classList.remove('hover:text-gray-900');
+
+                    currentFilter = btn.getAttribute('data-filter');
+                    renderTasks();
+                });
+            });
+
+            // Clear completed tasks
+            clearCompletedBtn.addEventListener('click', () => {
+                tasks = tasks.filter(task => !task.completed);
+                saveAndRender();
+            });
+
+            // Render tasks
+            function renderTasks() {
+                todoList.innerHTML = '';
+
+                const filteredTasks = tasks.filter(task => {
+                    if (currentFilter === 'active') return !task.completed;
+                    if (currentFilter === 'completed') return task.completed;
+                    return true;
+                });
+
+                if (filteredTasks.length === 0) {
+                    todoList.innerHTML = `
+                        <li class="text-center py-8 text-gray-400 text-sm">
+                            No tasks found.
+                        </li>
+                    `;
+                } else {
+                    filteredTasks.forEach(task => {
+                        const li = document.createElement('li');
+                        li.className = `flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-gray-50 transition group`;
+                        
+                        li.innerHTML = `
+                            <div class="flex items-center gap-3 overflow-hidden">
+                                <input 
+                                    type="checkbox" 
+                                    checked="${task.completed}" 
+                                    ${task.completed ? 'checked' : ''} 
+                                    onchange="toggleTask(${task.id})"
+                                    class="w-5 h-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                                >
+                                <span class="text-sm text-gray-700 truncate ${task.completed ? 'line-through text-gray-400' : ''}">
+                                    ${escapeHTML(task.text)}
+                                </span>
+                            </div>
+                            <button 
+                                onclick="deleteTask(${task.id})" 
+                                class="text-gray-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition p-1 cursor-pointer"
+                                title="Delete task"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 ` +
+                                    `1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        `;
+                        todoList.appendChild(li);
+                    });
+                }
+
+                // Update item count
+                const activeCount = tasks.filter(task => !task.completed).length;
+                taskCount.textContent = `${activeCount} ${activeCount === 1 ? 'item' : 'items'} left`;
+            }
+
+            // Helper to prevent XSS
+            function escapeHTML(str) {
+                return str.replace(/[&<>'"]/g, 
+                    tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+                );
+            }
+
+            // Initial render
+            renderTasks();
+        });
+    </script>
+</body>
+</html>

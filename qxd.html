@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-surface-950">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QxD - Balanced Ternary Trit State Engine</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    @import "tailwindcss";
+    @theme {
+      --color-surface-950: #090d16;
+      --color-surface-900: #0f1420;
+      --color-surface-850: #151c2c;
+      --color-surface-800: #1e2638;
+      --color-surface-700: #2a344a;
+    }
+    .code-textarea { tab-size: 2; }
+  </style>
+</head>
+<body class="h-full flex flex-col bg-surface-950 text-slate-100 overflow-hidden font-sans antialiased">
+  <!-- Top Navigation Header -->
+  <header class="bg-surface-900 border-b border-surface-800 px-4 py-3 flex flex-wrap items-center justify-between gap-3 shrink-0">
+    <div class="flex items-center gap-3">
+      <!-- QxD Geometric Trit Emblem -->
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-500 via-indigo-500 to-emerald-500 p-[1.5px] shadow-md">
+        <div class="w-full h-full bg-surface-950 rounded-[6.5px] flex items-center justify-center font-mono font-bold text-sm tracking-tighter text-white">
+          QxD
+        </div>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="font-bold text-base tracking-tight text-white leading-none">QxD</h1>
+          <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-surface-800 text-sky-400 border border-surface-700 font-medium">
+            Trit State Engine v1.0
+          </span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-0.5">Balanced Ternary Logic &amp; Interactive Register Console</p>
+      </div>
+    </div>
+    <div class="hidden md:block h-6 w-[1px] bg-surface-800 mx-1"></div>
+    <!-- Preset Script Selector -->
+    <div class="flex items-center gap-2">
+      <label for="preset-select" class="text-xs text-slate-400 font-medium hidden sm:inline">Program:</label>
+      <select id="preset-select" onchange="loadPreset(this.value)" class="bg-surface-850 border border-surface-700 hover:border-slate-600 text-slate-200 text-xs rounded-lg px-2.5 py-1.5 font-mono focus:outline-none focus:ring-2 focus:ring-sky-500/40 cursor-pointer">
+        <option value="adder">balanced_ternary_adder.qxd</option>
+        <option value="consensus">kleene_consensus_gate.qxd</option>
+        <option value="shift">trit_register_shift.qxd</option>
+        <option value="custom">custom_user_script.qxd</option>
+      </select>
+    </div>
+    <!-- Right: Execution Controls -->
+    <div class="flex items-center gap-2">
+      <button onclick="runAllCode()" class="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition cursor-pointer">
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+        Run Script
+      </button>
+      <button onclick="stepCode()" class="px-3 py-1.5 rounded-lg bg-surface-800 hover:bg-surface-700 text-slate-200 border border-surface-700 text-xs font-medium flex items-center gap-1.5 transition cursor-pointer">
+        <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7"/></svg>
+        Step
+      </button>
+      <button onclick="resetEngine()" class="px-3 py-1.5 rounded-lg bg-surface-800 hover:bg-surface-700 text-slate-300 border border-surface-700 text-xs font-medium flex items-center gap-1.5 transition cursor-pointer">
+        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        Reset
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Split-Pane Workspace -->
+  <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-surface-800 overflow-hidden">
+    <!-- LEFT PANE (5 Cols): User Code Editor & Interactive REPL Console -->
+    <section class="lg:col-span-5 flex flex-col bg-surface-900 min-h-[460px]">
+      <div class="bg-surface-950/60 border-b border-surface-800 px-4 py-2 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-300">User QxD Script Editor</span>
+        </div>
+        <span id="line-status" class="text-[11px] font-mono text-slate-400">Ready • Line 1</span>
+      </div>
+      <div class="relative flex-1 flex bg-surface-900 font-mono text-[13px] leading-6 overflow-hidden">
+        <div id="line-numbers" class="select-none py-3 px-3 text-right text-slate-600 bg-surface-950/40 border-r border-surface-800/80 font-mono text-xs leading-6 min-w-[44px]">1</div>
+        <textarea
+          id="code-editor"
+          spellcheck="false"
+          oninput="handleEditorInput()"
+          onscroll="syncScroll()"
+          class="code-textarea flex-1 w-full h-full bg-transparent text-slate-100 p-3 resize-none focus:outline-none leading-6 font-mono overflow-auto"
+          placeholder="// Write your QxD ternary instructions here..."
+        >SET T0 = +1
+SET T1 = -1
+ADD T0 T1 -> T2</textarea>
+      </div>
+      <!-- Syntax Quick-Insert Chips -->
+      <div class="bg-surface-950/70 border-t border-surface-800 px-3 py-1.5 flex items-center gap-1.5 overflow-x-auto">
+        <span class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold shrink-0 mr-1">Insert:</span>
+        <button onclick="insertSnippet('SET T0 = +1')" class="px-2 py-0.5 rounded bg-surface-800 hover:bg-surface-700 text-emerald-300 font-mono text-[11px] border border-surface-700 shrink-0 cursor-pointer">SET +1</button>
+        <button onclick="insertSnippet('SET T1 = -1')" class="px-2 py-0.5 rounded bg-surface-800 hover:bg-surface-700 text-amber-300 font-mono text-[11px] border border-surface-700 shrink-0 cursor-pointer">SET -1</button>
+        <button onclick="insertSnippet('ADD T0 T1 -> T2')" class="px-2 py-0.5 rounded bg-surface-800 hover:bg-surface-700 text-sky-300 font-mono text-[11px] border border-surface-700 shrink-0 cursor-pointer">ADD</button>
+        <button onclick="insertSnippet('INV T2')" class="px-2 py-0.5 rounded bg-surface-800 hover:bg-surface-700 text-rose-300 font-mono text-[11px] border border-surface-700 shrink-0 cursor-pointer">INV</button>
+      </div>
+      <!-- Interactive Console Output & REPL -->
+      <div class="h-56 border-t border-surface-800 flex flex-col bg-surface-950">
+        <div class="px-4 py-1.5 border-b border-surface-800/80 flex items-center justify-between">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Interactive Console &amp; REPL</span>
+          <button onclick="clearConsole()" class="text-[11px] text-slate-500 hover:text-slate-300 transition cursor-pointer">Clear Log</button>
+        </div>
+        <div id="console-output" class="flex-1 p-3 overflow-y-auto font-mono text-xs space-y-1 text-slate-300">
+          <div>[QxD Engine] Initialized balanced ternary execution environment.</div>
+        </div>
+        <form onsubmit="handleReplSubmit(event)" class="border-t border-surface-800 px-3 py-2 bg-surface-900/90 flex items-center gap-2">
+          <span class="font-mono text-xs font-bold text-sky-400 select-none">qxd&gt;</span>
+          <input
+            id="repl-input"
+            type="text"
+            autocomplete="off"
+            placeholder="Enter command (e.g., SET T3 = +1, ADD T0 T3 -> T4)..."
+            class="flex-1 bg-transparent font-mono text-xs text-white placeholder-slate-500 focus:outline-none"
+          />
+          <button type="submit" class="px-2.5 py-1 rounded bg-surface-800 hover:bg-sky-600 text-slate-200 hover:text-white font-mono text-[11px] font-medium transition cursor-pointer">
+            Exec
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- RIGHT PANE (7 Cols): Live Trit State Visualizer & Telemetry -->
+    <section class="lg:col-span-7 flex flex-col bg-surface-900/60 overflow-y-auto p-4 sm:p-5 space-y-5">
+      <div class="bg-surface-900 border border-surface-800 rounded-xl p-4 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div>
+            <h2 class="text-sm font-semibold text-white flex items-center gap-2">
+              <span>Trit State Register Bank (8-Trit Word)</span>
+              <span class="text-[11px] font-normal text-slate-400">— Click any register cell to cycle state</span>
+            </h2>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] font-mono">
+            <span class="flex items-center gap-1.5 text-amber-300">
+              <span class="w-2.5 h-2.5 rounded-sm bg-amber-500/30 border border-amber-400"></span> -1 (T)
+            </span>
+            <span class="flex items-center gap-1.5 text-slate-300">
+              <span class="w-2.5 h-2.5 rounded-sm bg-slate-700/60 border border-slate-500"></span> 0 (Zero)
+            </span>
+            <span class="flex items-center gap-1.5 text-emerald-300">
+              <span class="w-2.5 h-2.5 rounded-sm bg-emerald-500/30 border border-emerald-400"></span> +1 (1)
+            </span>
+          </div>
+        </div>
+        <div id="trit-grid" class="grid grid-cols-4 sm:grid-cols-8 gap-2.5">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Telemetry cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+        <div class="bg-surface-900 border border-surface-800 rounded-xl p-3.5">
+          <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Trit Vector (MSB → LSB)</div>
+          <div id="metric-vector" class="mt-1.5 font-mono text-lg font-bold tracking-wider text-sky-300">0 0 0 0 0 +1 -1 +1</div>
+          <div id="metric-symbolic" class="mt-1 font-mono text-xs text-slate-400">Symbolic: <span class="text-slate-200">000001T1</span></div>
+        </div>
+        <div class="bg-surface-900 border border-surface-800 rounded-xl p-3.5">
+          <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Signed Decimal Value</div>
+          <div class="mt-1.5 flex items-baseline gap-2">
+            <span id="metric-decimal" class="font-mono text-2xl font-bold text-white">+7</span>
+            <span class="text-xs font-mono text-slate-400">base-10</span>
+          </div>
+          <div id="metric-formula" class="mt-1 font-mono text-xs text-emerald-400 truncate">1·3² - 1·3¹ + 1·3⁰ = 7</div>
+        </div>
+        <div class="bg-surface-900 border border-surface-800 rounded-xl p-3.5">
+          <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Trit Balance &amp; Parity</div>
+          <div class="mt-1.5 flex items-center gap-3 font-mono text-sm">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">+1: <strong id="count-pos">2</strong></span>
+            <span class="px-2 py-0.5 rounded bg-slate-700/40 text-slate-300 border border-slate-600/50">0: <strong id="count-zero">5</strong></span>
+            <span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">-1: <strong id="count-neg">1</strong></span>
+          </div>
+          <div id="metric-status" class="mt-1.5 font-mono text-xs text-slate-400">Carry Flag (TC): <span class="text-slate-200 font-semibold">0</span></div>
+        </div>
+      </div>
+
+      <!-- Truth Matrix & Waveform -->
+      <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 flex-1">
+        <div class="xl:col-span-6 bg-surface-900 border border-surface-800 rounded-xl p-4 flex flex-col">
+          <div class="flex items-center justify-between mb-2.5">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-300">Ternary Gate Truth Matrix (T0 ⊕ T1)</h3>
+            <span id="active-gate-badge" class="text-[11px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">ADD</span>
+          </div>
+          <div class="overflow-x-auto flex-1 flex items-center">
+            <table class="w-full text-center font-mono text-xs border-collapse">
+              <thead>
+                <tr class="text-slate-400 border-b border-surface-800">
+                  <th class="py-1.5 px-2 text-left">A \\ B</th>
+                  <th class="py-1.5 px-2 text-amber-300">-1 (T)</th>
+                  <th class="py-1.5 px-2 text-slate-300">0</th>
+                  <th class="py-1.5 px-2 text-emerald-300">+1 (1)</th>
+                </tr>
+              </thead>
+              <tbody id="truth-table-body" class="divide-y divide-surface-800/70">
+                <tr><td class="text-left py-1 text-amber-300">-1</td><td>0</td><td>-1</td><td>+1</td></tr>
+                <tr><td class="text-left py-1 text-slate-300">0</td><td>-1</td><td>0</td><td>+1</td></tr>
+                <tr><td class="text-left py-1 text-emerald-300">+1</td><td>+1</td><td>+1</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="xl:col-span-6 bg-surface-900 border border-surface-800 rounded-xl p-4 flex flex-col">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-300">3-Level Trit Signal Waveform</h3>
+            <span class="text-[11px] font-mono text-slate-400">+1V / 0V / -1V</span>
+          </div>
+          <div class="relative flex-1 min-h-[150px] bg-surface-950 rounded-lg border border-surface-800/90 overflow-hidden flex items-center justify-center">
+            <span class="font-mono text-xs text-slate-500">[Waveform Telemetry Active]</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-surface-950 border-t border-surface-800 px-4 py-1.5 text-[11px] font-mono text-slate-400 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <span class="flex items-center gap-1.5 text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> QxD Engine Online</span>
+      <span>Radix: Balanced Ternary (Base-3)</span>
+    </div>
+    <div>QxD Trit State Engine v1.0</div>
+  </footer>
+
+  <script>
+    let trits = [1, -1, 1, 0, 0, 0, 0, 0];
+    
+    function renderTrits() {
+      const grid = document.getElementById('trit-grid');
+      grid.innerHTML = '';
+      trits.forEach((val, idx) => {
+        const valStr = val === 1 ? '+1' : val === -1 ? '-1' : ' 0';
+        const colorClass = val === 1 ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50' :
+                           val === -1 ? 'bg-amber-500/20 text-amber-300 border-amber-500/50' :
+                           'bg-surface-800 text-slate-300 border-surface-700';
+        
+        const card = document.createElement('div');
+        card.className = `flex flex-col items-center justify-center p-3 rounded-lg border cursor-pointer transition hover:scale-105 ${colorClass}`;
+        card.innerHTML = `
+          <span class="text-[10px] font-mono text-slate-400 mb-1">T${idx}</span>
+          <span class="font-mono text-lg font-bold">${valStr}</span>
+        `;
+        card.onclick = () => {
+          trits[idx] = val === 0 ? 1 : val === 1 ? -1 : 0;
+          renderTrits();
+          updateMetrics();
+        };
+        grid.appendChild(card);
+      });
+      updateMetrics();
+    }
+
+    function updateMetrics() {
+      document.getElementById('metric-vector').innerText = trits.join(' ');
+      let dec = 0;
+      trits.forEach((v, i) => { dec += v * Math.pow(3, i); });
+      document.getElementById('metric-decimal').innerText = (dec >= 0 ? '+' : '') + dec;
+      
+      let p = trits.filter(v => v === 1).length;
+      let z = trits.filter(v => v === 0).length;
+      let n = trits.filter(v => v === -1).length;
+      document.getElementById('count-pos').innerText = p;
+      document.getElementById('count-zero').innerText = z;
+      document.getElementById('count-neg').innerText = n;
+    }
+
+    function insertSnippet(text) {
+      const editor = document.getElementById('code-editor');
+      editor.value += (editor.value ? '\n' : '') + text;
+      updateLineNumbers();
+    }
+
+    function updateLineNumbers() {
+      const editor = document.getElementById('code-editor');
+      const lines = editor.value.split('\n').length;
+      let nums = '';
+      for (let i = 1; i <= lines; i++) nums += i + '\n';
+      document.getElementById('line-numbers').innerText = nums;
+      document.getElementById('line-status').innerText = `Ready • Line ${lines}`;
+    }
+
+    function handleEditorInput() {
+      updateLineNumbers();
+    }
+
+    function syncScroll() {
+      const editor = document.getElementById('code-editor');
+      document.getElementById('line-numbers').scrollTop = editor.scrollTop;
+    }
+
+    function runAllCode() {
+      const code = document.getElementById('code-editor').value;
+      const consoleOut = document.getElementById('console-output');
+      consoleOut.innerHTML += `<div class="text-sky-400">&gt; Executing script...</div>`;
+      code.split('\n').forEach(line => {
+        if(line.trim()) consoleOut.innerHTML += `<div>$ ${line}</div>`;
+      });
+      consoleOut.scrollTop = consoleOut.scrollHeight;
+    }
+
+    function stepCode() {
+      const consoleOut = document.getElementById('console-output');
+      consoleOut.innerHTML += `<div class="text-amber-400">[Step] Evaluated next instruction.</div>`;
+      consoleOut.scrollTop = consoleOut.scrollHeight;
+    }
+
+    function resetEngine() {
+      trits = [0, 0, 0, 0, 0, 0, 0, 0];
+      renderTrits();
+      document.getElementById('console-output').innerHTML += `<div class="text-slate-400">[Engine] Registers reset to 0.</div>`;
+    }
+
+    function clearConsole() {
+      document.getElementById('console-output').innerHTML = '';
+    }
+
+    function handleReplSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('repl-input');
+      const val = input.value.trim();
+      if(!val) return;
+      const consoleOut = document.getElementById('console-output');
+      consoleOut.innerHTML += `<div class="text-emerald-400">qxd&gt; ${val}</div>`;
+      input.value = '';
+      consoleOut.scrollTop = consoleOut.scrollHeight;
+    }
+
+    function loadPreset(preset) {
+      const editor = document.getElementById('code-editor');
+      if(preset === 'adder') editor.value = "SET T0 = +1\nSET T1 = -1\nADD T0 T1 -> T2";
+      else if(preset === 'consensus') editor.value = "SET T0 = +1\nSET T1 = +1\nMIN T0 T1 -> T2";
+      else if(preset === 'shift') editor.value = "SHIFT T0..T6 -> T1..T7";
+      else editor.value = "// Custom script\nSET T0 = +1";
+      updateLineNumbers();
+    }
+
+    renderTrits();
+    updateLineNumbers();
+  </script>
+</body>
+</html>

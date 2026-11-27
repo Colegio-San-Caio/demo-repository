@@ -1,0 +1,39 @@
+name: Build MOSFETQ OQM MSIX
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - make_oqm_msix.py
+      - qxd-l3/**
+      - .github/workflows/oqm-msix-build.yml
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-msix:
+    name: Build oqm.msix
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 1
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Generate OQM MSIX Package
+      run: |
+        python3 make_oqm_msix.py
+
+    - name: Upload MSIX Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: oqm-msix
+        path: oqm.msix
