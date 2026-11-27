@@ -1,0 +1,40 @@
+name: Build and Package MSIX Suite
+
+on:
+  push:
+    branches: [ "main", "qxd-release-clean" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-msix:
+    name: Build MSIX Packages (QxD & OQM)
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 1
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Generate QxD Console MSIX
+      run: |
+        python3 make_qxd_console_msix.py
+
+    - name: Generate OQM MSIX
+      run: |
+        python3 make_oqm_msix.py
+
+    - name: Upload MSIX Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: msix-packages-suite
+        path: |
+          qxd_console.msix
+          oqm.msix
+          dist/
