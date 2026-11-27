@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QxD — Trit State Engine & Interactive Console</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], mono: ['JetBrains Mono','monospace'] }, colors: { surface: { 950: '#090b10', 900: '#0f131a', 850: '#141923', 800: '#1b2230', 700: '#273142' } } } } };
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0f131a; }
+    ::-webkit-scrollbar-thumb { background: #273142; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #38465e; }
+    .code-textarea { tab-size: 2; caret-color: #38bdf8; }
+    body { background-color: #090b10; color: #f1f5f9; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-sky-500/30 selection:text-sky-200">
+  <div id="helper-banner" class="bg-sky-950/80 border-b border-sky-800/60 px-4 py-2 text-xs text-sky-200 flex flex-wrap items-center justify-between gap-2">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-semibold border border-sky-500/30">Store Policy 10.1.1.3 Ready</span>
+      <span>Direct functional workspace for <strong>QxD (9NLJGLF9ZJ7K)</strong>. Toggle <strong>Screenshot Mode</strong> or click <strong>Export Store PNG</strong> for a clean 1366×768 Store capture.</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="btn-toggle-screenshot" onclick="toggleScreenshotMode()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 font-medium cursor-pointer">Hide Helper Bar</button>
+      <button id="btn-export-png" onclick="exportStoreScreenshot()" class="px-3 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow-sm flex items-center gap-1.5 cursor-pointer">Download 1366×768 PNG</button>
+      <a href="https://get.microsoft.com/installer/download/9nljglf9zj7kreferrer=appbadge" target="_blank" class="inline-block">
+        <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="140" alt="Get in Microsoft Store"/>
+      </a>
+    </div>
+  </div>
+  <div id="app-window" class="flex-1 flex flex-col max-w-[1600px] w-full mx-auto bg-surface-900 border-x border-surface-800 shadow-2xl overflow-hidden">
+    <header class="bg-surface-950 border-b border-surface-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-500 via-indigo-500 to-emerald-500 p-[1.5px] shadow-md"><div class="w-full h-full bg-surface-950 rounded-[6.5px] flex items-center justify-center font-mono font-bold text-sm text-white">QxD</div></div>
+          <div><div class="flex items-center gap-2"><h1 class="font-bold text-base text-white leading-none">QxD</h1><span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-surface-800 text-sky-400 border border-surface-700">Trit State Engine v1.0</span></div><p class="text-[11px] text-slate-400 mt-0.5">Balanced Ternary Logic &amp; Interactive Register Console</p></div>
+        </div>
+        <div class="hidden md:block h-6 w-[1px] bg-surface-800 mx-1"></div>
+        <div class="flex items-center gap-2"><label class="text-xs text-slate-400 hidden sm:inline">Program:</label><select id="preset-select" onchange="loadPreset(this.value)" class="bg-surface-850 border border-surface-700 text-slate-200 text-xs rounded-lg px-2.5 py-1.5 font-mono cursor-pointer"><option value="adder">balanced_ternary_adder.qxd</option><option value="consensus">kleene_consensus_gate.qxd</option><option value="shift">trit_register_shift.qxd</option><option value="custom">custom_user_script.qxd</option></select></div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="runAllCode()" class="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold cursor-pointer">▶ Run Script</button>
+        <button onclick="stepCode()" class="px-3 py-1.5 rounded-lg bg-surface-800 hover:bg-surface-700 text-slate-200 border border-surface-700 text-xs cursor-pointer">Step</button>
+        <button onclick="resetEngine()" class="px-3 py-1.5 rounded-lg bg-surface-800 hover:bg-surface-700 text-slate-300 border border-surface-700 text-xs cursor-pointer">Reset</button>
+      </div>
+    </header>
+    <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-surface-800 overflow-hidden">
+      <section class="lg:col-span-5 flex flex-col bg-surface-900 min-h-[460px]">
+        <div class="bg-surface-950/60 border-b border-surface-800 px-4 py-2 flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-sky-400"></span><span class="text-xs font-semibold uppercase tracking-wider text-slate-300">User QxD Script Editor</span></div><span id="line-status" class="text-[11px] font-mono text-slate-400">Ready • Line 1</span></div>
+        <div class="relative flex-1 flex bg-surface-900 font-mono text-[13px] leading-6 overflow-hidden"><div id="line-numbers" class="select-none py-3 px-3 text-right text-slate-600 bg-surface-950/40 border-r border-surface-800/80 font-mono text-xs leading-6 min-w-[44px]">1</div><textarea id="code-editor" spellcheck="false" oninput="handleEditorInput()" onscroll="syncScroll()" class="code-textarea flex-1 w-full h-full bg-transparent text-slate-100 p-3 resize-none focus:outline-none leading-6 font-mono overflow-auto" placeholder="// Write your QxD ternary instructions here..."></textarea></div>
+        <div class="bg-surface-950/70 border-t border-surface-800 px-3 py-1.5 flex items-center gap-1.5 overflow-x-auto"><span class="text-[10px] uppercase text-slate-500 font-semibold shrink-0 mr-1">Insert:</span><button onclick="insertSnippet('SET T0 = +1')" class="px-2 py-0.5 rounded bg-surface-800 text-emerald-300 font-mono text-[11px] border border-surface-700 shrink-0 cursor-pointer">SET +1</button><button onclick="insertSnippet('SET T1 = -1')" class="px-2 py-0.5 rounded bg-surface-800 text-amber-300 font-mono text-[11px] border border-surface-700 shrink-0 cursor-pointer">SET -1</button><button onclick="insertSnippet('ADD T0 T1 -> T2')" class="px-2 py-0.5 rounded bg-surface-800 text-sky-300 font-mono text-[11px] border border-surface-700 shrink-0 cursor-pointer">ADD</button><button onclick="insertSnippet('MIN T0 T1 -> T3')" class="px-2 py-0.5 rounded bg-surface-800 text-indigo-300 font-mono text-[11px] border border-surface-700 shrink-0 cursor-pointer">MIN (AND)</button><button onclick="insertSnippet('MAX T0 T1 -> T4')" class="px-2 py-0.5 rounded bg-surface-800 text-purple-300 font-mono text-[11px] border border-surface-700 shrink-0 cursor-pointer">MAX (OR)</button><button onclick="insertSnippet('INV T2')" class="px-2 py-0.5 rounded bg-surface-800 text-rose-300 font-mono text-[11px] border border-surface-700 shrink-0 cursor-pointer">INV</button></div>
+        <div class="h-56 border-t border-surface-800 flex flex-col bg-surface-950"><div class="px-4 py-1.5 border-b border-surface-800/80 flex items-center justify-between"><span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Interactive Console &amp; REPL</span><button onclick="clearConsole()" class="text-[11px] text-slate-500 hover:text-slate-300 cursor-pointer">Clear Log</button></div><div id="console-output" class="flex-1 p-3 overflow-y-auto font-mono text-xs space-y-1 text-slate-300"></div><form onsubmit="handleReplSubmit(event)" class="border-t border-surface-800 px-3 py-2 bg-surface-900/90 flex items-center gap-2"><span class="font-mono text-xs font-bold text-sky-400">qxd&gt;</span><input id="repl-input" type="text" autocomplete="off" placeholder="Enter command (e.g., SET T3 = +1, ADD T0 T3 -> T4, INV T4)..." class="flex-1 bg-transparent font-mono text-xs text-white placeholder-slate-500 focus:outline-none" /><button type="submit" class="px-2.5 py-1 rounded bg-surface-800 hover:bg-sky-600 text-slate-200 font-mono text-[11px] cursor-pointer">Exec</button></form></div>
+      </section>
+      <section class="lg:col-span-7 flex flex-col bg-surface-900/60 overflow-y-auto p-4 sm:p-5 space-y-5">
+        <div class="bg-surface-900 border border-surface-800 rounded-xl p-4"><div class="flex flex-wrap items-center justify-between gap-2 mb-3"><h2 class="text-sm font-semibold text-white">Trit State Register Bank (8-Trit Word) <span class="text-[11px] font-normal text-slate-400">— Click any register cell to cycle state</span></h2><div class="flex items-center gap-3 text-[11px] font-mono"><span class="text-amber-300">-1 (T)</span><span class="text-slate-300">0</span><span class="text-emerald-300">+1 (1)</span></div></div><div id="trit-grid" class="grid grid-cols-4 sm:grid-cols-8 gap-2.5"></div></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+          <div class="bg-surface-900 border border-surface-800 rounded-xl p-3.5"><div class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Trit Vector (MSB → LSB)</div><div id="metric-vector" class="mt-1.5 font-mono text-lg font-bold text-sky-300">0 0 0 0 0 +1 -1 +1</div><div id="metric-symbolic" class="mt-1 font-mono text-xs text-slate-400">Symbolic: <span class="text-slate-200">000001T1</span></div></div>
+          <div class="bg-surface-900 border border-surface-800 rounded-xl p-3.5"><div class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Signed Decimal Value</div><div class="mt-1.5 flex items-baseline gap-2"><span id="metric-decimal" class="font-mono text-2xl font-bold text-white">+7</span><span class="text-xs font-mono text-slate-400">base-10 (range ±3,280)</span></div><div id="metric-formula" class="mt-1 font-mono text-xs text-emerald-400 truncate">1·3² - 1·3¹ + 1·3⁰ = 7</div></div>
+          <div class="bg-surface-900 border border-surface-800 rounded-xl p-3.5"><div class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Trit Balance &amp; Parity</div><div class="mt-1.5 flex items-center gap-3 font-mono text-sm"><span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">+1: <strong id="count-pos">0</strong></span><span class="px-2 py-0.5 rounded bg-slate-700/40 text-slate-300 border border-slate-600/50">0: <strong id="count-zero">0</strong></span><span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">-1: <strong id="count-neg">0</strong></span></div><div id="metric-status" class="mt-1.5 font-mono text-xs text-slate-400">Carry Flag (TC): <span class="text-slate-200 font-semibold">0</span></div></div>
+        </div>
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 flex-1">
+          <div class="xl:col-span-6 bg-surface-900 border border-surface-800 rounded-xl p-4 flex flex-col"><div class="flex items-center justify-between mb-2.5"><h3 class="text-xs font-semibold uppercase tracking-wider text-slate-300">Ternary Gate Truth Matrix (T0 ⊕ T1)</h3><span class="text-[11px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">ADD (Sum / Carry)</span></div><div class="overflow-x-auto flex-1 flex items-center"><table class="w-full text-center font-mono text-xs border-collapse"><thead><tr class="text-slate-400 border-b border-surface-800"><th class="py-1.5 px-2 text-left">A \\ B</th><th class="py-1.5 px-2 text-amber-300">-1 (T)</th><th class="py-1.5 px-2 text-slate-300">0</th><th class="py-1.5 px-2 text-emerald-300">+1 (1)</th></tr></thead><tbody id="truth-table-body" class="divide-y divide-surface-800/70"></tbody></table></div><p class="text-[11px] text-slate-400 mt-2.5">Highlighted cell indicates live input pair <span class="font-mono text-slate-200">(T0, T1)</span> evaluated by the QxD engine.</p></div>
+          <div class="xl:col-span-6 bg-surface-900 border border-surface-800 rounded-xl p-4 flex flex-col"><div class="flex items-center justify-between mb-2"><h3 class="text-xs font-semibold uppercase tracking-wider text-slate-300">3-Level Trit Signal Waveform</h3><span class="text-[11px] font-mono text-slate-400">+1V / 0V / -1V</span></div><div class="relative flex-1 min-h-[150px] bg-surface-950 rounded-lg border border-surface-800/90 overflow-hidden"><canvas id="trit-waveform-canvas" class="w-full h-full block"></canvas></div><div class="flex items-center justify-between text-[11px] font-mono text-slate-400 mt-2"><span>LSB: T0</span><span>Balanced Ternary Voltage Levels</span><span>MSB: T7</span></div></div>
+        </div>
+      </section>
+    </main>
+    <footer class="bg-surface-950 border-t border-surface-800 px-4 py-1.5 text-[11px] font-mono text-slate-400 flex flex-wrap items-center justify-between gap-2"><div class="flex items-center gap-4"><span class="flex items-center gap-1.5 text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> QxD Engine Online</span><span>Radix: Balanced Ternary (Base-3)</span><span>Registers: 8 Trits (T0–T7)</span></div><div class="flex items-center gap-4"><span id="footer-last-op">Last Op: INIT_WORKSPACE</span><span class="text-slate-500">QxD v1.0 • 9NLJGLF9ZJ7K</span></div></footer>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+let trits=[0,0,0,0,0,1,-1,1]; let carry=0; let pc=0;
+const $=id=>document.getElementById(id);
+const tritSym=v=>v===-1?'T':v===0?'0':'1';
+const tritColor=v=>v===-1?'text-amber-300 border-amber-400 bg-amber-500/20':v===0?'text-slate-300 border-slate-500 bg-slate-700/40':'text-emerald-300 border-emerald-400 bg-emerald-500/20';
+function log(m,c='text-slate-300'){const d=document.createElement('div');d.className=c;d.textContent=m;$('console-output').appendChild(d);$('console-output').scrollTop=99999;}
+function clearConsole(){$('console-output').innerHTML='';log('> Console cleared','text-slate-500');}
+function render(){
+  const grid=$('trit-grid'); grid.innerHTML='';
+  for(let i=7;i>=0;i--){const v=trits[i];const el=document.createElement('button');el.onclick=()=>{trits[i]=trits[i]===-1?0:trits[i]===0?1:-1;setOp('CLICK T'+i);render();};el.className=`rounded-lg border p-3 text-center cursor-pointer ${tritColor(v)}`;el.innerHTML=`<div class="text-[10px] font-mono opacity-70">T${i}</div><div class="text-xl font-bold font-mono">${v===-1?'-1':v===0?'0':'+1'}</div><div class="text-[10px] font-mono">${tritSym(v)}</div>`;grid.appendChild(el);}
+  $('metric-vector').textContent=[...trits].reverse().map(v=>v===-1?'-1':v===0?'0':'+1').join(' ');
+  $('metric-symbolic').innerHTML=`Symbolic: <span class="text-slate-200">${[...trits].reverse().map(tritSym).join('')}</span>`;
+  let dec=0,parts=[]; trits.forEach((v,i)=>{dec+=v*Math.pow(3,i); if(v!==0)parts.push(`${v}·3^${i}`);});
+  $('metric-decimal').textContent=(dec>=0?'+':'')+dec;
+  $('metric-formula').textContent=parts.length?parts.reverse().join(' + ')+' = '+dec:'0 = 0';
+  $('count-pos').textContent=trits.filter(v=>v===1).length; $('count-zero').textContent=trits.filter(v=>v===0).length; $('count-neg').textContent=trits.filter(v=>v===-1).length;
+  $('metric-status').innerHTML=`Carry Flag (TC): <span class="text-slate-200 font-semibold">${carry}</span>`;
+  drawTruth(); drawWave();
+}
+function setOp(op){$('footer-last-op').textContent='Last Op: '+op;}
+function parseTrit(s){s=s.trim().toUpperCase(); if(s==='+1'||s==='1'||s==='POS')return 1; if(s==='-1'||s==='T'||s==='NEG')return -1; if(s==='0'||s==='ZERO')return 0; return null;}
+function getReg(t){const m=/^T([0-7])$/.exec(t.trim().toUpperCase()); return m?+m[1]:null;}
+function execLine(line){
+  line=line.trim(); if(!line||line.startsWith('//'))return true;
+  const parts=line.replace(/->/g,' -> ').split(/\s+/); const op=parts[0].toUpperCase();
+  try{
+    if(op==='SET'){const r=getReg(parts[1]);const v=parseTrit(parts[3]??parts[2]); if(r===null||v===null)throw 'SET T0 = +1'; trits[r]=v; log(`SET T${r} = ${v>0?'+1':v}`,'text-emerald-300'); setOp(`SET T${r}`);}
+    else if(op==='ADD'||op==='MIN'||op==='MAX'){const a=getReg(parts[1]),b=getReg(parts[2]),dest=getReg(parts[4]??parts[3]); if(a===null||b===null||dest===null)throw op+' T0 T1 -> T2'; let res; if(op==='ADD'){let s=trits[a]+trits[b]; if(s>1){res=s-3;carry=1;} else if(s<-1){res=s+3;carry=-1;} else {res=s;carry=0;}} if(op==='MIN')res=Math.min(trits[a],trits[b]); if(op==='MAX')res=Math.max(trits[a],trits[b]); trits[dest]=res; log(`${op} -> T${dest} = ${res}`,'text-sky-300'); setOp(op);}
+    else if(op==='INV'){const a=getReg(parts[1]); if(a===null)throw 'INV T2'; trits[a]=-trits[a]; log(`INV T${a} -> ${trits[a]}`,'text-rose-300'); setOp('INV');}
+    else{log(`? Unknown: ${line}`,'text-amber-300'); return false;}
+  }catch(e){log(`! Error: ${line} — use: ${e}`,'text-rose-400'); return false;}
+  return true;
+}
+function runAllCode(){pc=0; $('code-editor').value.split('\n').forEach(l=>execLine(l)); render(); log('> Run complete','text-emerald-400');}
+function stepCode(){const lines=$('code-editor').value.split('\n').filter(l=>l.trim()&&!l.trim().startsWith('//')); if(pc>=lines.length){log('> End of script','text-slate-500'); pc=0; return;} execLine(lines[pc]); pc++; render();}
+function resetEngine(){trits=[0,0,0,0,0,0,0,0]; carry=0; pc=0; render(); log('> Engine reset','text-slate-400'); setOp('RESET');}
+function handleEditorInput(){const n=$('code-editor').value.split('\n').length; $('line-numbers').innerHTML=Array.from({length:n},(_,i)=>i+1).join('<br>'); $('line-status').textContent=`Ready • ${n} lines`;}
+function syncScroll(){$('line-numbers').scrollTop=$('code-editor').scrollTop;}
+function insertSnippet(s){const ed=$('code-editor'); ed.value+=(ed.value&&!ed.value.endsWith('\n')?'\n':'')+s+'\n'; handleEditorInput();}
+function handleReplSubmit(e){e.preventDefault(); const inp=$('repl-input'); const cmd=inp.value; if(!cmd.trim())return; log('qxd> '+cmd,'text-sky-400'); execLine(cmd); render(); inp.value='';}
+function loadPreset(name){const p={adder:'// Balanced Ternary Adder\nSET T0 = +1\nSET T1 = -1\nADD T0 T1 -> T2',consensus:'// Kleene Consensus\nSET T0 = +1\nSET T1 = 0\nMIN T0 T1 -> T3\nMAX T0 T1 -> T4',shift:'// Trit Register Shift\nSET T0 = +1\nSET T1 = +1\nSET T2 = -1\nINV T2',custom:'// Custom\nSET T0 = +1'}; $('code-editor').value=p[name]||p.custom; handleEditorInput(); log('> Loaded '+name,'text-slate-400');}
+function drawTruth(){const a=trits[0],b=trits[1]; const body=$('truth-table-body'); body.innerHTML=''; [-1,0,1].forEach(av=>{const tr=document.createElement('tr'); tr.innerHTML=`<td class="py-1.5 px-2 text-left text-slate-300 font-bold">${av===-1?'-1':av}</td>`+[-1,0,1].map(bv=>{let s=av+bv,res=s; if(s>1)res=s-3; if(s<-1)res=s+3; const active=(av===a&&bv===b); return `<td class="py-1.5 px-2 ${active?'bg-sky-500/25 text-white font-bold border border-sky-400/50':''}">${res>0?'+1':res}</td>`;}).join(''); body.appendChild(tr);});}
+function drawWave(){const c=$('trit-waveform-canvas'); if(!c)return; const dpr=window.devicePixelRatio||1; const w=c.clientWidth,h=c.clientHeight; c.width=w*dpr; c.height=h*dpr; const ctx=c.getContext('2d'); ctx.scale(dpr,dpr); ctx.clearRect(0,0,w,h); const mid=h/2,amp=h/3; ctx.strokeStyle='#273142'; [-1,0,1].forEach(v=>{const y=mid-v*amp; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();}); ctx.strokeStyle='#38bdf8'; ctx.lineWidth=2; ctx.beginPath(); trits.forEach((v,i)=>{const x0=i*(w/8),x1=(i+1)*(w/8),y=mid-v*amp; if(i===0)ctx.moveTo(x0,y); ctx.lineTo(x1,y);}); ctx.stroke();}
+function toggleScreenshotMode(){const b=$('helper-banner'), btn=$('btn-restore-banner'); if(b.style.display==='none'){b.style.display=''; btn.classList.add('hidden');}else{b.style.display='none'; btn.classList.remove('hidden');}}
+function exportStoreScreenshot(){const w=window.open('','_blank'); w.document.write('<html><head><title>QxD Store Screenshot</title></head><body style="margin:0;background:#090b10;display:flex;justify-content:center;align-items:center;height:100vh;"><div id="capture" style="width:1366px;height:768px;overflow:hidden;transform:scale(0.8);transform-origin:center;">'+$('app-window').outerHTML+'</div></body></html>');}
+loadPreset('adder'); runAllCode();
+</script>
+</body>
+</html>

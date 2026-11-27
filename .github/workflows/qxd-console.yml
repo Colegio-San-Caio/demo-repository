@@ -1,0 +1,32 @@
+name: QxD Console Validation & Package
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  release:
+    types: [ created ]
+
+jobs:
+  validate-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Verify QxD console file exists
+        run: |
+          test -f qxd_trit_console.html
+          grep -q "QxD" qxd_trit_console.html
+
+      - name: Bundle web console artifact
+        run: |
+          mkdir -p dist
+          cp qxd_trit_console.html dist/index.html
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: qxd-trit-console-web
+          path: dist/
