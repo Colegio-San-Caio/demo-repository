@@ -1,0 +1,38 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>XIMG vs RAW - Compare</title><style>
+body{background:#000;color:#fff;font-family:monospace;padding:12px}
+.box{border:1px solid #333;padding:10px;margin:10px 0}
+button{background:#0ff;color:#000;border:0;padding:10px;font-weight:bold}
+pre{white-space:pre-wrap;word-break:break-all;font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+canvas{image-rendering:pixelated;border:2px solid #fff;max-width:100%}
+</style></head><body>
+<h1>⚖️ XIMG (161) vs RAW (7680) - Compare</h1>
+<button onclick="load()">Load Both From Repo</button> <span id="st"></span>
+<div class="grid">
+<div class="box"><h2>LEFT: kdp.ximg</h2><pre id="left">-</pre></div>
+<div class="box"><h2>RIGHT: kdp.raw</h2><pre id="right">-</pre></div>
+</div>
+<div class="box"><h2>Same Image?</h2><canvas id="cv" width="120" height="64" style="width:480px;height:256px"></canvas><p id="match"></p></div>
+<script>
+async function load(){
+  let x=await (await fetch('kdp.ximg')).arrayBuffer();
+  let r=await (await fetch('kdp.raw')).arrayBuffer();
+  let xd=new Uint8Array(x), rd=new Uint8Array(r);
+  let ds=new DecompressionStream('deflate');
+  let dec=await new Response(new Blob([xd.slice(14)]).stream().pipeThrough(ds)).arrayBuffer();
+  let dd=new Uint8Array(dec);
+  let same=dd.length===rd.length && dd.every((v,i)=>v===rd[i]);
+  document.getElementById('left').textContent=
+`Size: ${xd.length} bytes\nMagic: ${new TextDecoder().decode(xd.slice(0,4))}\nVersion: ${xd[4]}.${xd[5]}\nWidth: ${xd[6]|xd[7]<<8}\nHeader 0-13: ${[...xd.slice(0,14)].map(b=>b.toString(16).padStart(2,'0')).join(' ')}\nZlib 14-: ${[...xd.slice(14,30)].map(b=>b.toString(16).padStart(2,'0')).join(' ')}...\nDecompressed: ${dd.length}`;
+  document.getElementById('right').textContent=
+`Size: ${rd.length} bytes\n120 x 64 = ${120*64}\nFirst 32: ${[...rd.slice(0,32)].map(b=>b.toString(16).padStart(2,'0')).join(' ')}\nPattern: 14 18 20 FF repeats\nLast 16: ${[...rd.slice(-16)].map(b=>b.toString(16).padStart(2,'0')).join(' ')}`;
+  let cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+  let img=ctx.createImageData(120,64);
+  for(let i=0;i<dd.length;i++){img.data[i*4]=dd[i];img.data[i*4+1]=dd[i];img.data[i*4+2]=dd[i];img.data[i*4+3]=255;}
+  ctx.putImageData(img,0,0);
+  document.getElementById('match').textContent=same?'✅ MATCH - XIMG decompresses EXACTLY to RAW':'❌ MISMATCH';
+  document.getElementById('st').textContent='Loaded ✅ Compression: '+(rd.length/xd.length).toFixed(1)+'x';
+}
+</script></body></html>

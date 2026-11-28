@@ -1,0 +1,6 @@
+make*_tool
+make*_tool.o
+ximg_tool_d
+ximg_tool_d.o
+*.o
+*.raw

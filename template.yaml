@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  FAT77 and oeneyeOS Pipeline Serverless Backend
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  PipelineMetricsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: app.lambda_handler
+      Runtime: python3.10
+      Events:
+        GetMetrics:
+          Type: Api
+          Properties:
+            Path: /metrics
+            Method: get
+
+Outputs:
+  PipelineApiUrl:
+    Description: "API Gateway endpoint URL for Prod stage for Pipeline Metrics"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/metrics/"
